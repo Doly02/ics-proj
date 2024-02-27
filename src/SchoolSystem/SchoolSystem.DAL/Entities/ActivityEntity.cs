@@ -11,7 +11,7 @@ public record ActivityEntity : IEntity
 {
     public DateTime Start { get; set; }
     public DateTime End { get; set; }
-    public int ActivityType { get; set; }
+    public ActivityType ActivityType { get; set; }
     public string? Description { get; set;  }
 
     public required Guid SubjectId { get; set; }
