@@ -6,7 +6,18 @@ using System.Threading.Tasks;
 
 namespace SchoolSystem.DAL.Entities
 {
-    public record SubjectEntity
+    public record SubjectEntity : IEntity
     {
+        public Guid Id { get; set; }
+        public string? Name { get; set; }
+        public string? Abbreviation { get; set; }
+        
+        /*private string? _abbreviation;
+
+        public string? Abbreviation
+        {
+            get => _abbreviation;
+            set => _abbreviation = value?.ToUpper();
+        }*/
     }
 }
