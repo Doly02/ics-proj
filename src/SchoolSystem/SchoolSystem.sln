@@ -1,6 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolSystem.DAL", "SchoolSystem.DAL\SchoolSystem.DAL.csproj", "{AA191850-CEEC-4EB5-AE47-355006268B54}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34607.119
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolSystem.DAL", "SchoolSystem.DAL\SchoolSystem.DAL.csproj", "{AA191850-CEEC-4EB5-AE47-355006268B54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolSystem.DAL.Tests", "SchoolSystem.DAL.Tests\SchoolSystem.DAL.Tests.csproj", "{A42F782C-24F2-463F-B2C4-7B18E91FB66C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D3BA247D-4E0C-4F98-A221-E4584B95A721}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +19,18 @@ Global
 		{AA191850-CEEC-4EB5-AE47-355006268B54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA191850-CEEC-4EB5-AE47-355006268B54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA191850-CEEC-4EB5-AE47-355006268B54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A42F782C-24F2-463F-B2C4-7B18E91FB66C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A42F782C-24F2-463F-B2C4-7B18E91FB66C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A42F782C-24F2-463F-B2C4-7B18E91FB66C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A42F782C-24F2-463F-B2C4-7B18E91FB66C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A42F782C-24F2-463F-B2C4-7B18E91FB66C} = {D3BA247D-4E0C-4F98-A221-E4584B95A721}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D8ACCA03-E1FC-494A-A8BE-0683814216B3}
 	EndGlobalSection
 EndGlobal
