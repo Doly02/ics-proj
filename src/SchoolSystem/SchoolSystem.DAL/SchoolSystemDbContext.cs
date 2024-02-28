@@ -18,15 +18,24 @@ namespace SchoolSystem.DAL{
 
             modelBuilder.Entity<ActivityEntity>()
                 .HasMany(i => i.Evaluations)
-                .WithOne(i => i.Student)
+                .WithOne(i => i.Activity)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<IngredientEntity>()
-                .HasMany<StudentEntity>()
-                .WithOne(i => i.Ingredient)
+            modelBuilder.Entity<SubjectEntity>()
+                .HasMany<ActivityEntity>()
+                .WithOne(i => i.Subject)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            /*if (seedDemoData)
+            modelBuilder.Entity<StudentEntity>()
+                .HasMany(i => i.Subjects)
+                .WithMany(i => i.Students);
+                //.OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<StudentEntity>()
+                .HasMany<EvaluationEntity>()
+                .WithOne(i => i.Student)
+                .OnDelete(DeleteBehavior.Restrict);
+        /*if (seedDemoData)
             {
                 IngredientSeeds.Seed(modelBuilder);
                 RecipeSeeds.Seed(modelBuilder);
