@@ -8,9 +8,10 @@ namespace SchoolSystem.DAL.Enums
 {
     public enum ActivityType
     {
-        None = 0,
+        Other = 0,
         Lecture = 1,
         Exercise = 2,
-        Exam = 3
+        Project = 3,
+        Exam = 4
     }
 }
