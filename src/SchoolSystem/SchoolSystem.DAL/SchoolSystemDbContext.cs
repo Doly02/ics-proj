@@ -14,6 +14,9 @@ namespace SchoolSystem.DAL{
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            
+            modelBuilder.Entity<EvaluationEntity>()
+                .HasKey(e => new { e.StudentId, e.ActivityId });
 
             modelBuilder.Entity<ActivityEntity>()
                 .HasMany(i => i.Evaluations)
