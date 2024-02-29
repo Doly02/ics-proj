@@ -11,8 +11,7 @@
             get => _abbreviation;
             set => _abbreviation = value?.ToUpper();
         }
-        
-        public ICollection<StudentEntity> Students { get; set; } = new List<StudentEntity>();
+        public ICollection<EnrolledEntity> Enrolleds { get; set; } = new List<EnrolledEntity>();
         public ICollection<ActivityEntity> Activities { get; set; } = new List<ActivityEntity>();
     }
 }

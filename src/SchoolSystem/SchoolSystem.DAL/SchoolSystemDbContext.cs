@@ -1,7 +1,6 @@
 using SchoolSystem.DAL.Entities;
 //using SchoolSystem.DAL.Seeds;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace SchoolSystem.DAL{
 
@@ -25,16 +24,22 @@ namespace SchoolSystem.DAL{
                 .HasMany<ActivityEntity>()
                 .WithOne(i => i.Subject)
                 .OnDelete(DeleteBehavior.Restrict);
+            
+            modelBuilder.Entity<SubjectEntity>()
+                .HasMany(i => i.Enrolleds)
+                .WithOne(i => i.Subject)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<StudentEntity>()
-                .HasMany(i => i.Subjects)
-                .WithMany(i => i.Students);
-                //.OnDelete(DeleteBehavior.NoAction);
+                .HasMany(i => i.Enrolleds)
+                .WithOne(i => i.Student)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<StudentEntity>()
                 .HasMany<EvaluationEntity>()
                 .WithOne(i => i.Student)
                 .OnDelete(DeleteBehavior.Restrict);
+            
         /*if (seedDemoData)
             {
                 IngredientSeeds.Seed(modelBuilder);
