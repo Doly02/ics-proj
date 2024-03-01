@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-
+using Microsoft.EntityFrameworkCore;
+using SchoolSystem.DAL;
 namespace SchoolSystem.Common.Tests.Factories;
 
 public class DbContextSqLiteTestingFactory(string databaseName, bool seedTestingData = false)

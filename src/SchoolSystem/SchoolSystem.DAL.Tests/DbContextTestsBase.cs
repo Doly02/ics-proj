@@ -1,4 +1,4 @@
-﻿using SchoolSystem.Common.Tests;
+using SchoolSystem.Common.Tests;
 using SchoolSystem.Common.Tests.Factories;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
@@ -14,7 +14,7 @@ public class  DbContextTestsBase : IAsyncLifetime
         Console.SetOut(converter);
 
         DbContextFactory = new DbContextSqLiteTestingFactory(GetType().FullName!, seedTestingData: true);
-        CookBookDbContextSUT = DbContextFactory.CreateDbContext();
+        SchoolSystemDbContextSUT = DbContextFactory.CreateDbContext();
     }
 
     protected IDbContextFactory<SchoolSystemDbContext> DbContextFactory { get; }
@@ -29,7 +29,7 @@ public class  DbContextTestsBase : IAsyncLifetime
 
     public async Task DisposeAsync()
     {
-        await CookBookDbContextSUT.Database.EnsureDeletedAsync();
-        await CookBookDbContextSUT.DisposeAsync();
+        await SchoolSystemDbContextSUT.Database.EnsureDeletedAsync();
+        await SchoolSystemDbContextSUT.DisposeAsync();
     }
 }
