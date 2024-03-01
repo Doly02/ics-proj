@@ -18,6 +18,9 @@ namespace SchoolSystem.DAL{
             modelBuilder.Entity<EvaluationEntity>()
                 .HasKey(e => new { e.StudentId, e.ActivityId });
 
+            modelBuilder.Entity<EnrolledEntity>()
+                .HasKey(e => new { e.StudentId, e.SubjectId });
+
             modelBuilder.Entity<ActivityEntity>()
                 .HasMany(i => i.Evaluations)
                 .WithOne(i => i.Activity)
