@@ -31,5 +31,18 @@ public class DbContextStudentTests(ITestOutputHelper output) : DbContextTestsBas
         var actualEntities = await dbx.Students.SingleAsync(i => i.Id == entity.Id);
         DeepAssert.Equal(entity, actualEntities);
     }
-}
+    /*
+    [Fact]
+    public async Task Delete_Student_Deleted()
+    {
+        //Arrange
+        var baseEntity = StudentSeeds.IngredientAmountEntityDelete;
 
+        //Act
+        SchoolSystemDbContextSUT.Students.Remove(baseEntity);
+        await SchoolSystemDbContextSUT.SaveChangesAsync();
+
+        //Assert
+        Assert.False(await SchoolSystemDbContextSUT.Students.AnyAsync(i => i.Id == baseEntity.Id));
+    }*/
+}

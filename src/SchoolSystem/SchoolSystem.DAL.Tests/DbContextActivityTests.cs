@@ -9,10 +9,15 @@ namespace  SchoolSystem.DAL.Tests;
 
 public class DbContextActivityTests(ITestOutputHelper output) : DbContextTestsBase(output)
 {
-    /*[Fact]
-    public async Task_AddNewActivity_Per()
+    [Fact]
+    public async Task AddNewActivity_Persisted()
     {
         //Arrange
+        SubjectEntity subject = new() // todo seed subject maybe
+        {
+            Id = Guid.NewGuid()
+        };
+    
         ActivityEntity entity = new()
         {
             Id = Guid.Parse("C5DE45D7-64A0-4E8D-AC7F-BF5CFDFB0EFC"),
@@ -21,6 +26,7 @@ public class DbContextActivityTests(ITestOutputHelper output) : DbContextTestsBa
             Place = "101B", 
             ActivityType = ActivityType.Lecture, 
             Description = "Introduction to Programming",
+            Subject =  subject
         };
 
         //Act
@@ -30,7 +36,7 @@ public class DbContextActivityTests(ITestOutputHelper output) : DbContextTestsBa
         //Assert
         await using var dbx = await DbContextFactory.CreateDbContextAsync();
         var actualEntities = await dbx.Activities.SingleAsync(i => i.Id == entity.Id);
-        Assert.Equal(entity, actualEntities);
-    }*/
+        DeepAssert.Equal(entity, actualEntities);
+    }
 }
 

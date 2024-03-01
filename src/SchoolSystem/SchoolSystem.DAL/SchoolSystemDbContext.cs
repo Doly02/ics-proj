@@ -10,6 +10,7 @@ namespace SchoolSystem.DAL{
         public DbSet<SubjectEntity> Subjects => Set<SubjectEntity>();
         public DbSet<EvaluationEntity> Evaluations => Set<EvaluationEntity>();
         public DbSet<ActivityEntity> Activities => Set<ActivityEntity>();
+        public DbSet<EnrolledEntity> Enrolleds => Set<EnrolledEntity>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
