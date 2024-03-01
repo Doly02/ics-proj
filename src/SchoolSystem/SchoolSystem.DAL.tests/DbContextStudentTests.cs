@@ -16,7 +16,10 @@ public class DbContextStudentTests(ITestOutputHelper output) : DbContextTestsBas
         {
             Id = Guid.Parse("C5DE45D7-64A0-4E8D-AC7F-BF5CFDFB0EFC"),
             Name = "John",
-            Surname = "Doe"
+            Surname = "Doe",
+            ImageUrl = null,
+            Enrolleds = new List<EnrolledEntity>(),
+            Evaluations = new List<EvaluationEntity>()
         };
 
         //Act
@@ -26,7 +29,7 @@ public class DbContextStudentTests(ITestOutputHelper output) : DbContextTestsBas
         //Assert
         await using var dbx = await DbContextFactory.CreateDbContextAsync();
         var actualEntities = await dbx.Students.SingleAsync(i => i.Id == entity.Id);
-        Assert.Equal(entity, actualEntities);
+        DeepAssert.Equal(entity, actualEntities);
     }
 }
 
