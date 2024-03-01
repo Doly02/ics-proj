@@ -24,7 +24,7 @@ namespace SchoolSystem.DAL{
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<SubjectEntity>()
-                .HasMany<ActivityEntity>()
+                .HasMany(i => i.Activities)
                 .WithOne(i => i.Subject)
                 .OnDelete(DeleteBehavior.Restrict);
             
@@ -39,7 +39,7 @@ namespace SchoolSystem.DAL{
                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<StudentEntity>()
-                .HasMany<EvaluationEntity>()
+                .HasMany(i => i.Evaluations)
                 .WithOne(i => i.Student)
                 .OnDelete(DeleteBehavior.Restrict);
             
