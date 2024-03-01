@@ -26,22 +26,22 @@ namespace SchoolSystem.DAL{
             modelBuilder.Entity<SubjectEntity>()
                 .HasMany(i => i.Activities)
                 .WithOne(i => i.Subject)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
             
             modelBuilder.Entity<SubjectEntity>()
                 .HasMany(i => i.Enrolleds)
                 .WithOne(i => i.Subject)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<StudentEntity>()
                 .HasMany(i => i.Enrolleds)
                 .WithOne(i => i.Student)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<StudentEntity>()
                 .HasMany(i => i.Evaluations)
                 .WithOne(i => i.Student)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
             
         /*if (seedDemoData)
             {
