@@ -55,8 +55,11 @@ namespace SchoolSystem.DAL
             await using var dbx = await DbContextFactory.CreateDbContextAsync();
             var actualEntity = await dbx.Evaluations
                 .Include(e => e.Student)
+                .ThenInclude(s => s.Evaluations)
+                .Include(e => e.Student)
+                .ThenInclude(s => s.Enrolleds)
                 .Include(e => e.Activity)
-                .ThenInclude(a => a.Subject) // Ensuring the Subject is included in the query for a complete test verification
+                .ThenInclude(a => a.Subject)
                 .SingleAsync(e => e.StudentId == studentId && e.ActivityId == activityId);
             DeepAssert.Equal(evaluation, actualEntity);
         }
