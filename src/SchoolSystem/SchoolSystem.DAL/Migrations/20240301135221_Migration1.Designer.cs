@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolSystem.DAL;
 
@@ -10,9 +11,11 @@ using SchoolSystem.DAL;
 namespace SchoolSystem.DAL.Migrations
 {
     [DbContext(typeof(SchoolSystemDbContext))]
-    partial class SchoolSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240301135221_Migration1")]
+    partial class Migration1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.2");
@@ -50,13 +53,19 @@ namespace SchoolSystem.DAL.Migrations
 
             modelBuilder.Entity("SchoolSystem.DAL.Entities.EnrolledEntity", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
                     b.Property<Guid>("StudentId")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("SubjectId")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("StudentId", "SubjectId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
 
                     b.HasIndex("SubjectId");
 
