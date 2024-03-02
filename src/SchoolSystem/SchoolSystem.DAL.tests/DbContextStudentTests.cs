@@ -1,4 +1,4 @@
-//using SchoolSystem.Common.Tests.Seeds;
+using SchoolSystem.Common.Tests.Seeds;
 using SchoolSystem.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
@@ -31,12 +31,12 @@ public class DbContextStudentTests(ITestOutputHelper output) : DbContextTestsBas
         var actualEntities = await dbx.Students.SingleAsync(i => i.Id == entity.Id);
         DeepAssert.Equal(entity, actualEntities);
     }
-    /*
+    
     [Fact]
     public async Task Delete_Student_Deleted()
     {
         //Arrange
-        var baseEntity = StudentSeeds.IngredientAmountEntityDelete;
+        var baseEntity = StudentSeeds.StudentEntityDelete;
 
         //Act
         SchoolSystemDbContextSUT.Students.Remove(baseEntity);
@@ -44,5 +44,5 @@ public class DbContextStudentTests(ITestOutputHelper output) : DbContextTestsBas
 
         //Assert
         Assert.False(await SchoolSystemDbContextSUT.Students.AnyAsync(i => i.Id == baseEntity.Id));
-    }*/
+    }
 }

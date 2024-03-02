@@ -1,4 +1,4 @@
-//using SchoolSystem.Common.Tests.Seeds;
+using SchoolSystem.Common.Tests.Seeds;
 using SchoolSystem.DAL;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,11 +11,11 @@ public class SchoolSystemTestingDbContext(DbContextOptions contextOptions, bool 
     {
         base.OnModelCreating(modelBuilder);
 
-        /*if (seedTestingData)
+        if (seedTestingData)
         {
-            IngredientSeeds.Seed(modelBuilder);
-            RecipeSeeds.Seed(modelBuilder);
-            IngredientAmountSeeds.Seed(modelBuilder);
-        }*/
+            StudentSeeds.Seed(modelBuilder);
+            SubjectSeeds.Seed(modelBuilder);
+            //EnrolledSeeds.Seed(modelBuilder);
+        }
     }
 }
