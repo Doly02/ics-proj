@@ -63,7 +63,6 @@ public class DbContextStudentTests(ITestOutputHelper output) : DbContextTestsBas
         SubjectEntity subject = new() { Id = Guid.NewGuid() };
         EnrolledEntity enrolled = new EnrolledEntity()
         {
-            Id = Guid.NewGuid(),
             StudentId = entity.Id,
             Subject = subject,
             SubjectId = subject.Id,
@@ -80,7 +79,7 @@ public class DbContextStudentTests(ITestOutputHelper output) : DbContextTestsBas
          //Assert
          await using var dbx = await DbContextFactory.CreateDbContextAsync();
          var actualStudent = await dbx.Students.SingleAsync(i => i.Id == entity.Id);
-         var actualEnrolled = await dbx.Enrolleds.SingleAsync(i => i.Id == enrolled.Id);
+         var actualEnrolled = await dbx.Enrolleds.SingleAsync(i => i.StudentId == enrolled.StudentId);
          DeepAssert.Equal(entity, actualStudent);
          Assert.True(entity.Enrolleds.Contains(enrolled));
          DeepAssert.Equal(entity.Enrolleds.First(), actualEnrolled);
