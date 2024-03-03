@@ -1,6 +1,7 @@
 ﻿//using SchoolSystem.Common.Tests.Seeds;
 using SchoolSystem.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
+using SchoolSystem.DAL.Enums;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -103,5 +104,79 @@ public class DbContextSubjectTests(ITestOutputHelper output) : DbContextTestsBas
         Assert.NotNull(editedSubject);
         Assert.Equal(editedSubject.Id,subject2.Id);
         Assert.Equal("Formal Languages And Compilers",subject2.Name);
+    }
+    
+    [Fact]
+    public async Task AddSubject_AssignActivitiesToSubject()
+    {
+        // Arrange
+        var subject1 = new SubjectEntity 
+        {   Id = Guid.NewGuid(), 
+            Name = "Math Analysis II.",
+            Abbreviation = "ima2", // Should Be UpperCase
+            Enrolleds = new List<EnrolledEntity>(),
+            Activities = new List<ActivityEntity>()
+        };
+        var subject2 = new SubjectEntity 
+        {   Id = Guid.NewGuid(), 
+            Name = "Statistics",
+            Abbreviation = "IPT", // Should Stay UpperCase
+            Enrolleds = new List<EnrolledEntity>(),
+            Activities = new List<ActivityEntity>()
+        };
+        
+        SchoolSystemDbContextSUT.Subjects.Add(subject1);
+        await SchoolSystemDbContextSUT.SaveChangesAsync();
+        SchoolSystemDbContextSUT.Subjects.Add(subject2);
+        await SchoolSystemDbContextSUT.SaveChangesAsync();
+
+        
+        // Act
+        var toModify = await SchoolSystemDbContextSUT.Subjects.FindAsync(subject2.Id);
+        toModify.Activities = new List<ActivityEntity>
+        {
+            new ActivityEntity
+            {
+                Id = Guid.NewGuid(),
+                Start = new DateTime(2024, 3, 15, 9, 0, 0), // March 15, 2024, 9:00 AM
+                End = new DateTime(2024, 3, 15, 10, 30, 0), // March 15, 2024, 10:30 AM
+                Place = "D105",
+                ActivityType = ActivityType.Exam,
+                Description = "Midterm Statistics",
+                Subject = toModify,
+                Evaluations = new List<EvaluationEntity>()
+            },
+            new ActivityEntity
+            {
+                Id = Guid.NewGuid(),
+                Start = new DateTime(2024, 3, 22, 9, 0, 0), // March 22, 2024, 9:00 AM
+                End = new DateTime(2024, 3, 22, 10, 30, 0), // March 22, 2024, 10:30 AM
+                Place = "D105",
+                ActivityType = ActivityType.Lecture,
+                Description = "Statistics Lecture",
+                Subject = toModify,
+                Evaluations = new List<EvaluationEntity>()
+            }
+        };
+
+        // Assert
+        var modifiedSubject = await SchoolSystemDbContextSUT.Subjects.FindAsync(subject2.Id);
+        Assert.NotNull(modifiedSubject);
+        Assert.NotEmpty(modifiedSubject.Activities);                    // To Verify That Activities Are Not Empty
+        Assert.Equal(2, modifiedSubject.Activities.Count); // Verify The Count of Activities Is as Expected
+
+        // Verify Details of Activities
+        var activity1 = modifiedSubject.Activities.FirstOrDefault(a => a.Description == "Midterm Statistics");
+        Assert.NotNull(activity1);
+        Assert.Equal(new DateTime(2024, 3, 15, 9, 0, 0), activity1.Start);
+        Assert.Equal("D105", activity1.Place);
+        Assert.Equal(ActivityType.Exam, activity1.ActivityType);
+        
+        var activity2 = modifiedSubject.Activities.FirstOrDefault(a => a.Description == "Statistics Lecture");
+        Assert.NotNull(activity2);
+        Assert.Equal(new DateTime(2024, 3, 22, 9, 0, 0), activity2.Start);
+        Assert.Equal("D105", activity2.Place);
+        Assert.Equal(ActivityType.Lecture, activity2.ActivityType);
+        
     }
 }
