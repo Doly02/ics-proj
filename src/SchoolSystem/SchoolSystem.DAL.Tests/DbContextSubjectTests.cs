@@ -107,7 +107,7 @@ public class DbContextSubjectTests(ITestOutputHelper output) : DbContextTestsBas
     }
     
     [Fact]
-    public async Task AddSubject_AssignActivitiesToSubject()
+    public async Task AddRelation_AssignActivitiesToSubject()
     {
         // Arrange
         var subject1 = new SubjectEntity 
@@ -133,18 +133,18 @@ public class DbContextSubjectTests(ITestOutputHelper output) : DbContextTestsBas
         
         // Act
         var toModify = await SchoolSystemDbContextSUT.Subjects.FindAsync(subject2.Id);
-        toModify.Activities = new List<ActivityEntity>
+        toModify.Activities.Clear();
+        var newActivities = new List<ActivityEntity>
         {
             new ActivityEntity
             {
                 Id = Guid.NewGuid(),
-                Start = new DateTime(2024, 3, 15, 9, 0, 0), // March 15, 2024, 9:00 AM
-                End = new DateTime(2024, 3, 15, 10, 30, 0), // March 15, 2024, 10:30 AM
+                Start = new DateTime(2024, 3, 15, 9, 0, 0),
+                End = new DateTime(2024, 3, 15, 10, 30, 0),
                 Place = "D105",
                 ActivityType = ActivityType.Exam,
                 Description = "Midterm Statistics",
-                Subject = toModify,
-                Evaluations = new List<EvaluationEntity>()
+                Subject = toModify
             },
             new ActivityEntity
             {
@@ -158,7 +158,14 @@ public class DbContextSubjectTests(ITestOutputHelper output) : DbContextTestsBas
                 Evaluations = new List<EvaluationEntity>()
             }
         };
+        foreach (var activity in newActivities)
+        {
+            SchoolSystemDbContextSUT.Activities.Add(activity);  // Add Activity To Context   
+            // Assign Activity toModify.Activities.Add(activity);                  
+        }
+        await SchoolSystemDbContextSUT.SaveChangesAsync();
 
+        
         // Assert
         var modifiedSubject = await SchoolSystemDbContextSUT.Subjects.FindAsync(subject2.Id);
         Assert.NotNull(modifiedSubject);
@@ -179,4 +186,75 @@ public class DbContextSubjectTests(ITestOutputHelper output) : DbContextTestsBas
         Assert.Equal(ActivityType.Lecture, activity2.ActivityType);
         
     }
+     [Fact]
+    public async Task DeleteRelation_AssignActivitiesToSubject()
+    {
+        // Arrange
+        var subject1 = new SubjectEntity 
+        {   Id = Guid.NewGuid(), 
+            Name = "Math Analysis II.",
+            Abbreviation = "ima2", // Should Be UpperCase
+            Enrolleds = new List<EnrolledEntity>(),
+            Activities = new List<ActivityEntity>()
+        };
+        var subject2 = new SubjectEntity 
+        {   Id = Guid.NewGuid(), 
+            Name = "Statistics",
+            Abbreviation = "IPT", // Should Stay UpperCase
+            Enrolleds = new List<EnrolledEntity>(),
+            Activities = new List<ActivityEntity>()
+        };
+        subject2.Activities = new List<ActivityEntity>
+        {
+            new ActivityEntity
+            {
+                Id = Guid.NewGuid(),
+                Start = new DateTime(2024, 3, 15, 9, 0, 0),
+                End = new DateTime(2024, 3, 15, 10, 30, 0),
+                Place = "D105",
+                ActivityType = ActivityType.Exam,
+                Description = "Midterm Statistics",
+                Subject = subject2
+            },
+            new ActivityEntity
+            {
+                Id = Guid.NewGuid(),
+                Start = new DateTime(2024, 3, 22, 9, 0, 0), // March 22, 2024, 9:00 AM
+                End = new DateTime(2024, 3, 22, 10, 30, 0), // March 22, 2024, 10:30 AM
+                Place = "D105",
+                ActivityType = ActivityType.Lecture,
+                Description = "Statistics Lecture",
+                Subject = subject2,
+                Evaluations = new List<EvaluationEntity>()
+            }
+        };
+        
+        SchoolSystemDbContextSUT.Subjects.Add(subject1);
+        await SchoolSystemDbContextSUT.SaveChangesAsync();
+        SchoolSystemDbContextSUT.Subjects.Add(subject2);
+        await SchoolSystemDbContextSUT.SaveChangesAsync();
+
+        
+        // Act
+        var findedSubject = await SchoolSystemDbContextSUT.Subjects.FindAsync(subject2.Id);
+        var removedActivity = findedSubject.Activities.First();
+        findedSubject.Activities.Remove(removedActivity);
+        SchoolSystemDbContextSUT.Activities.Remove(removedActivity);
+        await SchoolSystemDbContextSUT.SaveChangesAsync();
+
+        // Assert
+        var modifiedSubject = await SchoolSystemDbContextSUT.Subjects.FindAsync(subject2.Id);
+        Assert.NotNull(modifiedSubject);
+        Assert.NotEmpty(modifiedSubject.Activities);                    // To Verify That Activities Are Not Empty
+        Assert.Equal(1, modifiedSubject.Activities.Count); // Verify The Count of Activities Is as Expected
+
+        // Verify Details of Activities
+        var activity2 = modifiedSubject.Activities.FirstOrDefault(a => a.Description == "Statistics Lecture");
+        Assert.NotNull(activity2);
+        Assert.Equal(new DateTime(2024, 3, 22, 9, 0, 0), activity2.Start);
+        Assert.Equal("D105", activity2.Place);
+        Assert.Equal(ActivityType.Lecture, activity2.ActivityType);
+        
+    }
+
 }
