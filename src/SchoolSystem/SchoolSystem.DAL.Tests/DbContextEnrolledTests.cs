@@ -95,20 +95,27 @@ public class DbContextEnrolledTests(ITestOutputHelper output) : DbContextTestsBa
         await SchoolSystemDbContextSUT.SaveChangesAsync();
 
         // Act
-        enrolled.Subject = newSubject;
-        enrolled.SubjectId = newSubject.Id;
-        SchoolSystemDbContextSUT.Enrolleds.Update(enrolled);
+        SchoolSystemDbContextSUT.Enrolleds.Remove(enrolled);
+        await SchoolSystemDbContextSUT.SaveChangesAsync();
+
+        var updatedEnrolled = new EnrolledEntity
+        {
+            Student = student,
+            Subject = newSubject,
+            StudentId = student.Id,
+            SubjectId = newSubject.Id
+        };
+        SchoolSystemDbContextSUT.Enrolleds.Add(updatedEnrolled);
         await SchoolSystemDbContextSUT.SaveChangesAsync();
 
         // Assert
-        await using var assertContext = await DbContextFactory.CreateDbContextAsync();
-        var updated = await assertContext.Enrolleds
+        await using var context = await DbContextFactory.CreateDbContextAsync();
+        var updated = await context.Enrolleds
             .Include(e => e.Student)
             .Include(e => e.Subject)
-            .FirstOrDefaultAsync(e => e.StudentId == enrolled.StudentId && e.SubjectId == enrolled.SubjectId);
+            .FirstOrDefaultAsync(e => e.StudentId == updatedEnrolled.StudentId && e.SubjectId == updatedEnrolled.SubjectId);
 
-
-        DeepAssert.Equal(enrolled, updated);
+        DeepAssert.Equal(updatedEnrolled, updated);
     }
 
     [Fact]
