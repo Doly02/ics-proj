@@ -2,14 +2,17 @@
 The repository contains a project for the ICS course focused on the creation of a school system.
 
 # Repozitory Organization
-src -> SchoolSystem -> SchoolSystem.DAL
-                    -> SchoolSystem.DAL.Tests
-                    -> SchoolSystem.Common.Tests
-
-doc -> Rider_ERD (ER Diagram From Rider)
-    -> Draft_ERD (Our Own ER Digram Draft)
-    -> Draft_usecase (Our Own Draft of Usecase Diagram)
-
+```
+src
+├── SchoolSystem
+│ ├── SchoolSystem.DAL
+│ ├── SchoolSystem.DAL.Tests
+│ └── SchoolSystem.Common.Tests
+doc
+├── Rider_ERD (ER Diagram From Rider)
+├── Draft_ERD (Our Own ER Diagram Draft)
+└── Draft_usecase (Our Own Draft of Usecase Diagram)
+```
 # Dependencies
 Basic description of dependencies for correct project build:
  1. .NET8, EntityFrameworkCore  
