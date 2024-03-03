@@ -5,7 +5,7 @@ using Xunit;
 using Xunit.Abstractions;
 using SchoolSystem.DAL.Enums;
 
-namespace  SchoolSystem.DAL.Tests;
+namespace SchoolSystem.DAL.Tests;
 
 public class DbContextEnrolledTests(ITestOutputHelper output) : DbContextTestsBase(output)
 {
@@ -24,12 +24,11 @@ public class DbContextEnrolledTests(ITestOutputHelper output) : DbContextTestsBa
             Name = "Peter",
             Surname = "Parker"
         };
-    
+
         EnrolledEntity entity = new()
         {
-            Id = Guid.NewGuid(),
             Student = student,
-            Subject =  subject,
+            Subject = subject,
             SubjectId = subject.Id,
             StudentId = student.Id
         };
@@ -39,8 +38,9 @@ public class DbContextEnrolledTests(ITestOutputHelper output) : DbContextTestsBa
         await SchoolSystemDbContextSUT.SaveChangesAsync();
 
         //Assert
-        await using var dbx = await DbContextFactory.CreateDbContextAsync();
-        var actualEntities = await dbx.Enrolleds.SingleAsync(i => i.Id == entity.Id);
+        await using var context = await DbContextFactory.CreateDbContextAsync();
+        var actualEntities = await context.Enrolleds
+            .SingleAsync(i => i.StudentId == entity.StudentId && i.SubjectId == entity.SubjectId);
         DeepAssert.Equal(entity, actualEntities);
     }
 
@@ -54,7 +54,6 @@ public class DbContextEnrolledTests(ITestOutputHelper output) : DbContextTestsBa
         var enrolled = new EnrolledEntity
         {
 
-            Id = Guid.NewGuid(),
             Student = student,
             Subject = subject,
             StudentId = student.Id,
@@ -65,7 +64,9 @@ public class DbContextEnrolledTests(ITestOutputHelper output) : DbContextTestsBa
         await SchoolSystemDbContextSUT.SaveChangesAsync();
 
         // Act
-        var retrieved = await SchoolSystemDbContextSUT.Enrolleds.FindAsync(enrolled.Id);
+        await using var context = await DbContextFactory.CreateDbContextAsync();
+        var retrieved = await context.Enrolleds
+            .FirstOrDefaultAsync(e => e.StudentId == enrolled.StudentId && e.SubjectId == enrolled.SubjectId);
 
         // Assert
         Assert.NotNull(retrieved);
@@ -81,7 +82,6 @@ public class DbContextEnrolledTests(ITestOutputHelper output) : DbContextTestsBa
         var newSubject = new SubjectEntity { Id = Guid.NewGuid(), Name = "IW5" };
         var enrolled = new EnrolledEntity
         {
-            Id = Guid.NewGuid(),
             Student = student,
             Subject = oldSubject,
             StudentId = student.Id,
@@ -95,7 +95,7 @@ public class DbContextEnrolledTests(ITestOutputHelper output) : DbContextTestsBa
         await SchoolSystemDbContextSUT.SaveChangesAsync();
 
         // Act
-        enrolled.Subject = newSubject; 
+        enrolled.Subject = newSubject;
         enrolled.SubjectId = newSubject.Id;
         SchoolSystemDbContextSUT.Enrolleds.Update(enrolled);
         await SchoolSystemDbContextSUT.SaveChangesAsync();
@@ -105,7 +105,7 @@ public class DbContextEnrolledTests(ITestOutputHelper output) : DbContextTestsBa
         var updated = await assertContext.Enrolleds
             .Include(e => e.Student)
             .Include(e => e.Subject)
-            .SingleAsync(e => e.Id == enrolled.Id);
+            .FirstOrDefaultAsync(e => e.StudentId == enrolled.StudentId && e.SubjectId == enrolled.SubjectId);
 
 
         DeepAssert.Equal(enrolled, updated);
@@ -119,7 +119,6 @@ public class DbContextEnrolledTests(ITestOutputHelper output) : DbContextTestsBa
         var subject = new SubjectEntity { Id = Guid.NewGuid(), Name = "ICS" };
         var enrolled = new EnrolledEntity
         {
-            Id = Guid.NewGuid(),
             Student = student,
             Subject = subject,
             StudentId = student.Id,
@@ -134,7 +133,9 @@ public class DbContextEnrolledTests(ITestOutputHelper output) : DbContextTestsBa
         await SchoolSystemDbContextSUT.SaveChangesAsync();
 
         // Assert
-        var deleted = await SchoolSystemDbContextSUT.Enrolleds.FindAsync(enrolled.Id);
+        await using var context = await DbContextFactory.CreateDbContextAsync();
+        var deleted = await context.Enrolleds
+            .FirstOrDefaultAsync(e => e.StudentId == enrolled.StudentId && e.SubjectId == enrolled.SubjectId);
         Assert.Null(deleted);
     }
 
@@ -146,7 +147,6 @@ public class DbContextEnrolledTests(ITestOutputHelper output) : DbContextTestsBa
         var subject = new SubjectEntity { Id = Guid.NewGuid(), Name = "Biology" };
         var enrolled = new EnrolledEntity
         {
-            Id = Guid.NewGuid(),
             Student = student,
             Subject = subject,
             StudentId = student.Id,
@@ -162,7 +162,7 @@ public class DbContextEnrolledTests(ITestOutputHelper output) : DbContextTestsBa
         var retrievedEnrolled = await SchoolSystemDbContextSUT.Enrolleds
             .Include(e => e.Student)
             .Include(e => e.Subject)
-            .FirstOrDefaultAsync(e => e.Id == enrolled.Id);
+            .FirstOrDefaultAsync(e => e.StudentId == enrolled.StudentId && e.SubjectId == enrolled.SubjectId);
 
         // Assert
         Assert.NotNull(retrievedEnrolled);
@@ -180,7 +180,6 @@ public class DbContextEnrolledTests(ITestOutputHelper output) : DbContextTestsBa
 
         var enrolled1 = new EnrolledEntity
         {
-            Id = sharedId,
             Student = student,
             Subject = subject,
             StudentId = student.Id,
@@ -189,7 +188,6 @@ public class DbContextEnrolledTests(ITestOutputHelper output) : DbContextTestsBa
 
         var enrolled2 = new EnrolledEntity
         {
-            Id = sharedId,
             Student = new StudentEntity { Id = Guid.NewGuid(), Name = "Lois", Surname = "Lane" },
             Subject = new SubjectEntity { Id = Guid.NewGuid(), Name = "Photography" },
             StudentId = student.Id,
