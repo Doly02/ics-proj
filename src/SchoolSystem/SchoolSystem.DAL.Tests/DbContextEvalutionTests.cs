@@ -7,12 +7,8 @@ using SchoolSystem.DAL.Enums;
 
 namespace SchoolSystem.DAL
 {
-    public class DbContextEvaluationTests : DbContextTestsBase
+    public class DbContextEvaluationTests(ITestOutputHelper output) : DbContextTestsBase(output)
     {
-        public DbContextEvaluationTests(ITestOutputHelper output) : base(output)
-        {
-        }
-
         [Fact]
         public async Task AddNew_Evaluation_Persisted()
         {
@@ -64,6 +60,91 @@ namespace SchoolSystem.DAL
             DeepAssert.Equal(evaluation, actualEntity);
         }
 
-        // Additional tests go here
+        [Fact]
+        public async Task Delete_Evaluation_Deleted()
+        {
+            //Arrange
+            StudentEntity student = new()
+            {
+                Id = Guid.NewGuid(),
+                Name = "John",
+                Surname = "Doe",
+                ImageUrl = null,
+                Enrolleds = new List<EnrolledEntity>(),
+                Evaluations = new List<EvaluationEntity>()
+            };
+            SubjectEntity subject = new() { Id = Guid.NewGuid() };
+            ActivityEntity activity = new()
+            {
+                Id = Guid.NewGuid(), 
+                Subject = subject,
+                ActivityType = ActivityType.Other
+            };
+            EvaluationEntity evaluation = new EvaluationEntity()
+            {
+                StudentId = student.Id,
+                Student = student,
+                ActivityId = activity.Id,
+                Activity = activity
+            };
+            student.Evaluations.Add(evaluation);
+            
+            //Act
+            SchoolSystemDbContextSUT.Evaluations.Add(evaluation);
+            await SchoolSystemDbContextSUT.SaveChangesAsync();
+            SchoolSystemDbContextSUT.Evaluations.Remove(evaluation);
+            await SchoolSystemDbContextSUT.SaveChangesAsync();
+            //Assert
+            await using var dbx = await DbContextFactory.CreateDbContextAsync();
+
+            Assert.False(dbx.Evaluations.Contains(evaluation));
+        }
+        
+        [Fact]
+        public async Task AddNew_Evaluation_Relationships_Persisted()
+        {
+            //Arrange
+            StudentEntity student = new()
+            {
+                Id = Guid.NewGuid(),
+                Name = "John",
+                Surname = "Doe",
+                ImageUrl = null,
+                Enrolleds = new List<EnrolledEntity>(),
+                Evaluations = new List<EvaluationEntity>()
+            };
+            SubjectEntity subject = new() { Id = Guid.NewGuid() };
+            ActivityEntity activity = new()
+            {
+                Id = Guid.NewGuid(), 
+                Subject = subject,
+                ActivityType = ActivityType.Other,
+                Evaluations = new List<EvaluationEntity>()
+            };
+            EvaluationEntity evaluation = new EvaluationEntity()
+            {
+                StudentId = student.Id,
+                Student = student,
+                ActivityId = activity.Id,
+                Activity = activity
+            };
+            student.Evaluations.Add(evaluation);
+            activity.Evaluations.Add(evaluation);
+            
+            //Act
+            SchoolSystemDbContextSUT.Evaluations.Add(evaluation);
+            SchoolSystemDbContextSUT.Students.Add(student);
+            SchoolSystemDbContextSUT.Activities.Add(activity);
+            await SchoolSystemDbContextSUT.SaveChangesAsync();
+
+            //Assert
+            await using var dbx = await DbContextFactory.CreateDbContextAsync();
+            var evaluationFromStudent = await dbx.Evaluations.SingleAsync(i => i.StudentId == student.Id);
+            var evaluationFromActivity = await dbx.Evaluations.SingleAsync(i => i.ActivityId == activity.Id);
+            DeepAssert.Equal(evaluationFromStudent, evaluation);
+            DeepAssert.Equal(evaluationFromActivity, evaluationFromStudent);
+            DeepAssert.Equal(student.Evaluations.First(), evaluation);
+            DeepAssert.Equal(activity.Evaluations.First(), evaluation);
+        }
     }
 }
