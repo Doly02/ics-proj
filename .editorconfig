@@ -1,0 +1,38 @@
+#
+# Project: ICS - School System
+# File: .editorconfig
+# Date: 29.2.2024
+#
+
+root = true
+
+
+# General
+[*]
+indent_style = space
+indent_size = 4
+tab_width = 4
+end_of_line = crlf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+*.cs
+max_line_length = 100
+csharp_new_line_before_open_brace = all
+
+# Rules For Public  Variables
+dotnet_naming_rule.public_methods_must_be_pascal_case.severity = suggestion
+dotnet_naming_rule.public_methods_must_be_pascal_case.symbols = public_methods
+dotnet_naming_rule.public_methods_must_be_pascal_case.style = camel_case_style
+
+# Rules For Private Variables
+dotnet_naming_rule.private_fields_must_have_underscore_prefix.severity = suggestion
+dotnet_naming_rule.private_fields_must_have_underscore_prefix.symbols = private_fields
+dotnet_naming_rule.private_fields_must_have_underscore_prefix.style = underscore_prefix_camel_case_style
+
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+
+dotnet_naming_style.underscore_prefix_camel_case_style.capitalization = camel_case
+dotnet_naming_style.underscore_prefix_camel_case_style.required_prefix = _

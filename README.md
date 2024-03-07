@@ -1,20 +1,33 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# ICS Project School System 
+The repository contains a project for the ICS course focused on the creation of a school system.
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+# Repozitory Organization
+```
+src
+├── SchoolSystem
+│ ├── SchoolSystem.DAL
+│ ├── SchoolSystem.DAL.Tests
+│ └── SchoolSystem.Common.Tests
+doc
+├── Rider_ERD (ER Diagram From Rider)
+├── Draft_ERD (Our Own ER Diagram Draft)
+└── Draft_usecase (Our Own Draft of Usecase Diagram)
+```
+# Dependencies
+Basic description of dependencies for correct project build:
+ 1. .NET8, EntityFrameworkCore  
+ 2. EntityFrameworkCore.Design 
+ 3. EntityFrameworkCore.Sqlite 
+ 4. EntityFrameworkCore.SqlServer 
+ 5. EntityFrameworkCore.Tools 
+ 6. Extensions.DependencyInjection.Abstractions 
+ 7. Extensions.Logging.Console 
+ 8. xUnit
+For more precise information like specific NuGets versions, look in the .csproj of the individual subprojects.
+
 
 # Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+In subproject SchoolSystem.DAL.Tests are implemented basic tests for entities and their database operations, all tests pass correctly.
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
-
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+# Contributors
+Tomas Dolak (xdolak09), Doubravka Simunkova (xsimun05), Jan Krumal (xkruma01), Monika Zahradnikova (xzahra33), Vojtech Teichmann (xteich02)
