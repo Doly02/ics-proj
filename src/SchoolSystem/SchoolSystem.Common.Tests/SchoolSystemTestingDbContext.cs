@@ -15,7 +15,7 @@ public class SchoolSystemTestingDbContext(DbContextOptions contextOptions, bool 
         {
             StudentSeeds.Seed(modelBuilder);
             SubjectSeeds.Seed(modelBuilder);
-            //EnrolledSeeds.Seed(modelBuilder);
+            EnrolledSeeds.Seed(modelBuilder);
         }
     }
 }
