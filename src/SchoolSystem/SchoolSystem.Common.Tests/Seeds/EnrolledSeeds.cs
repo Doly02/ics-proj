@@ -24,14 +24,6 @@ public static class EnrolledSeeds
         SubjectId = SubjectSeeds.ICS.Id
     };
 
-    public static readonly EnrolledEntity EnrolledEntity2 = new()
-    {
-        Student = StudentSeeds.StudentEntity2,
-        StudentId = StudentSeeds.StudentEntity2.Id,
-        Subject = SubjectSeeds.ICS,
-        SubjectId = SubjectSeeds.ICS.Id
-    };
-
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<EnrolledEntity>().HasData(
