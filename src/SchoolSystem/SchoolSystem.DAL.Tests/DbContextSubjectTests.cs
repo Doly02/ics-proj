@@ -1,5 +1,4 @@
-﻿//using SchoolSystem.Common.Tests.Seeds;
-using SchoolSystem.DAL.Entities;
+﻿using SchoolSystem.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using SchoolSystem.DAL.Enums;
 using Xunit;
