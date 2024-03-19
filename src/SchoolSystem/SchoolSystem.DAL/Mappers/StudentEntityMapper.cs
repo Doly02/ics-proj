@@ -9,8 +9,6 @@ namespace SchoolSystem.DAL.Mappers
             existingEntity.Name = newEntity.Name;
             existingEntity.Surname = newEntity.Surname;
             existingEntity.ImageUrl = newEntity.ImageUrl;
-            existingEntity.Enrolleds = newEntity.Enrolleds;
-            existingEntity.Evaluations = newEntity.Evaluations;
         }
     }
 }
