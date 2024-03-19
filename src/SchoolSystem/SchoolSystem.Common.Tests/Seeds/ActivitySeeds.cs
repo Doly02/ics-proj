@@ -17,7 +17,8 @@ public static class ActivitySeeds
         End = default,
         Evaluations = default!,
         Place = default,
-        Subject = default!
+        Subject = default!,
+        SubjectId = default
     };
 
     public static readonly ActivityEntity ActivityEntity = new()
@@ -28,6 +29,7 @@ public static class ActivitySeeds
         End = new DateTime(2024, 6, 1, 1, 1, 1),
         Place = "D105",
         Subject = SubjectSeeds.ICS,
+        SubjectId = SubjectSeeds.ICS.Id,
         ActivityType = ActivityType.Project
     };
     
