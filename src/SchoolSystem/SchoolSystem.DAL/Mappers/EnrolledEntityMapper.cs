@@ -11,8 +11,6 @@ namespace SchoolSystem.DAL.Mappers
     {
         public void MapToExistingEntity(EnrolledEntity existingEntity, EnrolledEntity newEntity)
         {
-            existingEntity.Student = newEntity.Student;
-            existingEntity.Subject = newEntity.Subject;
             existingEntity.StudentId = newEntity.StudentId;
             existingEntity.SubjectId = newEntity.SubjectId;
 
