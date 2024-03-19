@@ -37,9 +37,10 @@ namespace SchoolSystem.DAL
                     {
                         Id = subjectId,
                         Name = "Mathematics",
-                      
+
                         // Assuming these are the required properties based on the SubjectEntity definition
-                    }
+                    },
+                    SubjectId = subjectId
                 }
             };
 
@@ -78,6 +79,7 @@ namespace SchoolSystem.DAL
             {
                 Id = Guid.NewGuid(), 
                 Subject = subject,
+                SubjectId = subject.Id,
                 ActivityType = ActivityType.Other
             };
             EvaluationEntity evaluation = new EvaluationEntity()
@@ -118,6 +120,7 @@ namespace SchoolSystem.DAL
             {
                 Id = Guid.NewGuid(), 
                 Subject = subject,
+                SubjectId = subject.Id,
                 ActivityType = ActivityType.Other,
                 Evaluations = new List<EvaluationEntity>()
             };

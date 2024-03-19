@@ -104,6 +104,7 @@ public class DbContextStudentTests(ITestOutputHelper output) : DbContextTestsBas
         {
             Id = Guid.NewGuid(), 
             Subject = subject,
+            SubjectId = subject.Id,
             ActivityType = ActivityType.Other
         };
         EvaluationEntity evaluation = new EvaluationEntity()

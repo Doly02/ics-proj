@@ -1,4 +1,4 @@
-﻿//using SchoolSystem.Common.Tests.Seeds;
+//using SchoolSystem.Common.Tests.Seeds;
 using SchoolSystem.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using SchoolSystem.DAL.Enums;
@@ -144,7 +144,8 @@ public class DbContextSubjectTests(ITestOutputHelper output) : DbContextTestsBas
                 Place = "D105",
                 ActivityType = ActivityType.Exam,
                 Description = "Midterm Statistics",
-                Subject = toModify
+                Subject = toModify,
+                SubjectId = toModify.Id
             },
             new ActivityEntity
             {
@@ -155,6 +156,7 @@ public class DbContextSubjectTests(ITestOutputHelper output) : DbContextTestsBas
                 ActivityType = ActivityType.Lecture,
                 Description = "Statistics Lecture",
                 Subject = toModify,
+                SubjectId = toModify.Id,
                 Evaluations = new List<EvaluationEntity>()
             }
         };
@@ -214,7 +216,8 @@ public class DbContextSubjectTests(ITestOutputHelper output) : DbContextTestsBas
                 Place = "D105",
                 ActivityType = ActivityType.Exam,
                 Description = "Midterm Statistics",
-                Subject = subject2
+                Subject = subject2,
+                SubjectId = subject2.Id
             },
             new ActivityEntity
             {
@@ -225,6 +228,7 @@ public class DbContextSubjectTests(ITestOutputHelper output) : DbContextTestsBas
                 ActivityType = ActivityType.Lecture,
                 Description = "Statistics Lecture",
                 Subject = subject2,
+                SubjectId = subject2.Id,
                 Evaluations = new List<EvaluationEntity>()
             }
         };
