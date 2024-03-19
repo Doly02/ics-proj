@@ -1,11 +1,10 @@
 using SchoolSystem.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
-using SchoolSystem.DAL.Tests;
 using Xunit.Abstractions;
 using SchoolSystem.DAL.Enums;
 
-namespace SchoolSystem.DAL
+namespace SchoolSystem.DAL.Tests
 {
     public class DbContextEvaluationTests(ITestOutputHelper output) : DbContextTestsBase(output)
     {
