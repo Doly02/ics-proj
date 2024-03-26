@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolSystem.Common.Tests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolSystem.DAL.Tests", "SchoolSystem.DAL.Tests\SchoolSystem.DAL.Tests.csproj", "{2CD5CED5-BC86-4158-9A46-BDA846F4BCB9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolSystem.BL", "SchoolSystem.BL\SchoolSystem.BL.csproj", "{2D3CA6F6-27AD-4CE6-AABC-9901AB77133C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{2CD5CED5-BC86-4158-9A46-BDA846F4BCB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CD5CED5-BC86-4158-9A46-BDA846F4BCB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CD5CED5-BC86-4158-9A46-BDA846F4BCB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D3CA6F6-27AD-4CE6-AABC-9901AB77133C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D3CA6F6-27AD-4CE6-AABC-9901AB77133C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D3CA6F6-27AD-4CE6-AABC-9901AB77133C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D3CA6F6-27AD-4CE6-AABC-9901AB77133C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
