@@ -6,6 +6,7 @@ namespace SchoolSystem.DAL.Mappers
     {
         public void MapToExistingEntity(ActivityEntity existingEntity, ActivityEntity newEntity)
         {
+            existingEntity.Name = newEntity.Name;
             existingEntity.Start = newEntity.Start;
             existingEntity.End = newEntity.End;
             existingEntity.Place = newEntity.Place;
