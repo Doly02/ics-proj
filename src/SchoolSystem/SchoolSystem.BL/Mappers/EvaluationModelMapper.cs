@@ -11,7 +11,7 @@ public class EvaluationModelMapper
             ? ActivityEvaluationListModel.Empty
             : new ActivityEvaluationListModel
             {
-                // Id = entity.,
+                Id = entity.Id,
                 ActivityName = entity.Activity.Name,
                 EvaluationScore = entity.Score,
                 StudentFullName = entity.Student.Name,
@@ -23,7 +23,7 @@ public class EvaluationModelMapper
             ? EvaluationDetailModel.Empty
             : new EvaluationDetailModel
             {
-                // Id = entity.,
+                Id = entity.Id,
                 StudentId = entity.StudentId,
                 ActivityId = entity.ActivityId,
                 Score = entity.Score,
