@@ -4,14 +4,18 @@ using SchoolSystem.DAL.Entities;
 namespace SchoolSystem.BL.Mappers;
 
 public class EvaluationModelMapper 
-    : ModelMapperBase<EvaluationEntity, ActivityEvaluationListModel, EvaluationDetailModel>, IEvaluationModelIMapper
+    : ModelMapperBase<EvaluationEntity, ActivityEvaluationListModel, EvaluationDetailModel>
 {
     public override ActivityEvaluationListModel MapToListModel(EvaluationEntity? entity)
         => entity is null
             ? ActivityEvaluationListModel.Empty
             : new ActivityEvaluationListModel
             {
-                
+                // Id = entity.,
+                ActivityName = entity.Activity.Name,
+                EvaluationScore = entity.Score,
+                StudentFullName = entity.Student.Name,
+                SubjectName = entity.Activity.Subject.Name
             };
     
     public override EvaluationDetailModel MapToDetailModel(EvaluationEntity? entity)
@@ -19,20 +23,22 @@ public class EvaluationModelMapper
             ? EvaluationDetailModel.Empty
             : new EvaluationDetailModel
             {
-                
+                // Id = entity.,
+                StudentId = entity.StudentId,
+                ActivityId = entity.ActivityId,
+                Score = entity.Score,
+                Note = entity.Note,
+                StudentFullName = entity.Student.Name,
+                ActivityName = entity.Activity.Name
             };
     
     public override EvaluationEntity MapToEntity(EvaluationDetailModel model)
-        => throw new NotImplementedException("This method is unsupported. Use the other overload.");
-    
-    
-    public EvaluationEntity MapToEntity(EvaluationDetailModel model, Guid studentId)
         => new()
         {
             Score = model.Score,
             Note = model.Note,
-            StudentId = studentId,
-            ActivityId = model.Id,
+            StudentId = model.StudentId,
+            ActivityId = model.ActivityId,
             Student = null!,
             Activity = null!
         };
