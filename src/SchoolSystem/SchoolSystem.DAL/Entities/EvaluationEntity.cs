@@ -2,6 +2,7 @@ namespace SchoolSystem.DAL.Entities
 {
     public record EvaluationEntity : IEntity
     {
+        public required Guid Id { get; set; }
         public int Score { get; set; }
         public string? Note { get; set; }
 

@@ -10,6 +10,7 @@ public static class EnrolledSeeds
 {
     public static readonly EnrolledEntity EmptyEnrolledEntity = new()
     {
+        Id = default!,
         Student = default!,
         StudentId = default,
         Subject = default!,
@@ -18,6 +19,7 @@ public static class EnrolledSeeds
 
     public static readonly EnrolledEntity EnrolledEntity = new()
     {
+        Id = Guid.NewGuid(),
         Student = StudentSeeds.StudentEntity1,
         StudentId = StudentSeeds.StudentEntity1.Id,
         Subject = SubjectSeeds.ICS,

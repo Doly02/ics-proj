@@ -35,6 +35,7 @@ public class EvaluationModelMapper
     public override EvaluationEntity MapToEntity(EvaluationDetailModel model)
         => new()
         {
+            Id = model.Id,
             Score = model.Score,
             Note = model.Note,
             StudentId = model.StudentId,

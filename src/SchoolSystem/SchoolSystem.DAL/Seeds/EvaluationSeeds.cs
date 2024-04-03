@@ -10,6 +10,7 @@ public static class EvaluationSeeds
 {
     public static readonly EvaluationEntity EvaluationJohn = new()
     {
+        Id = Guid.NewGuid(),
         Student = StudentSeeds.StudentJohn,
         StudentId = StudentSeeds.StudentJohn.Id,
         Activity = ActivitySeeds.Project,
