@@ -215,7 +215,8 @@ public class DbContextActivityTests(ITestOutputHelper output) : DbContextTestsBa
             Student = student,
             Activity = activity,
             Score = 90,
-            Note = "Excellent work"
+            Note = "Excellent work",
+            Id = Guid.NewGuid()
         };
 
         await SchoolSystemDbContextSUT.Evaluations.AddAsync(evaluation);
