@@ -10,5 +10,5 @@ public class EvaluationFacade(
     IUnitOfWorkFactory unitOfWorkFactory,
     EvaluationModelMapper evaluationModelMapper)
     :
-        FacadeBase<EvaluationEntity, ActivityEvaluationListModel, EvaluationDetailModel,
+        FacadeBase<EvaluationEntity, StudentActivityListModel, EvaluationDetailModel,
             EvaluationEntityMapper>(unitOfWorkFactory, evaluationModelMapper);

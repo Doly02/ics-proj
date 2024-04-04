@@ -12,7 +12,7 @@ public class ActivityModelMapper :
             : new ActivityListModel
             {
                 Id = entity.Id, 
-                Name = entity.Name,
+                ActivityName = entity.Name,
                 // StudentFullName = 
             };
 

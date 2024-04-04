@@ -4,16 +4,16 @@ using SchoolSystem.DAL.Entities;
 namespace SchoolSystem.BL.Mappers;
 
 public class EvaluationModelMapper 
-    : ModelMapperBase<EvaluationEntity, ActivityEvaluationListModel, EvaluationDetailModel>
+    : ModelMapperBase<EvaluationEntity, StudentActivityListModel, EvaluationDetailModel>
 {
-    public override ActivityEvaluationListModel MapToListModel(EvaluationEntity? entity)
+    public override StudentActivityListModel MapToListModel(EvaluationEntity? entity)
         => entity is null
-            ? ActivityEvaluationListModel.Empty
-            : new ActivityEvaluationListModel
+            ? StudentActivityListModel.Empty
+            : new StudentActivityListModel
             {
                 Id = entity.Id,
                 ActivityName = entity.Activity.Name,
-                EvaluationScore = entity.Score,
+                Score = entity.Score,
                 StudentFullName = entity.Student.Name,
                 SubjectName = entity.Activity.Subject.Name
             };
