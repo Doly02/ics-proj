@@ -1,10 +1,12 @@
-﻿namespace SchoolSystem.BL.Models
+﻿using System.Collections.ObjectModel;
+
+namespace SchoolSystem.BL.Models
 {
     public record ActivityListModel : ModelBase
     {
         public string? ActivityName { get; set; }
         public string? SubjectName { get; set; }
-        public required List<ActivityDetailModel> Activity { get; set; }
+        public required ObservableCollection<ActivityDetailModel> Activity { get; set; }
         
         public static ActivityListModel Empty
             => new()
@@ -12,7 +14,7 @@
                 Id = Guid.Empty,
                 ActivityName = string.Empty,
                 SubjectName = string.Empty,
-                Activity = new List<ActivityDetailModel>()
+                Activity = new ObservableCollection<ActivityDetailModel>()
             };
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace SchoolSystem.BL.Models
+﻿using System.Collections.ObjectModel;
+
+namespace SchoolSystem.BL.Models
 {
     public record SubjectListModel : ModelBase
     {
@@ -10,8 +12,8 @@
             get => _abbreviation;
             set => _abbreviation = value?.ToUpper();
         }
-        
-        public required List<ActivityListModel> Activities { get; set; }
+
+        public required ObservableCollection<ActivityListModel> Activities { get; set; }
 
         public static SubjectListModel Empty
             => new()
@@ -19,7 +21,7 @@
                 Id = Guid.Empty,
                 Name = string.Empty,
                 Abbreviation = string.Empty,
-                Activities = new List<ActivityListModel>()
+                Activities = new ObservableCollection<ActivityListModel>()
             };
     }
 }
