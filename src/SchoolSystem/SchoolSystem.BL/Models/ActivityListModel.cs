@@ -2,15 +2,17 @@
 {
     public record ActivityListModel : ModelBase
     {
-        public string? Name { get; set; }
-        public string? StudentFullName { get; set; }
+        public string? ActivityName { get; set; }
+        public string? SubjectName { get; set; }
+        public required List<ActivityDetailModel> Activity { get; set; }
         
         public static ActivityListModel Empty
             => new()
             {
                 Id = Guid.Empty,
-                Name = string.Empty,
-                StudentFullName = string.Empty
+                ActivityName = string.Empty,
+                SubjectName = string.Empty,
+                Activity = new List<ActivityDetailModel>()
             };
     }
 }
