@@ -10,6 +10,7 @@ public static class EvaluationSeeds
 {
     public static readonly EvaluationEntity EmptyEnrolledEntity = new()
     {
+        Id = Guid.NewGuid(),
         Student = default!,
         StudentId = default,
         Activity = default!,
@@ -18,6 +19,7 @@ public static class EvaluationSeeds
 
     public static readonly EvaluationEntity EvaluationEntity = new()
     {
+        Id = Guid.NewGuid(),
         Student = StudentSeeds.StudentEntity1,
         StudentId = StudentSeeds.StudentEntity1.Id,
         Activity = ActivitySeeds.ActivityEntity,
