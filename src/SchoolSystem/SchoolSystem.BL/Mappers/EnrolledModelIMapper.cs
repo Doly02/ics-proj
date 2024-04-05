@@ -28,8 +28,6 @@ public class EnrolledModelMapper
             StudentFullName = entity.Student.Name
         };
     }
-       
-            
 
     public override SubjectDetailModel MapToDetailModel(EnrolledEntity entity)
         => entity?.Subject is null
