@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SchoolSystem.DAL.Mappers
 {
-    public class EnrolledEntityMapper 
+    public class EnrolledEntityMapper : IEntityMapper<EnrolledEntity>
     {
         public void MapToExistingEntity(EnrolledEntity existingEntity, EnrolledEntity newEntity)
         {

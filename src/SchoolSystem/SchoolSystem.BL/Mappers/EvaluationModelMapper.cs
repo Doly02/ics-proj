@@ -15,7 +15,8 @@ public class EvaluationModelMapper
                 ActivityName = entity.Activity.Name,
                 Score = entity.Score,
                 StudentFullName = entity.Student.Name,
-                SubjectName = entity.Activity.Subject.Name
+                SubjectName = entity.Activity.Subject.Name,
+                Evaluation = [MapToDetailModel(entity)]
             };
     
     public override EvaluationDetailModel MapToDetailModel(EvaluationEntity? entity)

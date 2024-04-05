@@ -1,4 +1,5 @@
-﻿using SchoolSystem.BL.Models;
+﻿using System.Collections.ObjectModel;
+using SchoolSystem.BL.Models;
 using SchoolSystem.DAL.Entities;
 
 namespace SchoolSystem.BL.Mappers;
@@ -13,7 +14,8 @@ public class ActivityModelMapper :
             {
                 Id = entity.Id, 
                 ActivityName = entity.Name,
-                // StudentFullName = 
+                Activity = [MapToDetailModel(entity)],
+                SubjectName = entity.Subject.Name
             };
 
     public override ActivityDetailModel MapToDetailModel(ActivityEntity? entity)
@@ -28,15 +30,16 @@ public class ActivityModelMapper :
                 End = entity.End,
                 Place = entity.Place,
                 Start = entity.Start,
-                SubjectName = null!
+                SubjectName = entity.Subject.Name
             };
     
-    public ActivityListModel MapToListModel(ActivityDetailModel detailModel)
+    public ActivityListModel MapToExistingDetailModel(ActivityDetailModel detailModel)
         => new()
             {
-                Id = detailModel.Id, 
-                Name = detailModel.Name,
-                // StudentFullName = 
+                Id = detailModel.Id,
+                Activity = [detailModel],
+                ActivityName = detailModel.Name,
+                SubjectName = detailModel.SubjectName
             };
     
     public override ActivityEntity MapToEntity(ActivityDetailModel model)
