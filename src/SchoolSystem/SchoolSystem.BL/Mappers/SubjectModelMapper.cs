@@ -1,4 +1,5 @@
-﻿using SchoolSystem.BL.Models;
+﻿using System.Collections.ObjectModel;
+using SchoolSystem.BL.Models;
 using SchoolSystem.DAL.Entities;
 
 namespace SchoolSystem.BL.Mappers;
@@ -6,9 +7,21 @@ namespace SchoolSystem.BL.Mappers;
 public class SubjectModelMapper : ModelMapperBase<SubjectEntity, SubjectListModel, SubjectDetailModel>
 {
     public override SubjectListModel MapToListModel(SubjectEntity? entity)
-        => entity is null
-            ? SubjectListModel.Empty
-            : new SubjectListModel { Id = entity.Id, Name = entity.Name, Abbreviation = entity.Abbreviation };
+    {
+        if (entity is null) return SubjectListModel.Empty;
+
+        var map = new ActivityModelMapper();
+        var activitiesListModel = map.MapToListModel(entity.Activities);
+        var observableActivitiesListModel = new ObservableCollection<ActivityListModel>(activitiesListModel);
+
+        return new SubjectListModel
+        {
+            Id = entity.Id,
+            Name = entity.Name,
+            Abbreviation = entity.Abbreviation,
+            Activities = observableActivitiesListModel
+        };
+    }
 
     public override SubjectDetailModel MapToDetailModel(SubjectEntity? entity)
         => entity is null
