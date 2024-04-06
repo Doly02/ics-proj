@@ -1,4 +1,4 @@
-﻿using SchoolSystem.BL.Mappers;
+using SchoolSystem.BL.Mappers;
 using SchoolSystem.BL.Models;
 using SchoolSystem.DAL.Entities;
 using SchoolSystem.DAL.Mappers;
@@ -12,7 +12,7 @@ public class ActivityFacade(
     ActivityModelMapper activityModelMapper)
     :
         FacadeBase<ActivityEntity, ActivityListModel, ActivityDetailModel,
-            ActivityEntityMapper>(unitOfWorkFactory, activityModelMapper)
+            ActivityEntityMapper>(unitOfWorkFactory, activityModelMapper), IActivityFacade
 {
     public async Task SaveAsync(ActivityDetailModel model, Guid recipeId)
     {
@@ -26,6 +26,10 @@ public class ActivityFacade(
         repository.InsertEntityAsync(entity);
         await uow.CommitAsync();
     }
+
+
+
+
 }
 
 
