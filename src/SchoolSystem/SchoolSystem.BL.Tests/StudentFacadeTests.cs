@@ -142,10 +142,30 @@ public class StudentFacadeTests : FacadeTestsBase
     private static void FixIds(StudentDetailModel expectedModel, StudentDetailModel returnedModel)
     {
         returnedModel.Id = expectedModel.Id;
-        // Assume each EnrolledSubject has an Id property
-        for (int i = 0; i < returnedModel.EnrolledSubjects.Count; i++)
+
+        foreach (var enrolledSubjectModel in returnedModel.EnrolledSubjects)
         {
-            returnedModel.EnrolledSubjects[i].Id = expectedModel.EnrolledSubjects[i].Id;
+            var matchingEnrolledSubject = expectedModel.EnrolledSubjects.FirstOrDefault(es =>
+                es.Name == enrolledSubjectModel.Name &&
+                es.Abbreviation == enrolledSubjectModel.Abbreviation &&
+                es.StudentFullName == enrolledSubjectModel.StudentFullName);
+
+            if (matchingEnrolledSubject != null)
+            {
+                enrolledSubjectModel.Id = matchingEnrolledSubject.Id;
+
+                foreach (var activityModel in enrolledSubjectModel.Activities)
+                {
+                    var matchingActivity = matchingEnrolledSubject.Activities.FirstOrDefault(a =>
+                        a.ActivityName == activityModel.ActivityName &&
+                        a.SubjectName == activityModel.SubjectName);
+
+                    if (matchingActivity != null)
+                    {
+                        activityModel.Id = matchingActivity.Id;
+                    }
+                }
+            }
         }
     }
 }

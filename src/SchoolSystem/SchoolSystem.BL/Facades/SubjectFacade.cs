@@ -1,4 +1,4 @@
-﻿using SchoolSystem.BL.Mappers;
+using SchoolSystem.BL.Mappers;
 using SchoolSystem.BL.Models;
 using SchoolSystem.DAL.Entities;
 using SchoolSystem.DAL.Mappers;
@@ -8,7 +8,7 @@ namespace SchoolSystem.BL.Facades;
 
 public class SubjectFacade(   
     IUnitOfWorkFactory unitOfWorkFactory,
-    StudentModelMapper modelMapper)
+    SubjectModelMapper modelMapper)
     :
-FacadeBase<StudentEntity, StudentListModel, StudentDetailModel, StudentEntityMapper>(
-    unitOfWorkFactory, modelMapper), IStudentFacade;
+FacadeBase<SubjectEntity, SubjectListModel, SubjectDetailModel, SubjectEntityMapper>(
+    unitOfWorkFactory, modelMapper), ISubjectFacade;
