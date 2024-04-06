@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Xunit.Abstractions;
 using SchoolSystem.DAL.Enums;
+using SchoolSystem.Common.Tests;
 
 namespace SchoolSystem.DAL.Tests
 {
