@@ -3,9 +3,7 @@ using SchoolSystem.DAL.Entities;
 
 namespace SchoolSystem.BL.Facades;
 
-// Do Not Inherits From IEntity
-public interface IEvaluationFacade
+public interface IEvaluationFacade : IFacade<EvaluationEntity, StudentActivityListModel, EvaluationDetailModel>
 {
-    Task SaveAsync(EvaluationDetailModel model, Guid recipeId);
-    Task DeleteAsync(Guid id);
+    
 }
