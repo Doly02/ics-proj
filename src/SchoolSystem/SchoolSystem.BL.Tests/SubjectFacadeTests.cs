@@ -20,19 +20,6 @@ public sealed class SubjectFacadeTests : FacadeTestsBase
     }
 
     [Fact]
-    public async Task GetAll_FromSeeded_ContainsSeeded()
-    {
-        //Arrange
-        var listModel = SubjectModelMapper.MapToListModel(SubjectSeeds.ICS);
-
-        //Act
-        var returnedModel = await _facadeSUT.GetAsync();
-
-        //Assert
-        Assert.Contains(listModel, returnedModel);
-    }
-
-    [Fact]
     public async Task GetAll_Single_SeededICS()
     {
         var subjects = await _facadeSUT.GetAsync();
@@ -45,17 +32,24 @@ public sealed class SubjectFacadeTests : FacadeTestsBase
     public async Task DeleteById_FromSeeded_DoesNotThrow()
     {
         //Arrange & Act & Assert
-        await _facadeSUT.DeleteAsync(SubjectSeeds.ICS.Id);
+        await _facadeSUT.DeleteAsync(SubjectSeeds.ISS.Id);
     }
 
     [Fact]
     public async Task DeleteById_FromSeeded_Deleted()
     {
         // Act - Delete the subject
-        await _facadeSUT.DeleteAsync(SubjectSeeds.ICS.Id);
+        await _facadeSUT.DeleteAsync(SubjectSeeds.ISS.Id);
 
         // Assert - Verify the subject is no longer in the list
         var postDeleteSubjects = await _facadeSUT.GetAsync();
-        Assert.DoesNotContain(postDeleteSubjects, s => s.Id == SubjectSeeds.ICS.Id);
+        Assert.DoesNotContain(postDeleteSubjects, s => s.Id == SubjectSeeds.ISS.Id);
+    }
+
+    [Fact]
+    public async Task Delete_SubjectUsedInActivity_Throws()
+    {
+        //Act & Assert
+        await Assert.ThrowsAsync<InvalidOperationException>(async () => await _facadeSUT.DeleteAsync(SubjectSeeds.ICS.Id));
     }
 }
