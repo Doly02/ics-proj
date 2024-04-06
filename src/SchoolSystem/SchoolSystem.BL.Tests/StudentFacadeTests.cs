@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using SchoolSystem.BL.Facades;
 using SchoolSystem.BL.Mappers;
 using SchoolSystem.BL.Models;
@@ -104,6 +105,22 @@ public class StudentFacadeTests : FacadeTestsBase
     }
 
     [Fact]
+    public async Task GetById_SeededStudentEntity1()
+    {
+        var student = await _facadeSUT.GetAsync(StudentSeeds.StudentEntity1.Id);
+
+        DeepAssert.Equal(StudentModelMapper.MapToDetailModel(StudentSeeds.StudentEntity1), student);
+    }
+
+    [Fact]
+    public async Task GetById_NonExistent()
+    {
+        var student = await _facadeSUT.GetAsync(StudentSeeds.EmptyStudentEntity.Id);
+
+        Assert.Null(student);
+    }
+
+    [Fact]
     public async Task GetAll_FromSeeded_ContainsSeeded()
     {
         //Arrange
@@ -114,6 +131,15 @@ public class StudentFacadeTests : FacadeTestsBase
 
         //Assert
         Assert.Contains(listModel, returnedModel);
+    }
+
+    [Fact]
+    public async Task GetAll_Single_SeededStudentEntity1()
+    {
+        var students = await _facadeSUT.GetAsync();
+        var student = students.Single(i => i.Id == StudentSeeds.StudentEntity1.Id);
+
+        DeepAssert.Equal(StudentModelMapper.MapToListModel(StudentSeeds.StudentEntity1), student);
     }
 
     [Fact]
@@ -136,6 +162,15 @@ public class StudentFacadeTests : FacadeTestsBase
     {
         //Arrange & Act & Assert
         await _facadeSUT.DeleteAsync(StudentSeeds.StudentEntity1.Id);
+    }
+    
+    [Fact]
+    public async Task DeleteById_SeededStudentEntity1_Deleted()
+    {
+        await _facadeSUT.DeleteAsync(StudentSeeds.StudentEntity1.Id);
+
+        var postDeleteStudent = await _facadeSUT.GetAsync();
+        Assert.DoesNotContain(postDeleteStudent, s => s.Id == StudentSeeds.StudentEntity1.Id);
     }
 
     // Helper method to synchronize Ids between expected and actual models.
