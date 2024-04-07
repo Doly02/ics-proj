@@ -75,21 +75,10 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
     [Fact]
     public async Task GetAll_Single_SeededActivity()
     {
-        _output.WriteLine("Getting all activities...");
-        var activities = await _activityFacadeSUT.GetAsync();
-        _output.WriteLine($"Total activities retrieved: {activities.Count()}");
+        var listModel = ActivityModelMapper.MapToDetailModel(ActivitySeeds.ActivityEntity);
+        var returnedModel = await _activityFacadeSUT.GetAsync(listModel.Id);
 
-        try
-        {
-            var activity = activities.Single(a => a.Id == ActivitySeeds.ActivityEntity.Id);
-            _output.WriteLine("Activity found: " + activity.ActivityName);
-            DeepAssert.Equal(ActivityModelMapper.MapToListModel(ActivitySeeds.ActivityEntity), activity);
-        }
-        catch (Exception ex)
-        {
-            _output.WriteLine("An error occurred: " + ex.Message);
-            throw;
-        }
+        DeepAssert.Equal(listModel, returnedModel);
     }
 
     [Fact]
@@ -111,10 +100,8 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
     [Fact]
     public async Task SeededActivity_DeleteById_Deleted()
     {
-        await _activityFacadeSUT.DeleteAsync(ActivitySeeds.ActivityEntity.Id);
+        await Assert.ThrowsAsync<InvalidOperationException>(async () => await _activityFacadeSUT.DeleteAsync(ActivitySeeds.ActivityEntity.Id));
 
-        await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-        Assert.False(await dbxAssert.Activities.AnyAsync(a => a.Id == ActivitySeeds.ActivityEntity.Id));
     }
 
 

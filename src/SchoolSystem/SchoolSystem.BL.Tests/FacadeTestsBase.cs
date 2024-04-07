@@ -25,7 +25,7 @@ public class FacadeTestsBase : IAsyncLifetime
         StudentModelMapper = new StudentModelMapper();
         ActivityModelMapper = new ActivityModelMapper();
         EnrolledModelMapper = new EnrolledModelMapper();
-        //EvaluationModelMapper = new EvaluationModelMapper();
+        EvaluationModelMapper = new EvaluationModelMapper();
 
         UnitOfWorkFactory = new UnitOfWorkFactory(DbContextFactory);
     }
@@ -36,7 +36,7 @@ public class FacadeTestsBase : IAsyncLifetime
     protected StudentModelMapper StudentModelMapper { get; }
     protected ActivityModelMapper ActivityModelMapper { get; }
     protected EnrolledModelMapper EnrolledModelMapper { get; }
-    //protected EvaluationModelMapper EvaluationModelMapper { get; }
+    protected EvaluationModelMapper EvaluationModelMapper { get; }
     protected UnitOfWorkFactory UnitOfWorkFactory { get; }
 
     public async Task InitializeAsync()
