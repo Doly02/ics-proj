@@ -32,6 +32,9 @@ namespace SchoolSystem.DAL.Migrations
                     b.Property<DateTime>("End")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Place")
                         .HasColumnType("TEXT");
 
@@ -60,7 +63,7 @@ namespace SchoolSystem.DAL.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("EnrolledEntity");
+                    b.ToTable("Enrolleds");
                 });
 
             modelBuilder.Entity("SchoolSystem.DAL.Entities.EvaluationEntity", b =>

@@ -1,11 +1,11 @@
 using SchoolSystem.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
-using SchoolSystem.DAL.Tests;
 using Xunit.Abstractions;
 using SchoolSystem.DAL.Enums;
+using SchoolSystem.Common.Tests;
 
-namespace SchoolSystem.DAL
+namespace SchoolSystem.DAL.Tests
 {
     public class DbContextEvaluationTests(ITestOutputHelper output) : DbContextTestsBase(output)
     {
@@ -23,24 +23,34 @@ namespace SchoolSystem.DAL
                 StudentId = studentId,
                 ActivityId = activityId,
                 // Directly using the initialized Student and Activity entities based on their updated structures
-                Student = new StudentEntity { Id = studentId, Name = "John", Surname = "Doe", ImageUrl = null }, // Assuming ImageUrl can be null if not provided
+                Student = new StudentEntity
+                {
+                    Id = studentId,
+                    Name = "John",
+                    Surname = "Doe",
+                    ImageUrl = null
+                }, // Assuming ImageUrl can be null if not provided
                 Activity = new ActivityEntity
                 {
                     Id = activityId,
                     Start = DateTime.Now,
                     End = DateTime.Now.AddHours(1), // For example, 1 hour later
                     Place = "101 Classroom",
-                    ActivityType = ActivityType.Lecture, // Assuming ActivityType.Lecture is a valid enum option
+                    ActivityType =
+                        ActivityType
+                            .Lecture, // Assuming ActivityType.Lecture is a valid enum option
                     Description = "Introduction to Mathematics",
                     // Direct initialization of SubjectEntity based on its structure
                     Subject = new SubjectEntity
                     {
                         Id = subjectId,
                         Name = "Mathematics",
-                      
+
                         // Assuming these are the required properties based on the SubjectEntity definition
-                    }
-                }
+                    },
+                    SubjectId = subjectId
+                },
+                Id = Guid.NewGuid()
             };
 
             // Act
@@ -78,14 +88,16 @@ namespace SchoolSystem.DAL
             {
                 Id = Guid.NewGuid(), 
                 Subject = subject,
+                SubjectId = subject.Id,
                 ActivityType = ActivityType.Other
             };
-            EvaluationEntity evaluation = new EvaluationEntity()
+            EvaluationEntity evaluation = new EvaluationEntity
             {
                 StudentId = student.Id,
                 Student = student,
                 ActivityId = activity.Id,
-                Activity = activity
+                Activity = activity,
+                Id = Guid.NewGuid()
             };
             student.Evaluations.Add(evaluation);
             
@@ -118,15 +130,17 @@ namespace SchoolSystem.DAL
             {
                 Id = Guid.NewGuid(), 
                 Subject = subject,
+                SubjectId = subject.Id,
                 ActivityType = ActivityType.Other,
                 Evaluations = new List<EvaluationEntity>()
             };
-            EvaluationEntity evaluation = new EvaluationEntity()
+            EvaluationEntity evaluation = new EvaluationEntity
             {
                 StudentId = student.Id,
                 Student = student,
                 ActivityId = activity.Id,
-                Activity = activity
+                Activity = activity,
+                Id = Guid.NewGuid()
             };
             student.Evaluations.Add(evaluation);
             activity.Evaluations.Add(evaluation);

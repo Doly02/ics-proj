@@ -46,14 +46,6 @@ namespace SchoolSystem.DAL{
                 .HasMany(i => i.Evaluations)
                 .WithOne(i => i.Student)
                 .OnDelete(DeleteBehavior.Cascade);
-            
-        /*if (seedDemoData)
-            {
-                IngredientSeeds.Seed(modelBuilder);
-                RecipeSeeds.Seed(modelBuilder);
-                StudentSeeds.Seed(modelBuilder);
-            }
-            */
         }
     }
 }

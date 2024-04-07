@@ -1,6 +1,6 @@
 ﻿namespace SchoolSystem.DAL.Entities
 {
-    public record StudentEntity
+    public record StudentEntity : IEntity
     {
         public required Guid Id { get; set; }
         public required string Name { get; set; }
