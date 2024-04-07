@@ -3,6 +3,7 @@ using SchoolSystem.BL.Mappers;
 using SchoolSystem.BL.Models;
 using SchoolSystem.Common.Tests;
 using SchoolSystem.Common.Tests.Seeds;
+using SchoolSystem.DAL.Enums;
 using SchoolSystem.DAL.Tests;
 using System.Collections.ObjectModel;
 using Xunit;
@@ -27,11 +28,11 @@ public class EvaluationFacadeTests : FacadeTestsBase
         // Arrange
         var model = new EvaluationDetailModel
         {
-            Id = Guid.NewGuid(), // Nové unikátní ID, které bude generováno
-            ActivityId = Guid.NewGuid(), // ID pro neexistující aktivitu
-            StudentId = Guid.NewGuid(), // ID pro neexistujícího studenta
-            Score = 5, // Platné skóre
-            Note = "Dobře odvedená práce" // Platná poznámka
+            Id = Guid.NewGuid(), 
+            ActivityId = Guid.NewGuid(), 
+            StudentId = Guid.NewGuid(), 
+            Score = 5, 
+            Note = "Good job" 
         };
 
         // Act & Assert
@@ -64,6 +65,15 @@ public class EvaluationFacadeTests : FacadeTestsBase
         //Act & Assert
         await Assert.ThrowsAsync<InvalidOperationException>(async () => await _evaluationFacadeSUT.DeleteAsync(EvaluationSeeds.EvaluationEntity.Id));
     }
+
+    [Fact]
+    public async Task GetEvaluation_NonExistingId_ReturnsNull()
+    {
+        var nonExistingId = Guid.NewGuid(); 
+        var evaluation = await _evaluationFacadeSUT.GetAsync(nonExistingId);
+        Assert.Null(evaluation);
+    }
+
 
 
 

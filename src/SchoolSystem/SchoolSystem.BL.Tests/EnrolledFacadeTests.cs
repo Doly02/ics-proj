@@ -82,7 +82,7 @@ namespace SchoolSystem.BL.Tests
             // Arrange
             var nonExistingId = Guid.NewGuid(); 
 
-            // Act & Assert - pokus o odstranění by měl vyvolat výjimku
+            // Act & Assert
             await Assert.ThrowsAsync<InvalidOperationException>(() => _enrolledFacadeSUT.DeleteAsync(nonExistingId));
         }
 
