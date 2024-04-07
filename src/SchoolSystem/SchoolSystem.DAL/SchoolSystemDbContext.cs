@@ -1,5 +1,4 @@
 using SchoolSystem.DAL.Entities;
-//using SchoolSystem.DAL.Seeds;
 using Microsoft.EntityFrameworkCore;
 
 namespace SchoolSystem.DAL{
