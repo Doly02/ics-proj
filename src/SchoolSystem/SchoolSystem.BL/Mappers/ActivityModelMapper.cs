@@ -15,7 +15,7 @@ public class ActivityModelMapper :
                 Id = entity.Id, 
                 ActivityName = entity.Name,
                 Activity = [MapToDetailModel(entity)],
-                SubjectName = entity.Subject.Name
+                SubjectName = entity.Subject?.Name
             };
 
     public override ActivityDetailModel MapToDetailModel(ActivityEntity? entity)
@@ -30,7 +30,7 @@ public class ActivityModelMapper :
                 End = entity.End,
                 Place = entity.Place,
                 Start = entity.Start,
-                SubjectName = entity.Subject.Name
+                SubjectName = entity.Subject?.Name
             };
     
     public ActivityListModel MapToExistingDetailModel(ActivityDetailModel detailModel)
