@@ -1,9 +1,9 @@
-//using SchoolSystem.Common.Tests.Seeds;
 using SchoolSystem.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Xunit.Abstractions;
 using SchoolSystem.DAL.Enums;
+using SchoolSystem.Common.Tests;
 
 namespace SchoolSystem.DAL.Tests;
 
@@ -30,7 +30,8 @@ public class DbContextEnrolledTests(ITestOutputHelper output) : DbContextTestsBa
             Student = student,
             Subject = subject,
             SubjectId = subject.Id,
-            StudentId = student.Id
+            StudentId = student.Id,
+            Id = Guid.NewGuid()
         };
 
         //Act
@@ -57,7 +58,8 @@ public class DbContextEnrolledTests(ITestOutputHelper output) : DbContextTestsBa
             Student = student,
             Subject = subject,
             StudentId = student.Id,
-            SubjectId = subject.Id
+            SubjectId = subject.Id,
+            Id = Guid.NewGuid()
         };
 
         SchoolSystemDbContextSUT.Enrolleds.Add(enrolled);
@@ -85,7 +87,8 @@ public class DbContextEnrolledTests(ITestOutputHelper output) : DbContextTestsBa
             Student = student,
             Subject = oldSubject,
             StudentId = student.Id,
-            SubjectId = oldSubject.Id
+            SubjectId = oldSubject.Id,
+            Id = Guid.NewGuid()
         };
 
         SchoolSystemDbContextSUT.Students.Add(student);
@@ -103,7 +106,8 @@ public class DbContextEnrolledTests(ITestOutputHelper output) : DbContextTestsBa
             Student = student,
             Subject = newSubject,
             StudentId = student.Id,
-            SubjectId = newSubject.Id
+            SubjectId = newSubject.Id,
+            Id = Guid.NewGuid()
         };
         SchoolSystemDbContextSUT.Enrolleds.Add(updatedEnrolled);
         await SchoolSystemDbContextSUT.SaveChangesAsync();
@@ -129,7 +133,8 @@ public class DbContextEnrolledTests(ITestOutputHelper output) : DbContextTestsBa
             Student = student,
             Subject = subject,
             StudentId = student.Id,
-            SubjectId = subject.Id
+            SubjectId = subject.Id,
+            Id = Guid.NewGuid()
         };
 
         SchoolSystemDbContextSUT.Enrolleds.Add(enrolled);
@@ -157,7 +162,8 @@ public class DbContextEnrolledTests(ITestOutputHelper output) : DbContextTestsBa
             Student = student,
             Subject = subject,
             StudentId = student.Id,
-            SubjectId = subject.Id
+            SubjectId = subject.Id,
+            Id = Guid.NewGuid()
         };
 
         SchoolSystemDbContextSUT.Students.Add(student);
@@ -190,15 +196,26 @@ public class DbContextEnrolledTests(ITestOutputHelper output) : DbContextTestsBa
             Student = student,
             Subject = subject,
             StudentId = student.Id,
-            SubjectId = subject.Id
+            SubjectId = subject.Id,
+            Id = Guid.NewGuid()
         };
 
         var enrolled2 = new EnrolledEntity
         {
-            Student = new StudentEntity { Id = Guid.NewGuid(), Name = "Lois", Surname = "Lane" },
-            Subject = new SubjectEntity { Id = Guid.NewGuid(), Name = "Photography" },
+            Student = new StudentEntity
+            {
+                Id = Guid.NewGuid(),
+                Name = "Lois",
+                Surname = "Lane"
+            },
+            Subject = new SubjectEntity
+            {
+                Id = Guid.NewGuid(),
+                Name = "Photography"
+            },
             StudentId = student.Id,
-            SubjectId = subject.Id
+            SubjectId = subject.Id,
+            Id = Guid.NewGuid()
         };
 
         SchoolSystemDbContextSUT.Enrolleds.Add(enrolled1);

@@ -63,6 +63,7 @@ public class DbContextStudentTests(ITestOutputHelper output) : DbContextTestsBas
         SubjectEntity subject = new() { Id = Guid.NewGuid() };
         EnrolledEntity enrolled = new EnrolledEntity()
         {
+            Id = Guid.NewGuid(),
             StudentId = entity.Id,
             Subject = subject,
             SubjectId = subject.Id,
@@ -104,10 +105,12 @@ public class DbContextStudentTests(ITestOutputHelper output) : DbContextTestsBas
         {
             Id = Guid.NewGuid(), 
             Subject = subject,
+            SubjectId = Guid.NewGuid(),
             ActivityType = ActivityType.Other
         };
         EvaluationEntity evaluation = new EvaluationEntity()
         {
+            Id = Guid.NewGuid(),
             StudentId = student.Id,
             Student = student,
             ActivityId = activity.Id,

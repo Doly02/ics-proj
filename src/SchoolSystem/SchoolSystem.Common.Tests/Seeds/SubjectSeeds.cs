@@ -1,4 +1,4 @@
-﻿using SchoolSystem.DAL.Enums;
+using SchoolSystem.DAL.Enums;
 using SchoolSystem.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using SchoolSystem.DAL.Entities;
@@ -23,14 +23,23 @@ public static class SubjectSeeds
         Abbreviation = "ICS"
     };
 
+    public static readonly SubjectEntity ISS = new()
+    {
+        Id = Guid.Parse("c979d3d6-0f57-4d53-bf2e-019d9230692f"), 
+        Name = "Signaly a systemy",
+        Abbreviation = "ISS"
+    };
+
     //To ensure that no tests reuse these clones for non-idempotent operations
     public static readonly SubjectEntity SubjectEntityUpdate = ICS with { Id = Guid.Parse("A2E6849D-A158-4436-980C-7FC26B60C674")};
     public static readonly SubjectEntity SubjectEntityDelete = ICS with { Id = Guid.Parse("30872EFF-CED4-4F2B-89DB-0EE83A74D279")};
+
 
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<SubjectEntity>().HasData(
             ICS,
+            ISS,
             SubjectEntityUpdate,
             SubjectEntityDelete);
     }

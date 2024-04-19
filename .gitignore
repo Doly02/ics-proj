@@ -362,3 +362,7 @@ MigrationBackup/
 FodyWeavers.xsd
 
 .idea/
+
+# Database generated files
+*.db
+*.dgml

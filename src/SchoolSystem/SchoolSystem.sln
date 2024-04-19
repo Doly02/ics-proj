@@ -5,9 +5,13 @@ VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolSystem.DAL", "SchoolSystem.DAL\SchoolSystem.DAL.csproj", "{AA191850-CEEC-4EB5-AE47-355006268B54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolSystem.Common.Tests", "SchoolSystem.Common.Tests\SchoolSystem.Common.Tests.csproj", "{98FC815E-5E5C-4E19-8D3E-9A1719D9DC15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolSystem.Common.Tests", "SchoolSystem.Common.Tests\SchoolSystem.Common.Tests.csproj", "{98FC815E-5E5C-4E19-8D3E-9A1719D9DC15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolSystem.DAL.Tests", "SchoolSystem.DAL.Tests\SchoolSystem.DAL.Tests.csproj", "{2CD5CED5-BC86-4158-9A46-BDA846F4BCB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolSystem.DAL.Tests", "SchoolSystem.DAL.Tests\SchoolSystem.DAL.Tests.csproj", "{2CD5CED5-BC86-4158-9A46-BDA846F4BCB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolSystem.BL", "SchoolSystem.BL\SchoolSystem.BL.csproj", "{2D3CA6F6-27AD-4CE6-AABC-9901AB77133C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolSystem.BL.Tests", "SchoolSystem.BL.Tests\SchoolSystem.BL.Tests.csproj", "{20BE5BC7-083D-44DC-9A34-3BD8019B8A63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,11 +31,17 @@ Global
 		{2CD5CED5-BC86-4158-9A46-BDA846F4BCB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CD5CED5-BC86-4158-9A46-BDA846F4BCB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CD5CED5-BC86-4158-9A46-BDA846F4BCB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D3CA6F6-27AD-4CE6-AABC-9901AB77133C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D3CA6F6-27AD-4CE6-AABC-9901AB77133C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D3CA6F6-27AD-4CE6-AABC-9901AB77133C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D3CA6F6-27AD-4CE6-AABC-9901AB77133C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20BE5BC7-083D-44DC-9A34-3BD8019B8A63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20BE5BC7-083D-44DC-9A34-3BD8019B8A63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20BE5BC7-083D-44DC-9A34-3BD8019B8A63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20BE5BC7-083D-44DC-9A34-3BD8019B8A63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D8ACCA03-E1FC-494A-A8BE-0683814216B3}

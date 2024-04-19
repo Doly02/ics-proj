@@ -1,9 +1,9 @@
-//using SchoolSystem.Common.Tests.Seeds;
 using SchoolSystem.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Xunit.Abstractions;
 using SchoolSystem.DAL.Enums;
+using SchoolSystem.Common.Tests;
 
 namespace  SchoolSystem.DAL.Tests;
 
@@ -26,7 +26,8 @@ public class DbContextActivityTests(ITestOutputHelper output) : DbContextTestsBa
             Place = "101B", 
             ActivityType = ActivityType.Lecture, 
             Description = "Introduction to Programming",
-            Subject =  subject
+            Subject = subject,
+            SubjectId = subject.Id,
         };
 
         //Act
@@ -43,6 +44,11 @@ public class DbContextActivityTests(ITestOutputHelper output) : DbContextTestsBa
     public async Task UpdateActivity_ActivityUpdated()
     {
         // Arrange
+        SubjectEntity subject = new() // todo seed subject maybe
+        {
+            Id = Guid.NewGuid()
+        };
+
         var entity = new ActivityEntity
         {
             Id = Guid.NewGuid(), // Vytvoření nového GUID pro entitu
@@ -51,7 +57,8 @@ public class DbContextActivityTests(ITestOutputHelper output) : DbContextTestsBa
             Place = "101B",
             ActivityType = ActivityType.Lecture,
             Description = "Introduction to Programming",
-            Subject = new SubjectEntity { Id = Guid.NewGuid() } // Vytvoření nového předmětu
+            Subject = subject, // Vytvoření nového předmětu
+            SubjectId = subject.Id
         };
 
         SchoolSystemDbContextSUT.Activities.Add(entity);
@@ -75,6 +82,10 @@ public class DbContextActivityTests(ITestOutputHelper output) : DbContextTestsBa
     public async Task GetActivityById_ActivityRetrieved()
     {
         // Arrange
+        SubjectEntity subject = new() // todo seed subject maybe
+        {
+            Id = Guid.NewGuid()
+        };
         var newEntity = new ActivityEntity
         {
             Id = Guid.NewGuid(),
@@ -83,7 +94,8 @@ public class DbContextActivityTests(ITestOutputHelper output) : DbContextTestsBa
             Place = "201A",
             ActivityType = ActivityType.Project,
             Description = "Advanced Programming Workshop",
-            Subject = new SubjectEntity { Id = Guid.NewGuid() }
+            Subject = subject,
+            SubjectId = subject.Id
         };
 
         await SchoolSystemDbContextSUT.Activities.AddAsync(newEntity);
@@ -101,6 +113,10 @@ public class DbContextActivityTests(ITestOutputHelper output) : DbContextTestsBa
     public async Task DeleteActivity_ActivityIsDeleted()
     {
         // Arrange
+        SubjectEntity subject = new() // todo seed subject maybe
+        {
+            Id = Guid.NewGuid()
+        };
         var newEntity = new ActivityEntity
         {
             Id = Guid.NewGuid(),
@@ -109,7 +125,8 @@ public class DbContextActivityTests(ITestOutputHelper output) : DbContextTestsBa
             Place = "301C",
             ActivityType = ActivityType.Lecture,
             Description = "Seminar on Database Management",
-            Subject = new SubjectEntity { Id = Guid.NewGuid() }
+            Subject = subject,
+            SubjectId = subject.Id
         };
 
         await SchoolSystemDbContextSUT.Activities.AddAsync(newEntity);
@@ -142,7 +159,8 @@ public class DbContextActivityTests(ITestOutputHelper output) : DbContextTestsBa
             Place = "Room 402",
             ActivityType = ActivityType.Lecture,
             Description = "Calculus Lecture",
-            Subject = subject
+            Subject = subject,
+            SubjectId = subject.Id
         };
 
         await SchoolSystemDbContextSUT.Subjects.AddAsync(subject);
@@ -170,11 +188,16 @@ public class DbContextActivityTests(ITestOutputHelper output) : DbContextTestsBa
             Name = "John",
             Surname = "Doe"
         };
+        SubjectEntity subject = new() // todo seed subject maybe
+        {
+            Id = Guid.NewGuid()
+        };
 
         var activity = new ActivityEntity
         {
             Id = Guid.NewGuid(),
-            Subject = new SubjectEntity { Id = Guid.NewGuid() },
+            Subject = subject,
+            SubjectId = subject.Id,
             Start = new DateTime(2023, 10, 5, 14, 0, 0),
             End = new DateTime(2023, 10, 5, 16, 0, 0),
             Place = "Room 500",
@@ -193,7 +216,8 @@ public class DbContextActivityTests(ITestOutputHelper output) : DbContextTestsBa
             Student = student,
             Activity = activity,
             Score = 90,
-            Note = "Excellent work"
+            Note = "Excellent work",
+            Id = Guid.NewGuid()
         };
 
         await SchoolSystemDbContextSUT.Evaluations.AddAsync(evaluation);
@@ -219,6 +243,14 @@ public class DbContextActivityTests(ITestOutputHelper output) : DbContextTestsBa
     {
         // Arrange
         var sharedId = Guid.NewGuid();
+        SubjectEntity subject1 = new() // todo seed subject maybe
+        {
+            Id = Guid.NewGuid()
+        };
+        SubjectEntity subject2 = new() // todo seed subject maybe
+        {
+            Id = Guid.NewGuid()
+        };
         var firstActivity = new ActivityEntity
         {
             Id = sharedId,
@@ -227,7 +259,8 @@ public class DbContextActivityTests(ITestOutputHelper output) : DbContextTestsBa
             Place = "Room 101",
             ActivityType = ActivityType.Lecture,
             Description = "First Activity",
-            Subject = new SubjectEntity { Id = Guid.NewGuid() }
+            Subject = subject1,
+            SubjectId = subject1.Id
         };
 
         SchoolSystemDbContextSUT.Activities.Add(firstActivity);
@@ -241,7 +274,8 @@ public class DbContextActivityTests(ITestOutputHelper output) : DbContextTestsBa
             Place = "Room 102",
             ActivityType = ActivityType.Lecture,
             Description = "Second Activity",
-            Subject = new SubjectEntity { Id = Guid.NewGuid() }
+            Subject = subject2,
+            SubjectId = subject2.Id
         };
 
         // Act & Assert
@@ -259,6 +293,15 @@ public class DbContextActivityTests(ITestOutputHelper output) : DbContextTestsBa
     public async Task LoadTwoActivitiesSequentially_ActivitiesLoadedCorrectly()
     {
         // Arrange
+        SubjectEntity subject1 = new() // todo seed subject maybe
+        {
+            Id = Guid.NewGuid()
+        };
+        SubjectEntity subject2 = new() // todo seed subject maybe
+        {
+            Id = Guid.NewGuid()
+        };
+
         var firstActivity = new ActivityEntity
         {
             Id = Guid.NewGuid(),
@@ -267,7 +310,8 @@ public class DbContextActivityTests(ITestOutputHelper output) : DbContextTestsBa
             Place = "Room 201",
             ActivityType = ActivityType.Lecture,
             Description = "First Activity",
-            Subject = new SubjectEntity { Id = Guid.NewGuid() }
+            Subject = subject1,
+            SubjectId = subject1.Id
         };
 
         var secondActivity = new ActivityEntity
@@ -278,7 +322,8 @@ public class DbContextActivityTests(ITestOutputHelper output) : DbContextTestsBa
             Place = "Room 202",
             ActivityType = ActivityType.Lecture,
             Description = "Second Activity",
-            Subject = new SubjectEntity { Id = Guid.NewGuid() }
+            Subject = subject2,
+            SubjectId = subject2.Id
         };
 
         await SchoolSystemDbContextSUT.Activities.AddRangeAsync(new[] { firstActivity, secondActivity });
