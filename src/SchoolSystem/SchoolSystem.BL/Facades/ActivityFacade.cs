@@ -1,3 +1,5 @@
+using System.Collections.ObjectModel;
+using Microsoft.EntityFrameworkCore;
 using SchoolSystem.BL.Mappers;
 using SchoolSystem.BL.Models;
 using SchoolSystem.DAL.Entities;
@@ -14,10 +16,10 @@ public class ActivityFacade(
         FacadeBase<ActivityEntity, ActivityListModel, ActivityDetailModel,
             ActivityEntityMapper>(unitOfWorkFactory, activityModelMapper), IActivityFacade
 {
-    public async Task SaveAsync(ActivityDetailModel model, Guid Id)
+    public async Task SaveAsync(ActivityDetailModel model, Guid id)
     {
         var mapper = new ActivityModelMapper();
-        ActivityEntity entity = mapper.MapToEntity(model, Id);
+        ActivityEntity entity = mapper.MapToEntity(model, id);
 
         await using IUnitOfWork uow = UnitOfWorkFactory.Create();
         IRepository<ActivityEntity> repository =
@@ -25,5 +27,22 @@ public class ActivityFacade(
 
         repository.InsertEntityAsync(entity);
         await uow.CommitAsync();
+    }
+    
+    public async Task<ObservableCollection<ActivityListModel>> FilterActivitiesByTimeAsync(DateTime startDateTime, DateTime endDateTime)
+    {
+        var mapper = new ActivityModelMapper();
+        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
+        IRepository<ActivityEntity> repository = uow.GetRepository<ActivityEntity, ActivityEntityMapper>();
+        
+        // the result of filtering
+        var activities = await repository.Get()  // create query to filter 
+            .Where(a => a.Start >= startDateTime && a.End <= endDateTime)
+            .ToListAsync();
+
+        // filtrated activity list
+        var activityListModels = activities.Select(entity => mapper.MapToListModel(entity)).ToList();
+  
+        return new(activityListModels);
     }
 }
