@@ -14,10 +14,10 @@ public class ActivityFacade(
         FacadeBase<ActivityEntity, ActivityListModel, ActivityDetailModel,
             ActivityEntityMapper>(unitOfWorkFactory, activityModelMapper), IActivityFacade
 {
-    public async Task SaveAsync(ActivityDetailModel model, Guid recipeId)
+    public async Task SaveAsync(ActivityDetailModel model, Guid Id)
     {
         var mapper = new ActivityModelMapper();
-        ActivityEntity entity = mapper.MapToEntity(model, recipeId);
+        ActivityEntity entity = mapper.MapToEntity(model, Id);
 
         await using IUnitOfWork uow = UnitOfWorkFactory.Create();
         IRepository<ActivityEntity> repository =
@@ -26,10 +26,4 @@ public class ActivityFacade(
         repository.InsertEntityAsync(entity);
         await uow.CommitAsync();
     }
-
-
-
-
 }
-
-
