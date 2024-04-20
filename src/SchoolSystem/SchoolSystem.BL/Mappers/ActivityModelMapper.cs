@@ -33,7 +33,7 @@ public class ActivityModelMapper :
                 SubjectName = entity.Subject?.Name
             };
     
-    public ActivityListModel MapToExistingDetailModel(ActivityDetailModel detailModel)
+    public ActivityListModel MapToListModel(ActivityDetailModel detailModel)
         => new()
             {
                 Id = detailModel.Id,
