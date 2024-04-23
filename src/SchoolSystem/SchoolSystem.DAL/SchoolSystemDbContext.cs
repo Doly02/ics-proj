@@ -1,6 +1,6 @@
 using SchoolSystem.DAL.Entities;
-//using SchoolSystem.DAL.Seeds;
 using Microsoft.EntityFrameworkCore;
+using SchoolSystem.DAL.Seeds;
 
 namespace SchoolSystem.DAL{
 
@@ -46,6 +46,15 @@ namespace SchoolSystem.DAL{
                 .HasMany(i => i.Evaluations)
                 .WithOne(i => i.Student)
                 .OnDelete(DeleteBehavior.Cascade);
+            
+            if (seedDemoData)
+            {
+                StudentSeeds.Seed(modelBuilder);
+                SubjectSeeds.Seed(modelBuilder);
+                ActivitySeeds.Seed(modelBuilder);
+                EvaluationSeeds.Seed(modelBuilder);
+                EnrolledSeeds.Seed(modelBuilder);
+            }
         }
     }
 }

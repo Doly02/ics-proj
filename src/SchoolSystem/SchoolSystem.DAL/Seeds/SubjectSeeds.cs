@@ -1,7 +1,5 @@
-﻿using SchoolSystem.DAL.Enums;
-using SchoolSystem.DAL.Entities;
+﻿using SchoolSystem.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
-using SchoolSystem.DAL.Entities;
 
 namespace SchoolSystem.DAL.Seeds;
 
