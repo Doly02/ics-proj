@@ -57,24 +57,3 @@ public class StudentFacade(
         return entities.Select(entity => modelMapper.MapToListModel(entity)).ToList();
     }
     
-    /// <summary>
-    /// Filters Students Based on a User-Provided Input String That is Checked Against 'Name' and 'Surname'.
-    /// </summary>
-    /// <param name="context">The Database Context Used to Access the 'Students' Table.</param>
-    /// <param name="nameInput">The Name Input String Used to Search for Students. Should Be a Part of the Name or Full Name.</param>
-    /// <returns>A List of Students That Match the Name Criteria.</returns>
-    public async Task<List<StudentEntity>> FilterStudentsByName(SchoolSystemDbContext context, string nameInput)
-    {
-        if (string.IsNullOrEmpty(nameInput))
-        {
-            return new List<StudentEntity>(); // Return an Empty List if the Input is Null or Empty.
-        }
-
-        // EF Core's Like Function to Filter Students by Name
-        var filteredStudents = await context.Students
-            .Where(student => EF.Functions.Like(student.Name, $"%{nameInput}%"))
-            .ToListAsync();
-
-        return filteredStudents;
-    }
-}
