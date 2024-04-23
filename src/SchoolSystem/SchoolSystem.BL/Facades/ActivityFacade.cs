@@ -45,4 +45,29 @@ public class ActivityFacade(
   
         return new(activityListModels);
     }
+    
+    public ObservableCollection<ActivityListModel> SortActivitiesAscendingAsync(List<ActivityEntity> activities)
+    {
+        // Create an instance to map entities to models.
+        var mapper = new ActivityModelMapper();
+        // Store result of sorting list.
+        var sortedActivities = activities
+            .OrderBy(a => a.Name)
+            .Select(mapper.MapToListModel) // convert entities to ActivityListModel
+            .ToList(); // convert IEnumerable to List
+
+        // Return observable collection.
+        return new ObservableCollection<ActivityListModel>(sortedActivities);
+    }
+
+    public ObservableCollection<ActivityListModel> SortActivitiesDescendingAsync(List<ActivityEntity> activities)
+    {
+        var mapper = new ActivityModelMapper();
+        var sortedActivities = activities
+            .OrderByDescending(a => a.Name)
+            .Select(mapper.MapToListModel)
+            .ToList();
+
+        return new ObservableCollection<ActivityListModel>(sortedActivities);
+    }
 }
