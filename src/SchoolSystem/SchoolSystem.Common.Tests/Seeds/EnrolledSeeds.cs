@@ -1,8 +1,6 @@
-using SchoolSystem.DAL.Enums;
 using SchoolSystem.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
-using SchoolSystem.DAL.Entities;
+
 
 namespace SchoolSystem.Common.Tests.Seeds;
 
