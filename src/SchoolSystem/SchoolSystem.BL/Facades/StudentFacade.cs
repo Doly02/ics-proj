@@ -24,11 +24,13 @@ public class StudentFacade(
     /// If Null, the Search Will Skip Name Matching.</param>
     /// <param name="Id">Optional. The Unique Identifier of a Student. If Null, the Search Will Skip Id Matching.</param>
     /// <returns>A Task That Represents The Asynchronous Operation and Contains a List of Students Matching the Criteria, Mapped to a List Model.</returns>
-    public async Task<IEnumerable<StudentListModel>> SearchAsync(string? Name = null, Guid? Id = null)
+    public async Task<IEnumerable<StudentListModel>> SearchAsync(string? Name = null,
+        Guid? Id = null)
     {
         await using var uow = UnitOfWorkFactory.Create();
         // Start the Query Using a Generic Repository and a Specific Entity Mapper
-        IQueryable<StudentEntity> query = uow.GetRepository<StudentEntity, StudentEntityMapper>().Get();
+        IQueryable<StudentEntity> query =
+            uow.GetRepository<StudentEntity, StudentEntityMapper>().Get();
 
         // Look For a Match In Name And Surname 
         if (!string.IsNullOrEmpty(Name))
@@ -36,7 +38,9 @@ public class StudentFacade(
             var terms = Name.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             foreach (var term in terms)
             {
-                query = query.Where(e => EF.Functions.Like(e.Name, $"%{term}%") || EF.Functions.Like(e.Surname, $"%{term}%"));
+                query = query.Where(e =>
+                    EF.Functions.Like(e.Name, $"%{term}%") ||
+                    EF.Functions.Like(e.Surname, $"%{term}%"));
             }
         }
 
@@ -50,10 +54,12 @@ public class StudentFacade(
         {
             query = query.Include(includePath);
         }
+
         // Execute the Query and Map the Results to a List Model Using a Model Mapper
         List<StudentEntity> entities = await query.ToListAsync();
 
         // Map Each Entity to a StudentListModel Using the Provided Model Mapper
         return entities.Select(entity => modelMapper.MapToListModel(entity)).ToList();
     }
-    
+
+}
