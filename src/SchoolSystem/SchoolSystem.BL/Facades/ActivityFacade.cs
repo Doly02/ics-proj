@@ -32,8 +32,8 @@ public class ActivityFacade(
     public async Task<ObservableCollection<ActivityListModel>> FilterActivitiesByTimeAsync(DateTime startDateTime, DateTime endDateTime)
     {
         var mapper = new ActivityModelMapper();
-        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
-        IRepository<ActivityEntity> repository = uow.GetRepository<ActivityEntity, ActivityEntityMapper>();
+        await using var uow = UnitOfWorkFactory.Create();
+        var repository = uow.GetRepository<ActivityEntity, ActivityEntityMapper>();
         
         // the result of filtering
         var activities = await repository.Get()  // create query to filter 
@@ -43,7 +43,7 @@ public class ActivityFacade(
         // filtrated activity list
         var activityListModels = activities.Select(entity => mapper.MapToListModel(entity)).ToList();
   
-        return new(activityListModels);
+        return new ObservableCollection<ActivityListModel>(activityListModels);
     }
     
     public ObservableCollection<ActivityListModel> SortActivitiesAscendingAsync(List<ActivityEntity> activities)
