@@ -6,10 +6,10 @@ namespace SchoolSystem.DAL.Entities {
         public required Guid Id { get; set; }
         // Id of enrolled defined by StudentId and SubjectId
         public required Guid StudentId { get; set; }
-        public required StudentEntity Student { get; set; }
+        public required StudentEntity? Student { get; set; }
 
         public required Guid SubjectId { get; set; }
-        public required SubjectEntity Subject { get; set; }
+        public required SubjectEntity? Subject { get; set; }
     }
 }
 

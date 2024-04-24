@@ -22,62 +22,22 @@ public class EnrolledFacade(
             .Include(e => e.Subject)
                 .ThenInclude(subject => subject.Activities)
             .Include(e => e.Student)
-            .SingleOrDefaultAsync(e => e.Id == id);
+            .SingleOrDefaultAsync(e => e.Id == id);// Compare Id of Student With id In Param
 
         var mapper = new EnrolledModelMapper();
 
         return entity != null ? mapper.MapToListModel(entity) : null;
     }
 
-    public async Task<IEnumerable<EnrolledSubjectsListModel>> FilterByStudentNameAsync(string studentName)
+
+    public async Task<IEnumerable<EnrolledSubjectsListModel>> SearchBySubjectNameAsync(string subjectName)
     {
-        await using var uow = UnitOfWorkFactory.Create();
-        IQueryable<EnrolledEntity> query = uow.GetRepository<EnrolledEntity, EnrolledEntityMapper>().Get()
-            .Include(e => e.Student)
+        await using var unitOfWork = UnitOfWorkFactory.Create();
+        IQueryable<EnrolledEntity> query = unitOfWork.GetRepository<EnrolledEntity, EnrolledEntityMapper>().Get()
             .Include(e => e.Subject)
-                .ThenInclude(subject => subject.Activities)
-            .Where(e => EF.Functions.Like(e.Student.Name, $"%{studentName}%"));
+            .Where(e => EF.Functions.Like(e.Subject.Name, $"%{subjectName}%"));
 
-        foreach (string includePath in IncludesNavigationPathDetail)
-        {
-            query = query.Include(includePath);
-        }
-
-        List<EnrolledEntity> entities = await query.ToListAsync();
-
-        return entities.Select(entity => ModelMapper.MapToListModel(entity)).ToList();
-    }
-
-    public async Task<IEnumerable<EnrolledSubjectsListModel>> SearchAsync(string? studentName = null, string? subjectName = null, Guid? subjectId = null)
-    {
-        await using var uow = UnitOfWorkFactory.Create();
-        IQueryable<EnrolledEntity> query = uow.GetRepository<EnrolledEntity, EnrolledEntityMapper>().Get()
-            .Include(e => e.Student)
-            .Include(e => e.Subject)
-                .ThenInclude(subject => subject.Activities);
-
-        // Aplikace filtrů, pokud jsou poskytnuty
-        if (!string.IsNullOrEmpty(studentName))
-        {
-            query = query.Where(e => EF.Functions.Like(e.Student.Name, $"%{studentName}%"));
-        }
-
-        if (!string.IsNullOrEmpty(subjectName))
-        {
-            query = query.Where(e => EF.Functions.Like(e.Subject.Name, $"%{subjectName}%"));
-        }
-
-        if (subjectId.HasValue)
-        {
-            query = query.Where(e => e.SubjectId == subjectId.Value);
-        }
-
-        foreach (string includePath in IncludesNavigationPathDetail)
-        {
-            query = query.Include(includePath);
-        }
-
-        List<EnrolledEntity> entities = await query.ToListAsync();
+        var entities = await query.ToListAsync();
 
         return entities.Select(entity => ModelMapper.MapToListModel(entity)).ToList();
     }
