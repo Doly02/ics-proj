@@ -22,7 +22,7 @@ public class EnrolledFacade(
             .Include(e => e.Subject)
                 .ThenInclude(subject => subject.Activities)
             .Include(e => e.Student)
-            .SingleOrDefaultAsync(e => e.Id == id);
+            .SingleOrDefaultAsync(e => e.Id == id);// Compare Id of Student With id In Param
 
         var mapper = new EnrolledModelMapper();
 
