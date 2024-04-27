@@ -42,6 +42,30 @@ public class EnrolledFacade(
         return entities.Select(entity => ModelMapper.MapToListModel(entity)).ToList();
     }
 
+    public async Task<IEnumerable<EnrolledSubjectsListModel>> SortEnrolledSubjectsAsync(
+    string sortBy,
+    bool ascending = true)
+    {
+        await using var unitOfWork = UnitOfWorkFactory.Create();
+        IQueryable<EnrolledEntity> query = unitOfWork.GetRepository<EnrolledEntity, EnrolledEntityMapper>().Get();
+
+        // Dynamické řazení na základě vybraného kritéria
+        query = sortBy switch
+        {
+            "Name" => ascending ?
+                        query.OrderBy(e => e.Subject.Name) :
+                        query.OrderByDescending(e => e.Subject.Name),
+            "Abbreviation" => ascending ?
+                        query.OrderBy(e => e.Subject.Abbreviation) :
+                        query.OrderByDescending(e => e.Subject.Abbreviation),
+            _ => query
+        };
+
+        var entities = await query.ToListAsync();
+
+        return entities.Select(entity => ModelMapper.MapToListModel(entity)).ToList();
+    }
+
 
 }
 
