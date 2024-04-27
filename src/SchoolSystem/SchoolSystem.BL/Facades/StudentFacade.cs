@@ -1,4 +1,8 @@
-﻿using SchoolSystem.BL.Mappers;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using SchoolSystem.BL.Mappers;
 using SchoolSystem.BL.Models;
 using SchoolSystem.DAL.Entities;
 using SchoolSystem.DAL.Mappers;
@@ -61,5 +65,31 @@ public class StudentFacade(
         // Map Each Entity to a StudentListModel Using the Provided Model Mapper
         return entities.Select(entity => modelMapper.MapToListModel(entity)).ToList();
     }
+    /// <summary>
+    /// Asynchronously retrieves a list of students sorted by surname in ascending order.
+    /// </summary>
+    /// <returns>A Task that represents the asynchronous operation and contains a list of students sorted by surname ascending.</returns>
+    public async Task<IEnumerable<StudentListModel>> GetStudentsSortedBySurnameAscendingAsync()
+    {
+        await using var uow = UnitOfWorkFactory.Create();
+        var students = await uow.GetRepository<StudentEntity, StudentEntityMapper>().Get()
+            .OrderBy(student => student.Surname)
+            .ToListAsync();
+        
+        // Lambda Expression + Creation of Delegate -> Not Optimal For Performance (Higher Memory Resolution)
+        return students.Select(student => modelMapper.MapToListModel(student)).ToList();
+    }
 
+    /// <summary>
+    /// Asynchronously retrieves a list of students sorted by surname in descending order.
+    /// </summary>
+    /// <returns>A Task that represents the asynchronous operation and contains a list of students sorted by surname descending.</returns>
+    public async Task<IEnumerable<StudentListModel>> GetStudentsSortedBySurnameDescendingAsync()
+    {
+        await using var uow = unitOfWorkFactory.Create();
+        var students = await uow.GetRepository<StudentEntity, StudentEntityMapper>().Get()
+            .OrderByDescending(student => student.Surname)
+            .ToListAsync();
+        return students.Select(student => modelMapper.MapToListModel(student)).ToList();
+    }
 }
