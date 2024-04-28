@@ -46,28 +46,32 @@ public class ActivityFacade(
         return new ObservableCollection<ActivityListModel>(activityListModels);
     }
     
-    public ObservableCollection<ActivityListModel> SortActivitiesAscendingAsync(List<ActivityEntity> activities)
+    public async Task<ObservableCollection<ActivityListModel>> SortActivitiesAscendingAsync()
     {
         // Create an instance to map entities to models.
         var mapper = new ActivityModelMapper();
-        // Store result of sorting list.
-        var sortedActivities = activities
+        
+        await using var uow = UnitOfWorkFactory.Create();
+        var repository = uow.GetRepository<ActivityEntity, ActivityEntityMapper>();
+        
+        var sortedActivities = await repository.Get()
             .OrderBy(a => a.Name)
-            .Select(mapper.MapToListModel) // convert entities to ActivityListModel
-            .ToList(); // convert IEnumerable to List
+            .ToListAsync();
 
-        // Return observable collection.
-        return new ObservableCollection<ActivityListModel>(sortedActivities);
+        return new ObservableCollection<ActivityListModel>(sortedActivities.Select(mapper.MapToListModel));
     }
 
-    public ObservableCollection<ActivityListModel> SortActivitiesDescendingAsync(List<ActivityEntity> activities)
+    public async Task<ObservableCollection<ActivityListModel>> SortActivitiesDescendingAsync()
     {
         var mapper = new ActivityModelMapper();
-        var sortedActivities = activities
+    
+        await using var uow = UnitOfWorkFactory.Create();
+        var repository = uow.GetRepository<ActivityEntity, ActivityEntityMapper>();
+    
+        var sortedActivities = await repository.Get()
             .OrderByDescending(a => a.Name)
-            .Select(mapper.MapToListModel)
-            .ToList();
+            .ToListAsync();
 
-        return new ObservableCollection<ActivityListModel>(sortedActivities);
+        return new ObservableCollection<ActivityListModel>(sortedActivities.Select(mapper.MapToListModel));
     }
 }

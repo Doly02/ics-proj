@@ -1,6 +1,6 @@
 ﻿namespace SchoolSystem.App.Messages;
 
-public record ActivityEditMessage
+public class ActivityFilterMessage
 {
     
 }
