@@ -50,7 +50,7 @@ public partial class StudentDetailViewModel(
     /// </summary>
     /// <remarks>
     /// This Method Overrides <see cref="ViewModelBase.LoadDataAsync"/> to Implement the Specific Data Loading Logic for Student Details.
-    /// The Student Data is Fetched Based on the <see cref="Id"/> P4roperty Value.
+    /// The Student Data is Fetched Based on the <see cref="Id"/> Property Value.
     /// </remarks>
     protected override async Task LoadDataAsync()
     {
