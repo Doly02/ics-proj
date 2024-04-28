@@ -19,7 +19,7 @@ public partial class StudentListViewModel(
         await LoadDataAsync();
     }
 
-    public async void Receive(StudentDeleteMessage message)
+    public async void Receive(StudentDeleteMessage message)                                 
     {
         await LoadDataAsync();
     }
