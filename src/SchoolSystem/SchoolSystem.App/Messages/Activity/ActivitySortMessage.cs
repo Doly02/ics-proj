@@ -1,6 +1,6 @@
 ﻿namespace SchoolSystem.App.Messages;
 
-public record ActivityDeleteMessage
+public class ActivitySortMessage
 {
     
 }
