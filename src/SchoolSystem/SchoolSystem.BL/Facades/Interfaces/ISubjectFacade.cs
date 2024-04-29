@@ -1,9 +1,10 @@
-﻿using SchoolSystem.BL.Models;
+using SchoolSystem.BL.Models;
 using SchoolSystem.DAL.Entities;
 
 namespace SchoolSystem.BL.Facades;
 
-public interface ISubjectFacade : IListModelFacade<SubjectEntity, SubjectListModel>
+public interface ISubjectFacade : IFacade<SubjectEntity, SubjectListModel, SubjectDetailModel>
 {
-    
+
 }
+
