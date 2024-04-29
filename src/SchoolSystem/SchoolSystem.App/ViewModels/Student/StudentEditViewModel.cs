@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Input;
 using SchoolSystem.App.Messages;
 using SchoolSystem.App.Services;
@@ -7,11 +8,12 @@ using SchoolSystem.BL.Models;
 
 namespace SchoolSystem.App.ViewModels;
 
+[QueryProperty(nameof(StudDetail), nameof(StudDetail))]
 public partial class StudentEditViewModel(
     IStudentFacade studentFacade,
     INavigationService navigationService,
     IMessengerService messengerService)
-    : ViewModelBase(messengerService)
+    : ViewModelBase(messengerService), IRecipient<StudentAddMessage>, IRecipient<StudentDeleteMessage>
 {
     public StudentDetailModel StudDetail { get; set; } = StudentDetailModel.Empty;
 
@@ -23,8 +25,9 @@ public partial class StudentEditViewModel(
 
         navigationService.SendBackButtonPressed();
     }
+    
     [RelayCommand]
-    private async Task AddAsync()
+    public async Task AddAsync()
     {
         try
         {
@@ -48,5 +51,21 @@ public partial class StudentEditViewModel(
     private void Clear()
     {
         StudDetail = StudentDetailModel.Empty;
+    }
+    
+    public async void Receive(StudentAddMessage message)
+    {
+        await ReloadDataAsync();
+    }
+
+    public async void Receive(StudentDeleteMessage message)
+    {
+        await ReloadDataAsync();
+    }
+
+    private async Task ReloadDataAsync()
+    {
+        StudDetail = await studentFacade.GetAsync(StudDetail.Id)
+                 ?? StudentDetailModel.Empty;
     }
 }

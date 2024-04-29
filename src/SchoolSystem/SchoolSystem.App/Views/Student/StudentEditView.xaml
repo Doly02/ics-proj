@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:SchoolSystem.App.Views"
+                       xmlns:viewModels="clr-namespace:SchoolSystem.App.ViewModels"
+
+                       xmlns:models="clr-namespace:SchoolSystem.BL.Models;assembly=SchoolSystem.BL"
+                       x:Class="SchoolSystem.App.Views.Student.StudentEditView"
+                     
+                       x:DataType="viewModels:StudentEditViewModel"
+                       Style="{StaticResource ContentPageStyle}">
+    <ScrollView>
+        <VerticalStackLayout Spacing="25" Padding="30">
+            <!-- Student's Name -->
+            <Entry Placeholder="Name" Text="{Binding StudDetail.Name, Mode=TwoWay}" />
+
+            <!-- Student's Surname -->
+            <Entry Placeholder="Surname" Text="{Binding StudDetail.Name, Mode=TwoWay}" />
+
+            <!-- URL of Picture -->
+            <Entry Placeholder="URL of Picture" Text="{Binding StudDetail.ImageUrl, Mode=TwoWay}" />
+
+            <!-- Button For Storing Data -->
+            <Button Text="Add" Command="{Binding SaveCommand}" />
+            <Button Text="Clear" Command="{Binding ClearCommand}" />
+            <!-- Should Be Implemented Soon Indicator if Operation Succeeded or Not -->
+        </VerticalStackLayout>
+    </ScrollView>
+</views:ContentPageBase>
