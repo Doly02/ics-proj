@@ -16,21 +16,36 @@ public class NavigationService : INavigationService
         // Home? would be before everything (//home/...)
         //new("//home", typeof(HomeView), typeof(HomeViewModel)),
         
+        // Student
         // new("//students", typeof(StudentListView), typeof(StudentListViewModel)),
         // new("//students/detail", typeof(StudentDetailView), typeof(StudentDetailViewModel)),
         
         new("//students/edit", typeof(StudentEditView), typeof(StudentEditViewModel)),
         new("//students/detail/edit", typeof(StudentEditView), typeof(StudentEditViewModel)),
         
+        // Enrolled of student
+        // new("//students/detail/enrolledSubjects", typeof(EnrolledListView), typeof(EnrolledListViewModel)),
+        
+        // Subjects
         // new("//subjects", typeof(SubjectListView), typeof(SubjectListViewModel)),
         // new("//subjects/edit", typeof(SubjectEditView), typeof(SubjectEditViewModel)),
         
+        // Activities
         // new("//subjects/activities", typeof(ActivityListView), typeof(ActivityListViewModel)),
         // new("//subjects/activities/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
         
         // new("//subjects/activities/detail", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
         // new("//subjects/activities/detail/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
         
+        // new("//students/detail/enrolledSubjects/activities", typeof(ActivityListView), typeof(ActivityListViewModel)),
+        // new("//students/detail/enrolledSubjects/activities/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
+        
+        // new("//students/detail/enrolledSubjects/activities/detail", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
+        // new("//students/detail/enrolledSubjects/activities/detail/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
+        
+        // Evaluation
+        // new("//students/detail/enrolledSubjects/activities/detail/evaluation", typeof(EvaluationDetailView), typeof(EvaluationDetailViewModel)),
+        // new("//students/detail/enrolledSubjects/activities/detail/evaluation/edit", typeof(EvaluationEditView), typeof(EvaluationEditViewModel)),
     };
 
     public async Task GoToAsync<TViewModel>()
