@@ -1,12 +1,12 @@
-﻿using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Input;
 using SchoolSystem.App.Services;
 using SchoolSystem.App.ViewModels;
 using SchoolSystem.BL.Models;
 
 
-namespace SchoolSystem.App
+namespace SchoolSystem.App.Shells
 {
-    public partial class AppShell : Shell
+    public partial class AppShell
     {
         private readonly INavigationService _navigationService;
 

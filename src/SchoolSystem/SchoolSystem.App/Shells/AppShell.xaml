@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:r="clr-namespace:SchoolSystem.App.Views.Student"
     xmlns:local="clr-namespace:SchoolSystem.App"
-    x:Class="SchoolSystem.App.AppShell"
+    x:Class="SchoolSystem.App.Shells.AppShell"
     x:Name="AppShellRoot"
     Shell.FlyoutBehavior="Disabled"
     Title="SchoolSystem.App">

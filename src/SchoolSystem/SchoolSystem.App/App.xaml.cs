@@ -1,14 +1,14 @@
-﻿namespace SchoolSystem.App
-{
-    public partial class App : Application
-    {
-        public App(IServiceProvider serviceProvider)
-        {
-            InitializeComponent();
+using SchoolSystem.App.Shells;
 
-            MainPage = serviceProvider.GetRequiredService<AppShell>();
-        }
+namespace SchoolSystem.App;
+
+public partial class App : Application
+{
+    public App(IServiceProvider serviceProvider)
+    {
+        InitializeComponent();
+
+        MainPage = serviceProvider.GetRequiredService<AppShell>();
     }
 }
-
 
