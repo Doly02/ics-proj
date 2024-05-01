@@ -10,4 +10,8 @@
       <ProjectReference Include="..\SchoolSystem.DAL\SchoolSystem.DAL.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
+    </ItemGroup>
+
 </Project>
