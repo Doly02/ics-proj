@@ -69,7 +69,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\Student\AddStudentPage.xaml">
+	  <MauiXaml Update="Views\Student\StudentEditPage.xaml">
 	    <SubType>Designer</SubType>
 	  </MauiXaml>
 	  <MauiXaml Update="Shells\AppShell.xaml">
@@ -78,8 +78,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\Student\AddStudentPage.xaml.cs">
-	    <DependentUpon>AddStudentPage.xaml</DependentUpon>
+	  <Compile Update="Views\Student\StudentEditPage.xaml.cs">
+	    <DependentUpon>StudentEditPage.xaml</DependentUpon>
 	    <SubType>Code</SubType>
 	  </Compile>
 	  <Compile Update="Shells\AppShell.xaml.cs">
