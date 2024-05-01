@@ -5,16 +5,15 @@ using SchoolSystem.App.Services;
 using SchoolSystem.BL.Facades;
 using SchoolSystem.BL.Models;
 
-namespace SchoolSystem.App.ViewModels.Activity;
+namespace SchoolSystem.App.ViewModels.EnrolledActivity;
 
 [QueryProperty(nameof(ViewModels.Activity), nameof(ViewModels.Activity))]
-public partial class ActivityEditViewModel(
+public partial class EnrolledActivityEditViewModel(
     IActivityFacade activityFacade,
     INavigationService navigationService,
     IMessengerService messengerService)
     : ViewModelBase(messengerService),
-        IRecipient<ActivityAddMessage>,
-        IRecipient<ActivityEditMessage>
+        IRecipient<ActivityAddEvalMessage>
 {
     public ActivityDetailModel Activity { get; set; } = ActivityDetailModel.Empty;
 
@@ -27,23 +26,14 @@ public partial class ActivityEditViewModel(
         navigationService.SendBackButtonPressed();
     }
     
-    // ADD
+    /*
+    // ADD EVALUATION
     [RelayCommand]
-    public async Task AddAsync() 
+    public async Task AddEvalAsync() 
     {
-        try 
-        {
-            Activity.Id = Guid.NewGuid();
-            await activityFacade.SaveAsync(Activity);
-            MessengerService.Send(new StudentAddMessage());
-            Activity = ActivityDetailModel.Empty;
-        }
         
-        catch (Exception exception)
-        {
-            // Propagate Exception
-        }
     }
+    */
     
     private async Task ReloadDataAsync()
     {
@@ -51,13 +41,9 @@ public partial class ActivityEditViewModel(
                    ?? ActivityDetailModel.Empty;
     }
     
-    public async void Receive(ActivityAddMessage message)
+    public async void Receive(ActivityAddEvalMessage message)
     {
         await ReloadDataAsync();
     }
     
-    public async void Receive(ActivityEditMessage message)
-    {
-        await ReloadDataAsync();
-    }
 }

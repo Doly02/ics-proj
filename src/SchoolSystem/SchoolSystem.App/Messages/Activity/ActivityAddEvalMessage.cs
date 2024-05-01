@@ -1,6 +1,6 @@
 ﻿namespace SchoolSystem.App.Messages;
 
-public record ActivityRemoveMessage
+public record ActivityAddEvalMessage
 {
     
 }

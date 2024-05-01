@@ -19,7 +19,6 @@ public partial class ActivityDetailViewModel(
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
-
         Activity = await activityFacade.GetAsync(Id);
     }
     
