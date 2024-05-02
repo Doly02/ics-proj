@@ -17,7 +17,7 @@ public partial class ContentPageBase
     {
         throw new NotImplementedException();
     }
-
+    
     protected override async void OnAppearing()
     {
         base.OnAppearing();

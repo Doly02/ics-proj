@@ -27,24 +27,6 @@ public partial class ActivityEditViewModel(
         navigationService.SendBackButtonPressed();
     }
     
-    // ADD
-    [RelayCommand]
-    public async Task AddAsync() 
-    {
-        try 
-        {
-            Activity.Id = Guid.NewGuid();
-            await activityFacade.SaveAsync(Activity);
-            MessengerService.Send(new StudentAddMessage());
-            Activity = ActivityDetailModel.Empty;
-        }
-        
-        catch (Exception exception)
-        {
-            // Propagate Exception
-        }
-    }
-    
     private async Task ReloadDataAsync()
     {
         Activity = await activityFacade.GetAsync(Activity.Id)
