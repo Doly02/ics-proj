@@ -47,7 +47,7 @@
                                     Text="delete"
                                     Style="{StaticResource PrimaryButtonStyle}"
                                     Command="{Binding Source={x:Reference SubjectListViewRoot}, Path=BindingContext.RemoveIngredientCommand}"
-                                    CommandParameter="{Binding Id}" />
+                                    CommandParameter="{Binding Id}" /> 
                             <Button Grid.Column="3"
                                     Text="edit"
                                     Style="{StaticResource PrimaryButtonStyle}"

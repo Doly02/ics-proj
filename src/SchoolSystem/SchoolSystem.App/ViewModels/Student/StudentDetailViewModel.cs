@@ -45,6 +45,15 @@ public partial class StudentDetailViewModel(
         }
     }
     
+    public async void Receive(StudentAddMessage message)
+    {
+        await LoadDataAsync();
+    }
+
+    public async void Receive(StudentDeleteMessage message)
+    {
+        await LoadDataAsync();
+    }
     /// <summary>
     /// Asynchronously Loads the Student Details From the Database Thru Facade.
     /// </summary>
@@ -81,7 +90,7 @@ public partial class StudentDetailViewModel(
     [RelayCommand]
     private async Task GoToEditAsync()
     {
-        await navigationService.GoToAsync("/edit",
+        await navigationService.GoToAsync("student/edit",
             new Dictionary<string, object?>
                 { [nameof(StudentEditViewModel.StudDetail)] = StudDetail });
     }

@@ -86,9 +86,7 @@ public partial class ActivityListViewModel (
     
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    
-    /*
-    // Requests navigation to the "/add" page using the navigation service.
+   // Requests navigation to the "/add" page using the navigation service.
     [RelayCommand]
     private async Task GoToAddAsync()
     {
@@ -115,8 +113,6 @@ public partial class ActivityListViewModel (
     {
         await navigationService.GoToAsync("/sort");
     }
-    */
-    
     
     //////// These methods are expected to refresh the data, typically after some activity /////////
     

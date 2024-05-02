@@ -4,6 +4,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Style x:Key="ContentPageStyle" TargetType="ContentPage">
         <Setter Property="Padding" Value="30" />
-        <Setter Property="BackgroundColor" Value="Gray" />
+        <Setter Property="BackgroundColor" Value="White" />
     </Style>
 </ResourceDictionary>
