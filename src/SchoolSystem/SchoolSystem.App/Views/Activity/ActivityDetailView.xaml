@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:SchoolSystem.App.Views"
+                       xmlns:viewModels="clr-namespace:SchoolSystem.App.ViewModels"
+                       xmlns:models="clr-namespace:SchoolSystem.BL.Models;assembly=SchoolSystem.BL"
+                       xmlns:activity="clr-namespace:SchoolSystem.App.ViewModels.Activity"
+                       x:Class="SchoolSystem.App.Views.Activity.ActivityDetailView"
+                       x:Name="ActivityDetailViewRoot"
+                       x:DataType="activity:ActivityDetailViewModel"
+                       Style="{StaticResource ContentPageStyle}">
+                    
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="25" Padding="30">
+            <HorizontalStackLayout>
+                <Label Text="Start:" FontAttributes="Bold" WidthRequest="100"/>
+                <Label Text="{Binding Activity.Start}" HorizontalOptions="StartAndExpand"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label Text="End:" FontAttributes="Bold" WidthRequest="100"/>
+                <Label Text="{Binding Activity.End}" HorizontalOptions="StartAndExpand"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label Text="Place:" FontAttributes="Bold" WidthRequest="100"/>
+                <Label Text="{Binding Activity.Place}" HorizontalOptions="StartAndExpand"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label Text="Type:" FontAttributes="Bold" WidthRequest="100"/>
+                <Label Text="{Binding Activity.ActivityType}" HorizontalOptions="StartAndExpand"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label Text="Description:" FontAttributes="Bold" WidthRequest="100"/>
+                <Label Text="{Binding Activity.Description}" HorizontalOptions="StartAndExpand"/>
+            </HorizontalStackLayout>
+
+            <Button Text="Edit" Command="{Binding GoToEditCommand}" Margin="20"/>
+        </VerticalStackLayout>
+    </ScrollView>
+    
+</views:ContentPageBase>
+

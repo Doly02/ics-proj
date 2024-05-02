@@ -14,7 +14,7 @@ public partial class ActivityDetailViewModel(
     : ViewModelBase(messengerService), IRecipient<ActivityEditMessage>
 {
     public Guid Id { get; set; }
-    private ActivityDetailModel? Activity { get; set; }
+    public ActivityDetailModel? Activity { get; set; }
     
     protected override async Task LoadDataAsync()
     {

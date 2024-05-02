@@ -2,7 +2,10 @@
 <Shell
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    
     xmlns:r="clr-namespace:SchoolSystem.App.Views.Student"
+    xmlns:activity="clr-namespace:SchoolSystem.App.Views.Activity"
+    
     xmlns:local="clr-namespace:SchoolSystem.App"
     x:Class="SchoolSystem.App.Shells.AppShell"
     x:Name="AppShellRoot"
@@ -13,6 +16,7 @@
         <ShellContent Title="Home1" ContentTemplate="{DataTemplate local:MainPage}" Route="home1" />
         <ShellContent Title="Home2" ContentTemplate="{DataTemplate local:MainPage}" Route="home2" />
         <ShellContent Title="Edit Student" ContentTemplate="{DataTemplate r:StudentEditView}" Route="student/edit" />
+        <ShellContent Title="Activity Detail" ContentTemplate="{DataTemplate activity:ActivityDetailView}" Route="subjects/activities/detail" />
     </TabBar>
 
 </Shell>

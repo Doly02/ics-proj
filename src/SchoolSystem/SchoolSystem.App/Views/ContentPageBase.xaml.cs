@@ -13,6 +13,11 @@ public partial class ContentPageBase
         BindingContext = ViewModel = viewModel;
     }
 
+    protected ContentPageBase()
+    {
+        throw new NotImplementedException();
+    }
+
     protected override async void OnAppearing()
     {
         base.OnAppearing();
