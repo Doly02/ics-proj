@@ -15,7 +15,7 @@
             <Entry Placeholder="Name" Text="{Binding StudDetail.Name, Mode=TwoWay}" />
 
             <!-- Student's Surname -->
-            <Entry Placeholder="Surname" Text="{Binding StudDetail.Name, Mode=TwoWay}" />
+            <Entry Placeholder="Surname" Text="{Binding StudDetail.Surname, Mode=TwoWay}" />
 
             <!-- URL of Picture -->
             <Entry Placeholder="URL of Picture" Text="{Binding StudDetail.ImageUrl, Mode=TwoWay}" />
