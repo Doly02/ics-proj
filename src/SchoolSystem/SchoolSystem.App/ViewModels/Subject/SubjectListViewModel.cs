@@ -10,7 +10,8 @@ namespace SchoolSystem.App.ViewModels;
 public partial class SubjectListViewModel(
     ISubjectFacade subjectFacade,
     INavigationService navigationService,
-    IMessengerService messengerService)
+    IMessengerService messengerService,
+    IAlertService alertService)
     : ViewModelBase(messengerService), IRecipient<SubjectEditMessage>, IRecipient<SubjectDeleteMessage>
 {
     public IEnumerable<SubjectListModel> Subjects { get; set; } = null!;
@@ -22,6 +23,42 @@ public partial class SubjectListViewModel(
         Subjects = await subjectFacade.GetAsync();
     }
 
+    [RelayCommand]
+    private async Task SortByNameAscAsync()
+    {
+        Subjects = await subjectFacade.GetSortedByNameAscAsync();
+        OnPropertyChanged(nameof(Subjects));
+    }
+
+
+    [RelayCommand]
+    private async Task SortByNameDescAsync()
+    {
+        Subjects = await subjectFacade.GetSortedByNameDescAsync();
+        OnPropertyChanged(nameof(Subjects));
+    }
+
+    [RelayCommand]
+    private async Task SearchAsync()
+    {
+        Subjects = await subjectFacade.SearchAsync();
+        OnPropertyChanged(nameof(Subjects));
+    }
+
+    [RelayCommand]
+    private async Task RemoveIngredientAsync(Guid id)
+    {
+        try
+        {
+            await subjectFacade.DeleteAsync(id);
+            MessengerService.Send(new SubjectDeleteMessage());
+            navigationService.SendBackButtonPressed();
+        }
+        catch (InvalidOperationException)
+        {
+            await alertService.DisplayAsync("Operation Failed", "Removal of the Student Failed.");
+        }
+    }
 
     [RelayCommand]
     private async Task GoToCreateAsync()
@@ -30,7 +67,7 @@ public partial class SubjectListViewModel(
     }
 
     [RelayCommand]
-    public async Task GoToEdAsync(SubjectListModel subject)
+    public async Task GoToEditAsync(SubjectDetailModel subject)
     {
         if (subject != null)
         {
@@ -40,6 +77,18 @@ public partial class SubjectListViewModel(
             { [nameof(SubjectEditViewModel.Subject)] = subject});
         }
     }
+
+    /*
+    [RelayCommand]
+    private async Task GoToActivityAsync(Guid subjectId)
+    {
+        //must exist ActivityListViewModel
+
+        await navigationService.GoToAsync<ActivityListViewModel>(
+            new Dictionary<string, object?> { [nameof(SubjectDetailViewModel.Id)] = subjectId });
+    }
+    */
+
     public async void Receive(SubjectEditMessage message)
     {
         await LoadDataAsync();
