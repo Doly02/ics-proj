@@ -38,4 +38,34 @@ FacadeBase<SubjectEntity, SubjectListModel, SubjectDetailModel, SubjectEntityMap
 
         return entities.Select(entity => modelMapper.MapToListModel(entity)).ToList();
     }
+
+    public async Task<IEnumerable<SubjectListModel>> GetSortedByNameAscAsync()
+    {
+        await using var uow = UnitOfWorkFactory.Create();
+
+        IQueryable<SubjectEntity> query = uow.GetRepository<SubjectEntity, SubjectEntityMapper>().Get();
+
+        // Sort the subjects by name in ascending order
+        query = query.OrderBy(e => e.Name);
+        //query = query.OrderByDescending(e => e.Name);
+
+        List<SubjectEntity> entities = await query.ToListAsync();
+
+        return entities.Select(entity => modelMapper.MapToListModel(entity)).ToList();
+    }
+
+    public async Task<IEnumerable<SubjectListModel>> GetSortedByNameDescAsync()
+    {
+        await using var uow = UnitOfWorkFactory.Create();
+
+        IQueryable<SubjectEntity> query = uow.GetRepository<SubjectEntity, SubjectEntityMapper>().Get();
+
+        // Sort the subjects by name in ascending order
+        query = query.OrderBy(e => e.Name);
+        //query = query.OrderByDescending(e => e.Name);
+
+        List<SubjectEntity> entities = await query.ToListAsync();
+
+        return entities.Select(entity => modelMapper.MapToListModel(entity)).ToList();
+    }
 }
