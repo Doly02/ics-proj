@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:SchoolSystem.App.Views"
+                       xmlns:m="clr-namespace:SchoolSystem.BL.Models;assembly=SchoolSystem.BL"
+                       xmlns:vm="clr-namespace:SchoolSystem.App.ViewModels"
+                       x:Class="SchoolSystem.App.Views.Student.StudentListView"
+                       Style="{StaticResource ContentPageStyle}"
+                       x:Name="StudentListViewRoot"
+                       x:DataType="vm:StudentListViewModel">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Student List -->
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Spacing="25" Padding="30">
+                <ListView ItemsSource="{Binding StudList}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="m:StudentListModel">
+                            <ViewCell>
+                                <Frame Margin="10" Padding="5" CornerRadius="10" BorderColor="#CCCCCC">
+                                    <StackLayout Orientation="Horizontal" Margin="10">
+                                        <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
+                                            <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold"/>
+                                            <Label Text="{Binding Surname}" FontSize="14"/>
+                                        </StackLayout>
+                                        <Button Text="Edit" 
+                                                Command="{Binding Path=BindingContext.GoToDetailCommand, Source={x:Reference StudentListViewRoot}}" 
+                                                CommandParameter="{Binding Id}"
+                                                HorizontalOptions="End" />
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Bottom Bar With Buttons -->
+        <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Padding="10">
+            <Button Text="Add" Command="{Binding GoToCreateCommand}"/>
+            <Button Text="Search" Command="{Binding GoToSeachCommand}" />
+            <Button Text="Sort" Command="{Binding GoToSortCommand}" />
+        </StackLayout>
+    </Grid>
+</views:ContentPageBase>

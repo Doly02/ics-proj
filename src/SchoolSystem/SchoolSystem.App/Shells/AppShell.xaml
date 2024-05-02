@@ -15,6 +15,7 @@
         <ShellContent Title="Home2" ContentTemplate="{DataTemplate local:MainPage}" Route="home2" />
         <ShellContent Title="Edit Student" ContentTemplate="{DataTemplate r:StudentEditView}" Route="student/edit" />
         <ShellContent Title="Subject List" ContentTemplate="{DataTemplate s:SubjectListView}" Route="subjects" />
+        <ShellContent Title="Student List" ContentTemplate="{DataTemplate r:StudentListView}" Route="students" />
     </TabBar>
 
 </Shell>
