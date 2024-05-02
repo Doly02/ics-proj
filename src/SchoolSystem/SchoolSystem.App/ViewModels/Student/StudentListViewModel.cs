@@ -26,6 +26,8 @@ public partial class StudentListViewModel(
         await LoadDataAsync();
     }
 
+    
+    
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
@@ -49,14 +51,14 @@ public partial class StudentListViewModel(
     [RelayCommand]
     private async Task SortActivitiesAscendingAsync()
     {
-        sortedStudents = await studentFacade.GetStudentsSortedBySurnameAscendingAsync();
+        StudList  = await studentFacade.GetStudentsSortedBySurnameAscendingAsync();
         OnPropertyChanged(nameof(StudList));
     }
 
     [RelayCommand]
     private async Task SortActivitiesDescendingAsync()
     {
-        sortedStudents = await studentFacade.GetStudentsSortedBySurnameDescendingAsync();
+        StudList = await studentFacade.GetStudentsSortedBySurnameDescendingAsync();
         OnPropertyChanged(nameof(StudList));
     }
 

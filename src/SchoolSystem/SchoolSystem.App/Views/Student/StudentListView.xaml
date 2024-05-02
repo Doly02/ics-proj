@@ -28,9 +28,8 @@
                                             <Label Text="{Binding Surname}" FontSize="14"/>
                                         </StackLayout>
                                         <Button Text="Edit" 
-                                                Command="{Binding Path=BindingContext.GoToDetailCommand, Source={x:Reference StudentListViewRoot}}" 
-                                                CommandParameter="{Binding Id}"
-                                                HorizontalOptions="End" />
+                                                Command="{Binding Source={x:Reference StudentListViewRoot}, Path=BindingContext.GoToDetailCommand}"
+                                                CommandParameter="{Binding Id}" /> 
                                     </StackLayout>
                                 </Frame>
                             </ViewCell>
@@ -44,7 +43,7 @@
         <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Padding="10">
             <Button Text="Add" Command="{Binding GoToCreateCommand}"/>
             <Button Text="Search" Command="{Binding GoToSeachCommand}" />
-            <Button Text="Sort" Command="{Binding GoToSortCommand}" />
+            <Button Text="Sort" Command="{Binding SortActivitiesAscendingCommand}" />
         </StackLayout>
     </Grid>
 </views:ContentPageBase>
