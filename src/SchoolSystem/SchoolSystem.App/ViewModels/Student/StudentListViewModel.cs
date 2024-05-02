@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using SchoolSystem.App.Messages;
 using SchoolSystem.App.Services;
@@ -14,6 +15,7 @@ public partial class StudentListViewModel(
     : ViewModelBase(messengerService), IRecipient<StudentEditMessage>, IRecipient<StudentDeleteMessage>
 {
     public IEnumerable<StudentListModel> StudList { get; set; } = null!;
+    public ObservableCollection<StudentListModel> sortedStudents { get; private set; } = new ObservableCollection<StudentListModel>();
     public async void Receive(StudentEditMessage message)
     {
         await LoadDataAsync();
@@ -24,6 +26,8 @@ public partial class StudentListViewModel(
         await LoadDataAsync();
     }
 
+    
+    
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
@@ -36,10 +40,37 @@ public partial class StudentListViewModel(
         await navigationService.GoToAsync("/edit");
     }
 
+    
     [RelayCommand]
     private async Task GoToDetailAsync(Guid id)
     {
         await navigationService.GoToAsync<StudentDetailViewModel>(new Dictionary<string, object?>
             { [nameof(StudentDetailViewModel.Id)] = id });
+    }
+    
+    [RelayCommand]
+    private async Task SortActivitiesAscendingAsync()
+    {
+        StudList  = await studentFacade.GetStudentsSortedBySurnameAscendingAsync();
+        OnPropertyChanged(nameof(StudList));
+    }
+
+    [RelayCommand]
+    private async Task SortActivitiesDescendingAsync()
+    {
+        StudList = await studentFacade.GetStudentsSortedBySurnameDescendingAsync();
+        OnPropertyChanged(nameof(StudList));
+    }
+
+    [RelayCommand]
+    private async Task GoToSortAsync()
+    {
+        await navigationService.GoToAsync("/students/sort");
+    }
+    
+    [RelayCommand]
+    private async Task GoToSeachAsync()
+    {
+        await navigationService.GoToAsync("/students/search");
     }
 }

@@ -86,9 +86,7 @@ public partial class ActivityListViewModel (
     
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    
-    /*
-    // Requests navigation to the "/add" page using the navigation service.
+   // Requests navigation to the "/add" page using the navigation service.
     [RelayCommand]
     private async Task GoToAddAsync()
     {
