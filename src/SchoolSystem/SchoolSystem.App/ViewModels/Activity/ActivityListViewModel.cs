@@ -113,8 +113,6 @@ public partial class ActivityListViewModel (
     {
         await navigationService.GoToAsync("/sort");
     }
-    */
-    
     
     //////// These methods are expected to refresh the data, typically after some activity /////////
     
