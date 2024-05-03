@@ -8,23 +8,32 @@
                        Style="{StaticResource ContentPageStyle}"
                        x:Name="SubjectListViewRoot"
                        x:DataType="vm:SubjectListViewModel">
-    <Grid HorizontalOptions="FillAndExpand" RowDefinitions="*, *" ColumnDefinitions="*, *">
+    <Grid HorizontalOptions="FillAndExpand" RowDefinitions="*, *" ColumnDefinitions="*, *, *, *">
+        <Entry Grid.Row="1" Grid.Column="0" Placeholder="search" Text="{Binding ToSearch, Mode=TwoWay}" />
         <Button Grid.Row="1"
-                Grid.Column="0"
+                Grid.Column="1"
+                Padding="12, 6"
+                Text="search"
+                Command="{Binding SearchCommand}"
+                CommandParameter="{Binding ToSearch}"
+                CornerRadius="5" FontFamily="MontserratMedium"
+                Style="{StaticResource PrimaryButtonStyle}" />  
+        <Button Grid.Row="1"
+                Grid.Column="3"
                 Padding="12, 6"
                 Text="add"
                 Command="{Binding GoToCreateCommand}"
                 CornerRadius="5" FontFamily="MontserratMedium"
                 Style="{StaticResource PrimaryButtonStyle}" />
         <Button Grid.Row="1"
-                Grid.Column="1"
+                Grid.Column="2"
                 Padding="12, 6"
                 Text="sort"
                 Command="{Binding SortByNameAscCommand}"
                 CornerRadius="5" FontFamily="MontserratMedium"
                 Style="{StaticResource PrimaryButtonStyle}" />
 
-        <ListView Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0"
+        <ListView Grid.Row="0" Grid.ColumnSpan="4" Grid.Column="0"
                         ItemsSource="{Binding Subjects}">
 
             <ListView.ItemTemplate>

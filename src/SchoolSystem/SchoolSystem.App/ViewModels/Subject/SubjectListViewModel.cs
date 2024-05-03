@@ -16,6 +16,20 @@ public partial class SubjectListViewModel(
 {
     public IEnumerable<SubjectListModel> Subjects { get; set; } = null!;
 
+    private string _toSearch;
+    public string ToSearch
+    {
+        get => _toSearch;
+        set
+        {
+            if (_toSearch != value)
+            {
+                _toSearch = value;
+                OnPropertyChanged(); // Notify property changed
+            }
+        }
+    }
+
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
@@ -39,9 +53,9 @@ public partial class SubjectListViewModel(
     }
 
     [RelayCommand]
-    private async Task SearchAsync()
+    private async Task SearchAsync(string? search = null)
     {
-        Subjects = await subjectFacade.SearchAsync();
+        Subjects = await subjectFacade.SearchAsync(search);
         OnPropertyChanged(nameof(Subjects));
     }
 
