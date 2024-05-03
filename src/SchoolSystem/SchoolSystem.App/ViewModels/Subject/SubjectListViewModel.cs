@@ -16,19 +16,7 @@ public partial class SubjectListViewModel(
 {
     public IEnumerable<SubjectListModel> Subjects { get; set; } = null!;
 
-    private string _toSearch;
-    public string ToSearch
-    {
-        get => _toSearch;
-        set
-        {
-            if (_toSearch != value)
-            {
-                _toSearch = value;
-                OnPropertyChanged(); // Notify property changed
-            }
-        }
-    }
+    
 
     protected override async Task LoadDataAsync()
     {
