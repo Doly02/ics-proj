@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.Messaging;
+﻿using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Input;
 using SchoolSystem.App.Messages;
 using SchoolSystem.App.Services;
@@ -8,39 +7,32 @@ using SchoolSystem.BL.Models;
 
 namespace SchoolSystem.App.ViewModels;
 
-[QueryProperty(nameof(StudDetail), nameof(StudDetail))]
-public partial class StudentEditViewModel(
+[QueryProperty(nameof(NewStud), nameof(NewStud))]
+public partial class StudentAddViewModel(
     IStudentFacade studentFacade,
     INavigationService navigationService,
     IMessengerService messengerService)
     : ViewModelBase(messengerService), IRecipient<StudentAddMessage>, IRecipient<StudentDeleteMessage>
 {
-    public StudentDetailModel StudDetail { get; set; } = StudentDetailModel.Empty;
+    public StudentDetailModel NewStud { get; set; } = StudentDetailModel.Empty;
 
-    [RelayCommand]
-    private async Task SaveAsync()
-    {
-        await studentFacade.SaveAsync(StudDetail);
-        MessengerService.Send(new StudentEditMessage { StudentId = StudDetail.Id });
 
-        //navigationService.SendBackButtonPressed();
-        await navigationService.GoToAsync("//students");
-    }
-    
     [RelayCommand]
     public async Task AddAsync()
     {
         try
         {
             // Generate for Student New ID
-            StudDetail.Id = Guid.NewGuid();
+            NewStud.Id = Guid.NewGuid();
             // Add Thru Facade Student To Database
-            await studentFacade.SaveAsync(StudDetail);
+            await studentFacade.SaveAsync(NewStud);
             // Send Message That Student Was Added
             MessengerService.Send(new StudentAddMessage());
             // Create New Stud Detail
-            StudDetail = StudentDetailModel.Empty;
-            // Navigate Back To Main Page}
+            NewStud = StudentDetailModel.Empty;
+            // Navigate Back To Main Page
+            await navigationService.GoToAsync("//students");
+            await ReloadDataAsync();
         }
         catch (Exception ex)
         {
@@ -51,7 +43,7 @@ public partial class StudentEditViewModel(
     [RelayCommand]
     private void Clear()
     {
-        StudDetail = StudentDetailModel.Empty;
+        NewStud = StudentDetailModel.Empty;
     }
     
     public async void Receive(StudentAddMessage message)
@@ -66,7 +58,7 @@ public partial class StudentEditViewModel(
 
     private async Task ReloadDataAsync()
     {
-        StudDetail = await studentFacade.GetAsync(StudDetail.Id)
-                 ?? StudentDetailModel.Empty;
+        NewStud = await studentFacade.GetAsync(NewStud.Id)
+                  ?? StudentDetailModel.Empty;
     }
 }

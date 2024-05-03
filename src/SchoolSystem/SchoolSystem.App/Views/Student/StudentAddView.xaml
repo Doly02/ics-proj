@@ -5,23 +5,29 @@
                        xmlns:viewModels="clr-namespace:SchoolSystem.App.ViewModels"
 
                        xmlns:models="clr-namespace:SchoolSystem.BL.Models;assembly=SchoolSystem.BL"
-                       x:Class="SchoolSystem.App.Views.Student.StudentEditView"
+                       x:Class="SchoolSystem.App.Views.Student.StudentAddView"
                      
-                       x:DataType="viewModels:StudentEditViewModel"
+                       x:DataType="viewModels:StudentAddViewModel"
                        Style="{StaticResource ContentPageStyle}">
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30">
+            <!-- Image of the Student -->
+            <Image Source="{Binding NewStud.ImageUrl, FallbackValue='default_student.jpeg'}"
+                   Aspect="AspectFit"
+                   HeightRequest="200"
+                   HorizontalOptions="Center" />
+
             <!-- Student's Name -->
-            <Entry Placeholder="Name" Text="{Binding StudDetail.Name, Mode=TwoWay}" />
+            <Entry Placeholder="Name" Text="{Binding NewStud.Name, Mode=TwoWay}" />
 
             <!-- Student's Surname -->
-            <Entry Placeholder="Surname" Text="{Binding StudDetail.Surname, Mode=TwoWay}" />
+            <Entry Placeholder="Surname" Text="{Binding NewStud.Surname, Mode=TwoWay}" />
 
             <!-- URL of Picture -->
-            <Entry Placeholder="URL of Picture" Text="{Binding StudDetail.ImageUrl, Mode=TwoWay}" />
+            <Entry Placeholder="URL of Profile Picture" Text="{Binding NewStud.ImageUrl, Mode=TwoWay}" />
 
             <!-- Button For Storing Data -->
-            <Button Text="Save" Command="{Binding SaveCommand}" />
+            <Button Text="Save" Command="{Binding AddCommand}" />
             <Button Text="Clear" Command="{Binding ClearCommand}" />
             <!-- Should Be Implemented Soon Indicator if Operation Succeeded or Not -->
         </VerticalStackLayout>

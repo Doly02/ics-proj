@@ -24,8 +24,9 @@ public class NavigationService : INavigationService
         
         new("//student/edit", typeof(StudentEditView), typeof(StudentEditViewModel)),
         new("//student/detail/edit", typeof(StudentEditView), typeof(StudentEditViewModel)),
-        //new("//student/detail", typeof(StudentDetailView), typeof(StudentDetailViewModel)),
-        
+        new("//student/detail", typeof(StudentDetailView), typeof(StudentDetailViewModel)),
+        new ("//student/list", typeof(StudentListView),typeof(StudentListView)),
+        new("//student/add", typeof(StudentAddView), typeof(StudentAddViewModel)),
         // Enrolled of student
         // new("//students/detail/enrolledSubjects", typeof(EnrolledListView), typeof(EnrolledListViewModel)),
         

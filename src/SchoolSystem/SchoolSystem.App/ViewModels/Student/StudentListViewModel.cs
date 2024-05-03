@@ -25,8 +25,6 @@ public partial class StudentListViewModel(
     {
         await LoadDataAsync();
     }
-
-    
     
     protected override async Task LoadDataAsync()
     {
@@ -37,7 +35,7 @@ public partial class StudentListViewModel(
     [RelayCommand]
     private async Task GoToCreateAsync()
     {
-        await navigationService.GoToAsync("/edit");
+        await navigationService.GoToAsync("//student/add");
     }
 
     
