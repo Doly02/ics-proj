@@ -43,4 +43,10 @@ public partial class SubjectEditViewModel(
 
         navigationService.SendBackButtonPressed();
     }
+
+    [RelayCommand]
+    private async Task BackAsync()
+    {
+        await Shell.Current.GoToAsync("..");
+    }
 }

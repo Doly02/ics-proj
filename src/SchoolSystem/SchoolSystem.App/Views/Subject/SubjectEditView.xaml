@@ -11,6 +11,8 @@
                        Style="{StaticResource ContentPageStyle}">
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30">
+
+            <Button Text="back" Command="{Binding BackCommand}" BackgroundColor="MediumPurple"/>
             <!-- Student's Name -->
             <Entry Placeholder="Name" Text="{Binding Subject.Name, Mode=TwoWay}" />
 
