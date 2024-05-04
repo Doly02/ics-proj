@@ -7,7 +7,7 @@ using SchoolSystem.App.Views.Student;
 using SchoolSystem.App.Views.Subject;
 // using SchoolSystem.App.Views.Activity;
 // using SchoolSystem.App.Views.Enrolled;
-// using SchoolSystem.App.Views.Evaluation;
+using SchoolSystem.App.Views.Evaluation;
 
 namespace SchoolSystem.App.Services;
 
