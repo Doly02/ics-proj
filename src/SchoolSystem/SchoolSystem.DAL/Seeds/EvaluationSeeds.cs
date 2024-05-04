@@ -8,7 +8,7 @@ public static class EvaluationSeeds
 {
     public static readonly EvaluationEntity EvaluationJohn = new()
     {
-        Id = Guid.NewGuid(),
+        Id = Guid.Parse("c0a5c2d1-8a95-4e09-bba2-67c3d133e20e"),
         Student = StudentSeeds.StudentJohn,
         StudentId = StudentSeeds.StudentJohn.Id,
         Activity = ActivitySeeds.Project,

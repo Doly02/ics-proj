@@ -6,7 +6,7 @@ using SchoolSystem.App.Views.Student;
 using SchoolSystem.App.Views.Subject;
 // using SchoolSystem.App.Views.Activity;
 // using SchoolSystem.App.Views.Enrolled;
-// using SchoolSystem.App.Views.Evaluation;
+using SchoolSystem.App.Views.Evaluation;
 
 namespace SchoolSystem.App.Services;
 
@@ -51,8 +51,8 @@ public class NavigationService : INavigationService
         // new("//students/detail/enrolledSubjects/activities/detail/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
         
         // Evaluation
-        // new("//students/detail/enrolledSubjects/activities/detail/evaluation", typeof(EvaluationDetailView), typeof(EvaluationDetailViewModel)),
-        // new("//students/detail/enrolledSubjects/activities/detail/evaluation/edit", typeof(EvaluationEditView), typeof(EvaluationEditViewModel)),
+        new("//students/detail/enrolledSubjects/activities/detail/evaluation", typeof(EvaluationDetailView), typeof(EvaluationDetailViewModel)),
+        new("//students/detail/enrolledSubjects/activities/detail/evaluation/edit", typeof(EvaluationEditView), typeof(EvaluationEditViewModel)),
     };
 
     public async Task GoToAsync<TViewModel>()

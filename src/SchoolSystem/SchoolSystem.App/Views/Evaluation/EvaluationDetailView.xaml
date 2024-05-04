@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:SchoolSystem.App.Views"
+                       xmlns:viewModels="clr-namespace:SchoolSystem.App.ViewModels"
+
+                       xmlns:models="clr-namespace:SchoolSystem.BL.Models;assembly=SchoolSystem.BL"
+                       x:Class="SchoolSystem.App.Views.Evaluation.EvaluationDetailView"
+                     
+                       x:DataType="viewModels:EvaluationDetailViewModel"
+                       Style="{StaticResource ContentPageStyle}">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="25" Padding="30">
+            <!-- Back -->
+            <Button Text="Back"  />
+            <!-- Header -->
+            <Label Text="Evaluation" FontSize="Large" />
+
+            <!-- Activity name -->
+            <Label Text="{Binding EvaluationDetail.ActivityName}" FontSize="Medium" />
+
+            <!-- Student name -->
+            <Label Text="{Binding EvaluationDetail.StudentFullName}" FontSize="Medium" />
+            
+            <!-- Points -->
+            <Label Text="{Binding EvaluationDetail.Score}" />
+
+            <!-- Note -->
+            <Label Text="{Binding EvaluationDetail.Note}" />
+
+            <!-- Edit -->
+            <Button Text="Edit" Command="{Binding GoToEditCommand}" />
+            <!-- Remove -->
+            <Button Text="Remove" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+    
+</views:ContentPageBase>
+
