@@ -61,4 +61,10 @@ public partial class StudentAddViewModel(
         NewStud = await studentFacade.GetAsync(NewStud.Id)
                   ?? StudentDetailModel.Empty;
     }
+    
+    [RelayCommand]
+    private async Task GoBackToList()
+    {
+        await navigationService.GoToAsync("//students");
+    }
 }

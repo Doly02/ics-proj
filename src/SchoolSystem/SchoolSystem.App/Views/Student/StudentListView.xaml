@@ -13,7 +13,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-
+        
         <!-- Student List -->
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Spacing="25" Padding="30">
@@ -38,9 +38,24 @@
 
         <!-- Bottom Bar With Buttons -->
         <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Padding="10">
-            <Button Text="Add" Command="{Binding GoToCreateCommand}"/>
-            <Button Text="Search" Command="{Binding GoToSeachCommand}" />
-            <Button Text="Sort" Command="{Binding SortActivitiesAscendingCommand}" />
+            <Button Text="Add" 
+                    Command="{Binding GoToCreateCommand}"
+                    TextColor="Black"/>
+            <HorizontalStackLayout>
+                <Entry Placeholder="Enter search text" 
+                       Text="{Binding SearchText, Mode=TwoWay}"
+                       WidthRequest="300" MinimumWidthRequest="200" MaximumWidthRequest="400" VerticalOptions="Center"
+                       TextColor="Black"/>
+                <Button Text="Search" 
+                        Command="{Binding SearchCommand}" VerticalOptions="Center"
+                        TextColor="Black"/>
+            </HorizontalStackLayout>
+            <Button Text="Sort By Surname Ascending" 
+                    Command="{Binding SortStudentBySurnameAscendingCommand}"
+                    TextColor="Black"/>
+            <Button Text="Sort By Surname Descending" 
+                    Command="{Binding SortStudentBySurnameDescendingCommand}"
+                    TextColor="Black"/>
         </StackLayout>
     </Grid>
 </views:ContentPageBase>

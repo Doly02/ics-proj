@@ -12,17 +12,27 @@
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30">
             <!-- Student's Name -->
-            <Entry Placeholder="Name" Text="{Binding StudDetail.Name, Mode=TwoWay}" />
+            <Entry Placeholder="Name" 
+                   Text="{Binding StudDetail.Name, Mode=TwoWay}" 
+                   TextColor="Black"/>
 
             <!-- Student's Surname -->
-            <Entry Placeholder="Surname" Text="{Binding StudDetail.Surname, Mode=TwoWay}" />
+            <Entry Placeholder="Surname" 
+                   Text="{Binding StudDetail.Surname, Mode=TwoWay}" 
+                   TextColor="Black"/>
 
             <!-- URL of Picture -->
-            <Entry Placeholder="URL of Picture" Text="{Binding StudDetail.ImageUrl, Mode=TwoWay}" />
+            <Entry Placeholder="URL of Picture" 
+                   Text="{Binding StudDetail.ImageUrl, Mode=TwoWay}" 
+                   TextColor="Black"/>
 
             <!-- Button For Storing Data -->
-            <Button Text="Save" Command="{Binding SaveCommand}" />
-            <Button Text="Clear" Command="{Binding ClearCommand}" />
+            <Button Text="Save" 
+                    Command="{Binding SaveCommand}"
+                    TextColor="Black"/>
+            <Button Text="Clear" 
+                    Command="{Binding ClearCommand}" 
+                    TextColor="Black"/>
             <!-- Should Be Implemented Soon Indicator if Operation Succeeded or Not -->
         </VerticalStackLayout>
     </ScrollView>

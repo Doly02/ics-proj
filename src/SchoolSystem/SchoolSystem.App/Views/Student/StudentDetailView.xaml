@@ -21,11 +21,13 @@
                 <Label Text="Name:"
                        FontSize="16"
                        FontAttributes="Bold"
-                       VerticalOptions="Center" />
+                       VerticalOptions="Center"
+                       TextColor="Black"/>
                 <Label Text="{Binding StudDetail.Name}"
                        FontSize="16"
                        VerticalOptions="Center"
-                       HorizontalOptions="FillAndExpand" />
+                       HorizontalOptions="FillAndExpand"
+                       TextColor="Black"/>
             </HorizontalStackLayout>
 
             <!-- Student's Surname -->
@@ -33,25 +35,30 @@
                 <Label Text="Surname:"
                        FontSize="16"
                        FontAttributes="Bold"
-                       VerticalOptions="Center" />
+                       VerticalOptions="Center"
+                       TextColor="Black"/>
                 <Label Text="{Binding StudDetail.Surname}"
                        FontSize="16"
                        VerticalOptions="Center"
-                       HorizontalOptions="FillAndExpand" />
+                       HorizontalOptions="FillAndExpand"
+                       TextColor="Black"/>
             </HorizontalStackLayout>
             
             <!-- Buttons for operations -->
             <StackLayout Orientation="Horizontal" Spacing="10">
                 <Button Text="Back"
                         Command="{Binding GoToListCommand}"
-                        HorizontalOptions="FillAndExpand" />
+                        HorizontalOptions="FillAndExpand" 
+                        TextColor="Black"/>
                 <Button Text="Edit"
                         Command="{Binding GoToEditCommand}"
+                        BackgroundColor="#7AB2B2"
+                        TextColor="Black"
                         HorizontalOptions="FillAndExpand" />
                 <Button Text="Delete"
                         Command="{Binding DeleteCommand}"
                         BackgroundColor="#FA7070"
-                        TextColor="White"
+                        TextColor="Black"
                         HorizontalOptions="FillAndExpand" />
             </StackLayout>
         </VerticalStackLayout>
