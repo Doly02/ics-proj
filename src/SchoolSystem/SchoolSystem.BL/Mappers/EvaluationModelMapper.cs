@@ -28,9 +28,9 @@ public class EvaluationModelMapper
                 StudentId = entity.StudentId,
                 ActivityId = entity.ActivityId,
                 Score = entity.Score,
-                Note = entity.Note//,
-                //StudentFullName = entity.Student.Name + " " + entity.Student.Surname,
-                //ActivityName = entity.Activity.Name
+                Note = entity.Note,
+                StudentFullName = entity.Student.Name + " " + entity.Student.Surname,
+                ActivityName = entity.Activity.Name
             };
     
     public override EvaluationEntity MapToEntity(EvaluationDetailModel model)
