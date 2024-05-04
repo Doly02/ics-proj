@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:SchoolSystem.App.Views"
+                       xmlns:viewModels="clr-namespace:SchoolSystem.App.ViewModels"
+
+                       xmlns:models="clr-namespace:SchoolSystem.BL.Models;assembly=SchoolSystem.BL"
+                       x:Class="SchoolSystem.App.Views.Student.StudentAddView"
+                     
+                       x:DataType="viewModels:StudentAddViewModel"
+                       Style="{StaticResource ContentPageStyle}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Spacing="25" Padding="30">
+                <!-- Image of the Student -->
+                <Image Source="{Binding NewStud.ImageUrl, FallbackValue='default_student.jpeg'}"
+                       Aspect="AspectFit"
+                       HeightRequest="200"
+                       HorizontalOptions="Center" />
+
+                <!-- Student's Name -->
+                <Entry Placeholder="Name" 
+                       TextColor="Black"
+                       Text="{Binding NewStud.Name, Mode=TwoWay}" />
+
+                <!-- Student's Surname -->
+                <Entry Placeholder="Surname" 
+                       TextColor="Black"
+                       Text="{Binding NewStud.Surname, Mode=TwoWay}" />
+
+                <!-- URL of Picture -->
+                <Entry Placeholder="URL of Profile Picture" Text="{Binding NewStud.ImageUrl, Mode=TwoWay}" />
+            </VerticalStackLayout>
+            </ScrollView>
+            <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Padding="10">
+                <!-- Button For Storing Data -->
+                <Button Text="Back" 
+                        Command="{Binding GoBackToListCommand}"/>
+                <Button Text="Save" 
+                        Command="{Binding AddCommand}"
+                        BackgroundColor="#7AB2B2"
+                        TextColor="Black"/>
+                <Button Text="Clear" 
+                        Command="{Binding ClearCommand}" 
+                        BackgroundColor="#FDDE55"
+                        TextColor="Black"/>
+                
+                <!-- Should Be Implemented Soon Indicator if Operation Succeeded or Not -->
+            </StackLayout>
+    </Grid>
+</views:ContentPageBase>

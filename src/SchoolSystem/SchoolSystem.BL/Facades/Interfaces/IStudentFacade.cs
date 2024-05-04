@@ -6,7 +6,10 @@ namespace SchoolSystem.BL.Facades;
 
 public interface IStudentFacade : IFacade<StudentEntity, StudentListModel, StudentDetailModel>
 {
-    Task<ObservableCollection<StudentListModel>> GetStudentsSortedBySurnameAscendingAsync();
+    Task<ObservableCollection<StudentListModel>> GetStudentsSortedBySurnameAscendingAsync(bool name);
 
-    Task<ObservableCollection<StudentListModel>> GetStudentsSortedBySurnameDescendingAsync();
+    Task<ObservableCollection<StudentListModel>> GetStudentsSortedBySurnameDescendingAsync(bool name);
+
+    public Task<IEnumerable<StudentListModel>> SearchAsync(string? Name = null,
+        Guid? Id = null);
 }

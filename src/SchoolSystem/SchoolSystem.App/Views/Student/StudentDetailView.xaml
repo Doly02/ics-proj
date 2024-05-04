@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:SchoolSystem.App.Views"
+                       xmlns:vm="clr-namespace:SchoolSystem.App.ViewModels"
+                       x:Class="SchoolSystem.App.Views.Student.StudentDetailView"
+                       x:Name="StudentDetailViewRoot"
+                       x:DataType="vm:StudentDetailViewModel">
+    <ScrollView>
+        <VerticalStackLayout Spacing="25" Padding="30">
+            <!-- Image of the Student -->
+            <Image Source="{Binding StudDetail.ImageUrl, FallbackValue='default_student.jpeg'}"
+                   Aspect="AspectFit"
+                   WidthRequest="400"
+                   HeightRequest="400"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+
+            <!-- Student's Name -->
+            <HorizontalStackLayout Spacing="5">
+                <Label Text="Name:"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       TextColor="Black"/>
+                <Label Text="{Binding StudDetail.Name}"
+                       FontSize="16"
+                       VerticalOptions="Center"
+                       HorizontalOptions="FillAndExpand"
+                       TextColor="Black"/>
+            </HorizontalStackLayout>
+
+            <!-- Student's Surname -->
+            <HorizontalStackLayout Spacing="5" Margin="0,-15,0,0">
+                <Label Text="Surname:"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       TextColor="Black"/>
+                <Label Text="{Binding StudDetail.Surname}"
+                       FontSize="16"
+                       VerticalOptions="Center"
+                       HorizontalOptions="FillAndExpand"
+                       TextColor="Black"/>
+            </HorizontalStackLayout>
+            
+            <!-- Buttons for operations -->
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Button Text="Back"
+                        Command="{Binding GoToListCommand}"
+                        HorizontalOptions="FillAndExpand" 
+                        TextColor="Black"/>
+                <Button Text="Edit"
+                        Command="{Binding GoToEditCommand}"
+                        BackgroundColor="#7AB2B2"
+                        TextColor="Black"
+                        HorizontalOptions="FillAndExpand" />
+                <Button Text="Delete"
+                        Command="{Binding DeleteCommand}"
+                        BackgroundColor="#FA7070"
+                        TextColor="Black"
+                        HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+            <!-- Optional: Display Operation Status 
+            <Label Text="{Binding StatusMessage}"
+                   HorizontalOptions="Center"
+                   TextColor="#FA7070" />-->
+</views:ContentPageBase>

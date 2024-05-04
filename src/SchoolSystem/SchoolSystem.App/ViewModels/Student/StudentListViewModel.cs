@@ -15,7 +15,19 @@ public partial class StudentListViewModel(
     : ViewModelBase(messengerService), IRecipient<StudentEditMessage>, IRecipient<StudentDeleteMessage>
 {
     public IEnumerable<StudentListModel> StudList { get; set; } = null!;
-    public ObservableCollection<StudentListModel> sortedStudents { get; private set; } = new ObservableCollection<StudentListModel>();
+    private IEnumerable<StudentListModel> _OriginStudents { get; set; } = null!;
+
+    private string _SearchText;
+    public string SearchText
+    {
+        get => _SearchText;
+        set => SetProperty(ref _SearchText, value);
+    }
+    
+    public async void Receive(StudentAddMessage message)
+    {
+        await LoadDataAsync();
+    }
     public async void Receive(StudentEditMessage message)
     {
         await LoadDataAsync();
@@ -25,8 +37,6 @@ public partial class StudentListViewModel(
     {
         await LoadDataAsync();
     }
-
-    
     
     protected override async Task LoadDataAsync()
     {
@@ -37,7 +47,7 @@ public partial class StudentListViewModel(
     [RelayCommand]
     private async Task GoToCreateAsync()
     {
-        await navigationService.GoToAsync("/edit");
+        await navigationService.GoToAsync("//student/add");
     }
 
     
@@ -49,17 +59,37 @@ public partial class StudentListViewModel(
     }
     
     [RelayCommand]
-    private async Task SortActivitiesAscendingAsync()
+    private async Task SortStudentBySurnameAscendingAsync()
     {
-        StudList  = await studentFacade.GetStudentsSortedBySurnameAscendingAsync();
-        OnPropertyChanged(nameof(StudList));
+        if (null! == _OriginStudents)
+        {
+            _OriginStudents = StudList;
+            StudList  = await studentFacade.GetStudentsSortedBySurnameAscendingAsync(false);
+            OnPropertyChanged(nameof(StudList));
+        }
+        else
+        {
+            StudList = new ObservableCollection<StudentListModel>(_OriginStudents);
+            _OriginStudents = null!;
+            OnPropertyChanged(nameof(StudList));
+        }
     }
 
     [RelayCommand]
-    private async Task SortActivitiesDescendingAsync()
+    private async Task SortStudentBySurnameDescendingAsync()
     {
-        StudList = await studentFacade.GetStudentsSortedBySurnameDescendingAsync();
-        OnPropertyChanged(nameof(StudList));
+        if (null! == _OriginStudents)
+        {
+            _OriginStudents = StudList;
+            StudList  = await studentFacade.GetStudentsSortedBySurnameDescendingAsync(false);
+            OnPropertyChanged(nameof(StudList));
+        }
+        else
+        {
+            StudList = new ObservableCollection<StudentListModel>(_OriginStudents);
+            _OriginStudents = null!;
+            OnPropertyChanged(nameof(StudList));
+        }
     }
 
     [RelayCommand]
@@ -72,5 +102,20 @@ public partial class StudentListViewModel(
     private async Task GoToSeachAsync()
     {
         await navigationService.GoToAsync("/students/search");
+    }
+    
+    [RelayCommand]
+    private async Task SearchAsync()
+    {
+        try
+        {
+            var results = await studentFacade.SearchAsync(SearchText);
+            StudList = results; 
+            OnPropertyChanged(nameof(StudList));
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message); 
+        }
     }
 }
