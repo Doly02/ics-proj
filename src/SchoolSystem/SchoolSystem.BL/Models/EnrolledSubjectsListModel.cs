@@ -1,17 +1,13 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 
 namespace SchoolSystem.BL.Models
 {
     public record EnrolledSubjectsListModel : ModelBase
     {
-        public string? Name { get; set; }
-        private string? _abbreviation;
 
-        public string? Abbreviation
-        {
-            get => _abbreviation;
-            set => _abbreviation = value?.ToUpper();
-        }
+        public required Guid SubjectId { get; set; }
+        public required string SubjectName { get; set; }
+
         
         public string? StudentFullName { get; set; }
         public required ObservableCollection<ActivityListModel> Activities { get; set; }
@@ -20,8 +16,8 @@ namespace SchoolSystem.BL.Models
             => new()
             {
                 Id = Guid.Empty,
-                Name = string.Empty,
-                Abbreviation = string.Empty,
+                SubjectId = Guid.Empty,
+                SubjectName = string.Empty,
                 StudentFullName = string.Empty,
                 Activities = new ObservableCollection<ActivityListModel>()
             };
