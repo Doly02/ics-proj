@@ -14,55 +14,54 @@ public class SubjectFacade(
 FacadeBase<SubjectEntity, SubjectListModel, SubjectDetailModel, SubjectEntityMapper>(
     unitOfWorkFactory, modelMapper), ISubjectFacade
 {
-    public async Task<IEnumerable<SubjectListModel>> SearchAsync(string? Name = null, Guid? Id = null)
+    public async Task<IEnumerable<SubjectListModel>> SearchAsync(string? Search = null)
     {
         await using var uow = UnitOfWorkFactory.Create();
         IQueryable<SubjectEntity> query = uow.GetRepository<SubjectEntity, SubjectEntityMapper>().Get();
 
-        if (!string.IsNullOrEmpty(Name))
+        if (!string.IsNullOrEmpty(Search))
         {
-            query = query.Where(e => EF.Functions.Like(e.Name, $"%{Name}%"));
+            query = query.Where(e => EF.Functions.Like(e.Name, $"%{Search}%") || EF.Functions.Like(e.Abbreviation, $"%{Search}%"));
         }
-
-        if (Id.HasValue)
-        {
-            query = query.Where(e => e.Id == Id.Value);
-        }
-
+        /*
         foreach (string includePath in IncludesNavigationPathDetail)
         {
             query = query.Include(includePath);
         }
-
+        */
         List<SubjectEntity> entities = await query.ToListAsync();
 
         return entities.Select(entity => modelMapper.MapToListModel(entity)).ToList();
     }
 
-    public async Task<IEnumerable<SubjectListModel>> GetSortedByNameAscAsync()
+    public async Task<IEnumerable<SubjectListModel>> GetSortedAsync(bool ascending, bool byName)
     {
         await using var uow = UnitOfWorkFactory.Create();
 
         IQueryable<SubjectEntity> query = uow.GetRepository<SubjectEntity, SubjectEntityMapper>().Get();
 
-        // Sort the subjects by name in ascending order
-        query = query.OrderBy(e => e.Name);
-        //query = query.OrderByDescending(e => e.Name);
-
-        List<SubjectEntity> entities = await query.ToListAsync();
-
-        return entities.Select(entity => modelMapper.MapToListModel(entity)).ToList();
-    }
-
-    public async Task<IEnumerable<SubjectListModel>> GetSortedByNameDescAsync()
-    {
-        await using var uow = UnitOfWorkFactory.Create();
-
-        IQueryable<SubjectEntity> query = uow.GetRepository<SubjectEntity, SubjectEntityMapper>().Get();
-
-        // Sort the subjects by name in ascending order
-        query = query.OrderBy(e => e.Name);
-        //query = query.OrderByDescending(e => e.Name);
+        if (byName) // Sort by name
+        {
+            if (ascending)
+            {
+                query = query.OrderBy(e => e.Name);
+            }
+            else
+            {
+                query = query.OrderByDescending(e => e.Name);
+            }
+        }
+        else // Sort by abbreviation
+        {
+            if (ascending)
+            {
+                query = query.OrderBy(e => e.Abbreviation);
+            }
+            else
+            {
+                query = query.OrderByDescending(e => e.Abbreviation);
+            }
+        }
 
         List<SubjectEntity> entities = await query.ToListAsync();
 

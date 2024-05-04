@@ -16,6 +16,8 @@ public partial class SubjectListViewModel(
 {
     public IEnumerable<SubjectListModel> Subjects { get; set; } = null!;
 
+    
+
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
@@ -26,22 +28,35 @@ public partial class SubjectListViewModel(
     [RelayCommand]
     private async Task SortByNameAscAsync()
     {
-        Subjects = await subjectFacade.GetSortedByNameAscAsync();
+        Subjects = await subjectFacade.GetSortedAsync(true, true);
         OnPropertyChanged(nameof(Subjects));
     }
-
 
     [RelayCommand]
     private async Task SortByNameDescAsync()
     {
-        Subjects = await subjectFacade.GetSortedByNameDescAsync();
+        Subjects = await subjectFacade.GetSortedAsync(false, true);
         OnPropertyChanged(nameof(Subjects));
     }
 
     [RelayCommand]
-    private async Task SearchAsync()
+    private async Task SortByAbbrAscAsync()
     {
-        Subjects = await subjectFacade.SearchAsync();
+        Subjects = await subjectFacade.GetSortedAsync(true, false);
+        OnPropertyChanged(nameof(Subjects));
+    }
+
+    [RelayCommand]
+    private async Task SortByAbbrDescAsync()
+    {
+        Subjects = await subjectFacade.GetSortedAsync(false, false);
+        OnPropertyChanged(nameof(Subjects));
+    }
+
+    [RelayCommand]
+    private async Task SearchAsync(string? search = null)
+    {
+        Subjects = await subjectFacade.SearchAsync(search);
         OnPropertyChanged(nameof(Subjects));
     }
 
