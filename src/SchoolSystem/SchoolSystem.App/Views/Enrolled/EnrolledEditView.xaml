@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:SchoolSystem.App.Views"
+             xmlns:viewModels="clr-namespace:SchoolSystem.App.ViewModels"
+                       
+             xmlns:models="clr-namespace:SchoolSystem.BL.Models;assembly=SchoolSystem.BL"
+             x:Class="SchoolSystem.App.Views.Enrolled.EnrolledEditView"
+
+                       
+             x:DataType="viewModels:EnrolledEditViewModel"
+               Style="{StaticResource ContentPageStyle}">
+    <ScrollView>
+        <VerticalStackLayout Spacing="25" Padding="30">
+
+            <!-- Picker for selecting a subject -->
+            <Picker Title="Select a subject"
+                    ItemsSource="{Binding AvailableSubjects}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedSubject}"/>
+
+            <!-- Button for adding the selected subject -->
+            <Button Text="Add"
+                    Command="{Binding AddSubjectToStudentCommand}"
+                    Style="{StaticResource PrimaryButtonStyle}"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</views:ContentPageBase>

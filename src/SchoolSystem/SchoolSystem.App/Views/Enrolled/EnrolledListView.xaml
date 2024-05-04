@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:SchoolSystem.App.Views"
+             xmlns:m="clr-namespace:SchoolSystem.BL.Models;assembly=SchoolSystem.BL"
+             xmlns:vm="clr-namespace:SchoolSystem.App.ViewModels"
+             x:Class="SchoolSystem.App.Views.Enrolled.EnrolledListView"
+             Style="{StaticResource ContentPageStyle}"
+            x:Name="EnrolledListViewRoot"
+            x:DataType="vm:EnrolledListViewModel">
+    <Grid HorizontalOptions="FillAndExpand" RowDefinitions="*, *" ColumnDefinitions="*, *, *, *">
+        <!--<Entry Grid.Row="1" Grid.Column="0" Placeholder="search" Text="{Binding ToSearch, Mode=TwoWay}" />
+        <Button Grid.Row="1"
+                Grid.Column="1"
+                Padding="12, 6"
+                Text="search"
+                Command="{Binding SearchCommand}"
+                CommandParameter="{Binding ToSearch}"
+                CornerRadius="5" FontFamily="MontserratMedium"
+                Style="{StaticResource PrimaryButtonStyle}" />-->
+        <SearchBar Placeholder="search"
+                   Grid.Row="1"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2"
+                   x:Name="searchBar"
+                   SearchCommand="{Binding SearchCommand}"
+                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
+
+        <Button Grid.Row="1"
+                Grid.Column="3"
+                Padding="12, 6"
+                Text="add"
+                Command="{Binding GoToCreateCommand}"
+                CornerRadius="5" FontFamily="MontserratMedium"
+                Style="{StaticResource PrimaryButtonStyle}" />
+        <Button Grid.Row="1"
+                Grid.Column="2"
+                Padding="12, 6"
+                Text="sort"
+                Command="{Binding SortBySubjectAscCommand}"
+                CornerRadius="5" FontFamily="MontserratMedium"
+                Style="{StaticResource PrimaryButtonStyle}" />
+
+        <ListView Grid.Row="0" Grid.ColumnSpan="4" Grid.Column="0"
+                        ItemsSource="{Binding EnrolledList}">
+
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="m:EnrolledSubjectsListModel">
+                    <ViewCell>
+                        <Grid ColumnDefinitions="*,*,*,*">
+                            <Label Grid.Column="0"                                  
+                                   FontSize="12" LineBreakMode="WordWrap"
+                                   Text="{Binding SubjectId}"
+                                   VerticalOptions="End" />
+
+                            <Label Grid.Column="1"                                  
+                                    FontSize="12" LineBreakMode="WordWrap"
+                                    Text="{Binding SubjectName}"
+                                    VerticalOptions="End" />
+
+                            <Button Grid.Column="2"
+                                    Text="delete"
+                                    Style="{StaticResource PrimaryButtonStyle}"
+                                    Command="{Binding Source={x:Reference EnrolledListViewRoot}, Path=BindingContext.RemoveIngredientCommand}"
+                                    CommandParameter="{Binding Id}" />
+                            <Button Grid.Column="3"
+                                    Text="edit"
+                                    Style="{StaticResource PrimaryButtonStyle}"
+                                    Command="{Binding Source={x:Reference EnrolledListViewRoot}, Path=BindingContext.GoToEditCommand}"
+                                    CommandParameter="{Binding Id}" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</views:ContentPageBase>
