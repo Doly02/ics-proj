@@ -14,7 +14,7 @@ public partial class ActivityEditViewModel(
     IMessengerService messengerService)
     : ViewModelBase(messengerService),
         IRecipient<ActivityAddMessage>,
-        IRecipient<ActivityEditMessage>
+        IRecipient<ActivityDeleteMessage>
 {
     public ActivityDetailModel Activity { get; set; } = ActivityDetailModel.Empty;
 
@@ -45,6 +45,14 @@ public partial class ActivityEditViewModel(
         }
     }
     
+    //CLEAR
+    [RelayCommand]
+    private void Clear()
+    {
+        Activity = ActivityDetailModel.Empty;
+    }
+    
+    
     private async Task ReloadDataAsync()
     {
         Activity = await activityFacade.GetAsync(Activity.Id)
@@ -56,7 +64,7 @@ public partial class ActivityEditViewModel(
         await ReloadDataAsync();
     }
     
-    public async void Receive(ActivityEditMessage message)
+    public async void Receive(ActivityDeleteMessage message)
     {
         await ReloadDataAsync();
     }

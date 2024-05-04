@@ -14,10 +14,8 @@ public partial class ActivityListViewModel (
     INavigationService navigationService,
     IMessengerService messengerService) 
     : ViewModelBase(messengerService),
-        IRecipient<ActivityAddMessage>,
-        IRecipient<ActivityDeleteMessage>,
-        IRecipient<ActivitySortMessage>,
-        IRecipient<ActivityFilterMessage>
+        IRecipient<ActivityEditMessage>,
+        IRecipient<ActivityDeleteMessage>
 {
     public IEnumerable<ActivityListModel> Activities { get; set; } = null!;
     public ObservableCollection<ActivityListModel> ObservableActivities { get; set; } = new ObservableCollection<ActivityListModel>();
@@ -26,6 +24,7 @@ public partial class ActivityListViewModel (
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
+        Activities = await activityFacade.GetAsync();
     }
     
     ///////////////////// Navigates to the ActivityDetailViewModel /////////////////////////////////
@@ -71,34 +70,18 @@ public partial class ActivityListViewModel (
     [RelayCommand]
     private async Task SortActivitiesAscendingAsync()
     {
-        ObservableActivities = await activityFacade.SortActivitiesAscendingAsync();
-        Activities = ObservableActivities;
+        Activities = await activityFacade.SortActivitiesAscendingAsync();
         OnPropertyChanged(nameof(Activities));
     }
 
     [RelayCommand]
     private async Task SortActivitiesDescendingAsync()
     {
-        ObservableActivities = await activityFacade.SortActivitiesDescendingAsync();
-        Activities = ObservableActivities;
+        Activities = await activityFacade.SortActivitiesDescendingAsync();
         OnPropertyChanged(nameof(Activities));
     }
     
     ////////////////////////////////////////////////////////////////////////////////////////////////
-
-   // Requests navigation to the "/add" page using the navigation service.
-    [RelayCommand]
-    private async Task GoToAddAsync()
-    {
-        await navigationService.GoToAsync("/add");
-    }
-
-    // Requests navigation to the "/remove" page using the navigation service.
-    [RelayCommand]
-    private async Task GoToRemoveAsync()
-    {
-        await navigationService.GoToAsync("/remove");
-    }
     
     // Requests navigation to the "/filter" page using the navigation service.
     [RelayCommand]
@@ -116,26 +99,14 @@ public partial class ActivityListViewModel (
     
     //////// These methods are expected to refresh the data, typically after some activity /////////
     
-    // After ADD action
-    public async void Receive(ActivityAddMessage message)
+    // After EDIT action
+    public async void Receive(ActivityEditMessage message)
     {
         await LoadDataAsync();
     }
 
     // After DELETE action
     public async void Receive(ActivityDeleteMessage message)
-    {
-        await LoadDataAsync();
-    }
-    
-    // After FILTER action
-    public async void Receive(ActivityFilterMessage message)
-    {
-        await LoadDataAsync();
-    }
-    
-    // After SORT action
-    public async void Receive(ActivitySortMessage message)
     {
         await LoadDataAsync();
     }

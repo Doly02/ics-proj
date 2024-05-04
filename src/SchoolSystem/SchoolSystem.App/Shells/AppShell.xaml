@@ -5,6 +5,7 @@
     xmlns:r="clr-namespace:SchoolSystem.App.Views.Student"
     xmlns:s="clr-namespace:SchoolSystem.App.Views.Subject"
     xmlns:local="clr-namespace:SchoolSystem.App"
+    xmlns:a="clr-namespace:SchoolSystem.App.Views.Activity"
     x:Class="SchoolSystem.App.Shells.AppShell"
     x:Name="AppShellRoot"
     Shell.FlyoutBehavior="Disabled"
@@ -14,7 +15,9 @@
         <ShellContent Title="Home1" ContentTemplate="{DataTemplate local:MainPage}" Route="home1" />
         <ShellContent Title="Home2" ContentTemplate="{DataTemplate local:MainPage}" Route="home2" />
         <ShellContent Title="Edit Student" ContentTemplate="{DataTemplate r:StudentEditView}" Route="student/edit" />
+        <ShellContent Title="Edit Activity" ContentTemplate="{DataTemplate a:ActivityEditView}" Route="activities/edit" />
         <ShellContent Title="Subject List" ContentTemplate="{DataTemplate s:SubjectListView}" Route="subjects" />
+        <ShellContent Title="Activity List" ContentTemplate="{DataTemplate a:ActivityListView}" Route="activities" />
         <ShellContent Title="Student List" ContentTemplate="{DataTemplate r:StudentListView}" Route="students" />
     </TabBar>
 

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:SchoolSystem.App.Views"
+                       xmlns:models="clr-namespace:SchoolSystem.BL.Models;assembly=SchoolSystem.BL"
+                       xmlns:activity="clr-namespace:SchoolSystem.App.ViewModels.Activity"
+                       
+                       x:Class="SchoolSystem.App.Views.Activity.ActivityEditView"
+                       x:DataType="activity:ActivityEditViewModel"
+                       Style="{StaticResource ContentPageStyle}">
+    <ScrollView>
+        <VerticalStackLayout Spacing="25" Padding="30">
+            <!-- Activity name -->
+            <Entry Placeholder="Name" Text="{Binding Activity.Name, Mode=TwoWay}" />
+
+            <!-- Activity start -->
+            <!--Entry Placeholder="Start" Text="{Binding Activity.Start, Mode=TwoWay}" /-->
+
+            <!-- Activity end -->
+            <!--Entry Placeholder="End" Text="{Binding Activity.End, Mode=TwoWay}" /-->
+            
+            <!-- Activity place -->
+            <Entry Placeholder="Place" Text="{Binding Activity.Place, Mode=TwoWay}" />
+
+            <!-- Button For Storing Data -->
+            <Button Text="Add" Command="{Binding SaveCommand}" />
+            <!-- Should Be Implemented Soon Indicator if Operation Succeeded or Not -->
+        </VerticalStackLayout>
+    </ScrollView>
+</views:ContentPageBase>

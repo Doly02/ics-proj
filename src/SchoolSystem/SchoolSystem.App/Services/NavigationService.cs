@@ -1,9 +1,9 @@
 using SchoolSystem.App.Models;
 using SchoolSystem.App.ViewModels;
 using SchoolSystem.App.ViewModels.Activity;
+using SchoolSystem.App.Views.Activity;
 using SchoolSystem.App.Views.Student;
 using SchoolSystem.App.Views.Subject;
-// using SchoolSystem.App.Views.Activity;
 // using SchoolSystem.App.Views.Enrolled;
 // using SchoolSystem.App.Views.Evaluation;
 
@@ -34,8 +34,8 @@ public class NavigationService : INavigationService
         new("//subjects/edit", typeof(SubjectEditView), typeof(SubjectEditViewModel)),
         
         // Activities
-        // new("//subjects/activities", typeof(ActivityListView), typeof(ActivityListViewModel)),
-        // new("//subjects/activities/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
+        new("//subjects/activities", typeof(ActivityListView), typeof(ActivityListViewModel)),
+        new("//subjects/activities/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
         
         // new("//subjects/activities/detail", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
         // new("//subjects/activities/detail/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),

@@ -16,6 +16,7 @@ public static class ActivitySeeds
         Subject = SubjectSeeds.ICS,
         SubjectId = SubjectSeeds.ICS.Id,
         ActivityType = ActivityType.Project,
+        Name = "Školský systém - projekt"
     };
     
     public static void Seed(this ModelBuilder modelBuilder)
