@@ -29,7 +29,7 @@ public class EvaluationModelMapper
                 ActivityId = entity.ActivityId,
                 Score = entity.Score,
                 Note = entity.Note,
-                StudentFullName = entity.Student.Name,
+                StudentFullName = entity.Student.Name + " " + entity.Student.Surname,
                 ActivityName = entity.Activity.Name
             };
     

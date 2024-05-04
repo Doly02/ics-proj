@@ -56,6 +56,11 @@
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 
+  	<ItemGroup>
+    	<None Remove="appsettings.json" />
+    	<None Remove="Resources\Images\default_student.jpeg" />
+  	</ItemGroup>
+
 	<ItemGroup>
 		<None Remove="appsettings.json"/>
 	</ItemGroup>
@@ -86,6 +91,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\Student\StudentAddView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Student\StudentDetailView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -96,6 +104,12 @@
 	    <SubType>Designer</SubType>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Student\StudentListView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Student\StudentDetailView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Student\StudentSearchView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 
 namespace SchoolSystem.BL.Models
 {
@@ -6,13 +6,14 @@ namespace SchoolSystem.BL.Models
     {
         public string? Name { get; set; }
         private string? _abbreviation;
+        public Guid SubjectId { get; set; }
 
         public string? Abbreviation
         {
             get => _abbreviation;
             set => _abbreviation = value?.ToUpper();
         }
-        
+
         public string? StudentFullName { get; set; }
         public required ObservableCollection<ActivityListModel> Activities { get; set; }
 
@@ -20,6 +21,7 @@ namespace SchoolSystem.BL.Models
             => new()
             {
                 Id = Guid.Empty,
+                SubjectId = Guid.Empty,
                 Name = string.Empty,
                 Abbreviation = string.Empty,
                 StudentFullName = string.Empty,

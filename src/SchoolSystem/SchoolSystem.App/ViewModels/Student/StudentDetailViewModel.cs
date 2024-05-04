@@ -94,5 +94,10 @@ public partial class StudentDetailViewModel(
             new Dictionary<string, object?>
                 { [nameof(StudentEditViewModel.StudDetail)] = StudDetail });
     }
-    
+
+    [RelayCommand]
+    private async Task GoToList()
+    {
+        await navigationService.GoToAsync("//students");
+    }
 }

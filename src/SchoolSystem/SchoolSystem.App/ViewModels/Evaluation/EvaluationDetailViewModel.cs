@@ -17,7 +17,7 @@ public partial class EvaluationDetailViewModel(
     IAlertService alertService)
     : ViewModelBase(messengerService), IRecipient<EvaluationEditMessage>
 {
-    public Guid Id { get; set; }
+    public Guid Id = Guid.Parse("c0a5c2d1-8a95-4e09-bba2-67c3d133e20e");
     public EvaluationDetailModel? EvaluationDetail { get; private set; }
     
     public async void Receive(EvaluationEditMessage message)

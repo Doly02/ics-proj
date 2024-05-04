@@ -70,17 +70,27 @@ public class StudentFacade(
     /// Asynchronously retrieves a list of students sorted by surname in ascending order.
     /// </summary>
     /// <returns>A Task that represents the asynchronous operation and contains a list of students sorted by surname ascending.</returns>
-    public async Task<ObservableCollection<StudentListModel>> GetStudentsSortedBySurnameAscendingAsync()
+    public async Task<ObservableCollection<StudentListModel>> GetStudentsSortedBySurnameAscendingAsync(bool name)
     {
         // Create an instance to map entities to models.
         var studMapper = new StudentModelMapper();
         
         await using var uow = UnitOfWorkFactory.Create();
         var repository = uow.GetRepository<StudentEntity, StudentEntityMapper>();
-        
-        var ascStudents = await repository.Get()
-            .OrderBy(a => a.Surname)
-            .ToListAsync();
+        List<StudentEntity> ascStudents;
+        if (name)
+        {
+            ascStudents = await repository.Get()
+                .OrderBy(a => a.Name.ToLower())
+                .ToListAsync();
+            
+        }
+        else
+        {
+            ascStudents = await repository.Get()
+                .OrderBy(a => a.Surname.ToLower())
+                .ToListAsync();
+        }
 
         return new ObservableCollection<StudentListModel>(ascStudents.Select(studMapper.MapToListModel));
     }
@@ -89,16 +99,27 @@ public class StudentFacade(
     /// Asynchronously retrieves a list of students sorted by surname in descending order.
     /// </summary>
     /// <returns>A Task that represents the asynchronous operation and contains a list of students sorted by surname descending.</returns>
-    public async Task<ObservableCollection<StudentListModel>> GetStudentsSortedBySurnameDescendingAsync()
+    public async Task<ObservableCollection<StudentListModel>> GetStudentsSortedBySurnameDescendingAsync(bool name)
     {
         var studMapper = new StudentModelMapper();
     
         await using var uow = UnitOfWorkFactory.Create();
         var repository = uow.GetRepository<StudentEntity, StudentEntityMapper>();
-    
-        var desStudents = await repository.Get()
-            .OrderByDescending(a => a.Surname)
-            .ToListAsync();
+        List<StudentEntity> desStudents;
+        if (name)
+        {
+            desStudents = await repository.Get()
+                .OrderByDescending(a => a.Name.ToLower())
+                .ToListAsync();
+            
+        }
+        else
+        {
+            desStudents = await repository.Get()
+                .OrderByDescending(a => a.Surname.ToLower())
+                .ToListAsync();
+            
+        }
 
         return new ObservableCollection<StudentListModel>(desStudents.Select(studMapper.MapToListModel));
     }

@@ -13,37 +13,49 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-
+        
         <!-- Student List -->
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Spacing="25" Padding="30">
-                <ListView ItemsSource="{Binding StudList}">
-                    <ListView.ItemTemplate>
+                <CollectionView ItemsSource="{Binding StudList}">
+                    <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="m:StudentListModel">
-                            <ViewCell>
-                                <Frame Margin="10" Padding="5" CornerRadius="10" BorderColor="#CCCCCC">
-                                    <StackLayout Orientation="Horizontal" Margin="10">
-                                        <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
-                                            <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold"/>
-                                            <Label Text="{Binding Surname}" FontSize="14"/>
-                                        </StackLayout>
-                                        <Button Text="Edit" 
-                                                Command="{Binding Source={x:Reference StudentListViewRoot}, Path=BindingContext.GoToDetailCommand}"
-                                                CommandParameter="{Binding Id}" /> 
-                                    </StackLayout>
-                                </Frame>
-                            </ViewCell>
+                            <Frame Margin="10" Padding="5" CornerRadius="10" BorderColor="#CCCCCC">
+                                <StackLayout Orientation="Vertical" Margin="10">
+                                    <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold"/>
+                                    <Label Text="{Binding Surname}" FontSize="14"/>
+                                </StackLayout>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference StudentListViewRoot}, Path=BindingContext.GoToDetailCommand}" CommandParameter="{Binding Id}" />
+                                </Frame.GestureRecognizers>
+                            </Frame>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </VerticalStackLayout>
         </ScrollView>
 
+
         <!-- Bottom Bar With Buttons -->
         <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Padding="10">
-            <Button Text="Add" Command="{Binding GoToCreateCommand}"/>
-            <Button Text="Search" Command="{Binding GoToSeachCommand}" />
-            <Button Text="Sort" Command="{Binding SortActivitiesAscendingCommand}" />
+            <Button Text="Add" 
+                    Command="{Binding GoToCreateCommand}"
+                    TextColor="Black"/>
+            <HorizontalStackLayout>
+                <Entry Placeholder="Enter search text" 
+                       Text="{Binding SearchText, Mode=TwoWay}"
+                       WidthRequest="300" MinimumWidthRequest="200" MaximumWidthRequest="400" VerticalOptions="Center"
+                       TextColor="Black"/>
+                <Button Text="Search" 
+                        Command="{Binding SearchCommand}" VerticalOptions="Center"
+                        TextColor="Black"/>
+            </HorizontalStackLayout>
+            <Button Text="Sort By Surname Ascending" 
+                    Command="{Binding SortStudentBySurnameAscendingCommand}"
+                    TextColor="Black"/>
+            <Button Text="Sort By Surname Descending" 
+                    Command="{Binding SortStudentBySurnameDescendingCommand}"
+                    TextColor="Black"/>
         </StackLayout>
     </Grid>
 </views:ContentPageBase>

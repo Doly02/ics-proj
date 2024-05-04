@@ -1,11 +1,11 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using SchoolSystem.BL.Models;
 using SchoolSystem.DAL.Entities;
 
 namespace SchoolSystem.BL.Mappers;
 
 public class EnrolledModelMapper 
-    : ModelMapperBase<EnrolledEntity, EnrolledSubjectsListModel, SubjectDetailModel>
+    : ModelMapperBase<EnrolledEntity, EnrolledSubjectsListModel, EnrolledDetailModel>
 {
     public override EnrolledSubjectsListModel MapToListModel(EnrolledEntity? entity)
     {
@@ -22,25 +22,80 @@ public class EnrolledModelMapper
         {
                 
             Activities = observableActivitiesListModel,
-            Abbreviation = entity.Subject.Abbreviation,
             Id = entity.Id,
-            Name = entity.Subject.Name,
             StudentFullName = entity.Student.Name
         };
     }
 
-    public override SubjectDetailModel MapToDetailModel(EnrolledEntity entity)
-        => entity?.Subject is null
-            ? SubjectDetailModel.Empty
-            : new SubjectDetailModel
-            {
-                Id = entity.Subject.Id,
-                Name = entity.Subject.Name,
-                Abbreviation = entity.Subject.Abbreviation
-            };
-    
-    public override EnrolledEntity MapToEntity(SubjectDetailModel model)
+    public EnrolledSubjectsListModel MapToListModel(EnrolledSubjectsListModel detailModel)
     {
-        throw new NotImplementedException("Cannot map SubjectDetailModel to EnrolledEntity.");
+        var activitiesListModels = new ObservableCollection<ActivityListModel>();
+
+        foreach (var activityDetail in detailModel.Activities)
+        {
+            var newActivityList = new ActivityListModel
+            {
+                ActivityName = activityDetail.ActivityName,
+                SubjectName = activityDetail.SubjectName,
+                Activity = new ObservableCollection<ActivityDetailModel>()
+            };
+
+            activitiesListModels.Add(newActivityList);
+        }
+
+        return new EnrolledSubjectsListModel
+        {
+            Id = detailModel.Id,
+            Name = detailModel.Name,
+            Abbreviation = detailModel.Abbreviation,
+            StudentFullName = detailModel.StudentFullName,
+            Activities = activitiesListModels
+        };
     }
+
+    public void MapToExistingListModel(EnrolledSubjectsListModel existingListModel,
+       SubjectListModel subject)
+    {
+        existingListModel.Id = subject.Id;
+        existingListModel.Name = subject.Name;
+        existingListModel.Abbreviation = subject.Abbreviation;
+        existingListModel.Activities = subject.Activities;
+    }
+
+    public override EnrolledDetailModel MapToDetailModel(EnrolledEntity entity)
+        => entity?.Subject is null
+            ? EnrolledDetailModel.Empty
+            : new EnrolledDetailModel
+            {
+                Id = entity.Id,
+                StudentId = entity.StudentId,
+                SubjectId = entity.SubjectId,
+                SubjectName = entity.Subject.Name
+
+            };
+
+    public override EnrolledEntity MapToEntity(EnrolledDetailModel model)
+    {
+        throw new NotImplementedException("Cannot map EnrolledDeatilModel to EnrolledEntity.");
+    }
+
+    public EnrolledEntity MapToEntity(EnrolledDetailModel model, Guid studentId)
+        => new()
+        {
+            Id = model.Id,
+            StudentId = studentId,
+            SubjectId = model.SubjectId,
+            Student = null!,
+            Subject = null!
+        };
+
+    public EnrolledEntity MapToEntity(EnrolledSubjectsListModel model, Guid studentId)
+        => new ()
+        {
+            Id = model.Id,
+            StudentId = studentId, 
+            SubjectId = model.SubjectId,
+            Student = null!, 
+            Subject = null! 
+        };
 }

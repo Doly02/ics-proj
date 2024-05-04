@@ -2,8 +2,10 @@ using SchoolSystem.App.Models;
 using SchoolSystem.App.ViewModels;
 using SchoolSystem.App.ViewModels.Activity;
 using SchoolSystem.App.Views.Activity;
+using SchoolSystem.App.Views.Enrolled;
 using SchoolSystem.App.Views.Student;
 using SchoolSystem.App.Views.Subject;
+// using SchoolSystem.App.Views.Activity;
 // using SchoolSystem.App.Views.Enrolled;
 // using SchoolSystem.App.Views.Evaluation;
 
@@ -24,10 +26,13 @@ public class NavigationService : INavigationService
         
         new("//student/edit", typeof(StudentEditView), typeof(StudentEditViewModel)),
         new("//student/detail/edit", typeof(StudentEditView), typeof(StudentEditViewModel)),
-        //new("//student/detail", typeof(StudentDetailView), typeof(StudentDetailViewModel)),
-        
+        new("//student/detail", typeof(StudentDetailView), typeof(StudentDetailViewModel)),
+        new ("//student/list", typeof(StudentListView),typeof(StudentListView)),
+        new("//student/add", typeof(StudentAddView), typeof(StudentAddViewModel)),
         // Enrolled of student
         // new("//students/detail/enrolledSubjects", typeof(EnrolledListView), typeof(EnrolledListViewModel)),
+        new("//enrolled", typeof(EnrolledListView), typeof(EnrolledListViewModel)),
+        new("//enrolled/edit", typeof(EnrolledEditView), typeof(EnrolledEditViewModel)),
         
         // Subjects
         new("//subjects", typeof(SubjectListView), typeof(SubjectListViewModel)),
@@ -47,8 +52,8 @@ public class NavigationService : INavigationService
         // new("//students/detail/enrolledSubjects/activities/detail/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
         
         // Evaluation
-        // new("//students/detail/enrolledSubjects/activities/detail/evaluation", typeof(EvaluationDetailView), typeof(EvaluationDetailViewModel)),
-        // new("//students/detail/enrolledSubjects/activities/detail/evaluation/edit", typeof(EvaluationEditView), typeof(EvaluationEditViewModel)),
+        new("//students/detail/enrolledSubjects/activities/detail/evaluation", typeof(EvaluationDetailView), typeof(EvaluationDetailViewModel)),
+        new("//students/detail/enrolledSubjects/activities/detail/evaluation/edit", typeof(EvaluationEditView), typeof(EvaluationEditViewModel)),
     };
 
     public async Task GoToAsync<TViewModel>()
