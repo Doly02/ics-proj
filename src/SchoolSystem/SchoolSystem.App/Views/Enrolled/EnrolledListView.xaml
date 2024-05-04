@@ -55,7 +55,7 @@
 
                             <Label Grid.Column="1"                                  
                                     FontSize="12" LineBreakMode="WordWrap"
-                                    Text="{Binding SubjectName}"
+                                    Text="{Binding Name}"
                                     VerticalOptions="End" />
 
                             <Button Grid.Column="2"

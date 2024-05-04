@@ -23,8 +23,6 @@ public class EnrolledModelMapper
                 
             Activities = observableActivitiesListModel,
             Id = entity.Id,
-            SubjectId = entity.SubjectId,
-            SubjectName = entity.Subject.Name,
             StudentFullName = entity.Student.Name
         };
     }
@@ -48,8 +46,8 @@ public class EnrolledModelMapper
         return new EnrolledSubjectsListModel
         {
             Id = detailModel.Id,
-            SubjectId = detailModel.SubjectId,
-            SubjectName = detailModel.SubjectName,
+            Name = detailModel.Name,
+            Abbreviation = detailModel.Abbreviation,
             StudentFullName = detailModel.StudentFullName,
             Activities = activitiesListModels
         };
@@ -58,8 +56,9 @@ public class EnrolledModelMapper
     public void MapToExistingListModel(EnrolledSubjectsListModel existingListModel,
        SubjectListModel subject)
     {
-        existingListModel.SubjectId = subject.Id;
-        existingListModel.SubjectName = subject.Name;
+        existingListModel.Id = subject.Id;
+        existingListModel.Name = subject.Name;
+        existingListModel.Abbreviation = subject.Abbreviation;
         existingListModel.Activities = subject.Activities;
     }
 
@@ -91,13 +90,12 @@ public class EnrolledModelMapper
         };
 
     public EnrolledEntity MapToEntity(EnrolledSubjectsListModel model, Guid studentId)
-        => new EnrolledEntity
+        => new ()
         {
             Id = model.Id,
-            StudentId = studentId, // Předpokládáme, že studentId je známý
+            StudentId = studentId, 
             SubjectId = model.SubjectId,
-            // Další vlastnosti modelu závisí na tom, co všechno EnrolledListModel obsahuje
-            Student = null!, // Explicitně nastavujeme null
-            Subject = null! // Explicitně nastavujeme null
+            Student = null!, 
+            Subject = null! 
         };
 }

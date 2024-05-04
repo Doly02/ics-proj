@@ -65,8 +65,7 @@ public partial class EnrolledEditViewModel(
         return new()
         {
             Id = Guid.NewGuid(),
-            SubjectId = subjectFirst.Id,
-            SubjectName = subjectFirst.Name,
+            Name = subjectFirst.Name,
             Activities = subjectFirst.Activities
         };
     }
