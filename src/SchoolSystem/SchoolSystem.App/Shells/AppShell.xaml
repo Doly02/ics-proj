@@ -4,6 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:r="clr-namespace:SchoolSystem.App.Views.Student"
     xmlns:s="clr-namespace:SchoolSystem.App.Views.Subject"
+    xmlns:e="clr-namespace:SchoolSystem.App.Views.Evaluation"
+    xmlns:en="clr-namespace:SchoolSystem.App.Views.Enrolled"
     xmlns:local="clr-namespace:SchoolSystem.App"
     x:Class="SchoolSystem.App.Shells.AppShell"
     x:Name="AppShellRoot"
@@ -15,6 +17,7 @@
         <ShellContent Title="Home2" ContentTemplate="{DataTemplate local:MainPage}" Route="home2" />
         <ShellContent Title="Subject List" ContentTemplate="{DataTemplate s:SubjectListView}" Route="subjects" />
         <ShellContent Title="Student List" ContentTemplate="{DataTemplate r:StudentListView}" Route="students" />
+        <ShellContent Title="Enrolled List" ContentTemplate="{DataTemplate en:EnrolledListView}" Route="enrolled" />
         <ShellContent Title="Evaluation Detail" ContentTemplate="{DataTemplate e:EvaluationDetailView}" Route="students/detail/enrolledSubjects/activities/detail/evaluation" />
         <ShellContent Title="Evaluation Edit" ContentTemplate="{DataTemplate e:EvaluationEditView}" Route="students/detail/enrolledSubjects/activities/detail/evaluation/edit" />
     </TabBar>
