@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using SchoolSystem.App.Messages;
@@ -8,12 +8,12 @@ using SchoolSystem.BL.Models;
 
 namespace SchoolSystem.App.ViewModels.Activity;
 
+[QueryProperty(nameof(SubjectId), nameof(SubjectId))]
 public partial class ActivityListViewModel(
 
     IActivityFacade activityFacade,
     INavigationService navigationService,
-    IMessengerService messengerService,
-    Guid subjectId)
+    IMessengerService messengerService)
     : ViewModelBase(messengerService),
         IRecipient<ActivityEditMessage>,
         IRecipient<ActivityDeleteMessage>
@@ -21,7 +21,7 @@ public partial class ActivityListViewModel(
     public IEnumerable<ActivityListModel> Activities { get; set; } = null!;
     public ObservableCollection<ActivityListModel> ObservableActivities { get; set; } = new ObservableCollection<ActivityListModel>();
 
-    public Guid SubjectId { get; set; } = subjectId;
+    public Guid SubjectId { get; set; }
    
     
     protected override async Task LoadDataAsync()

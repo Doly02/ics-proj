@@ -2,6 +2,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using SchoolSystem.App.Messages;
 using SchoolSystem.App.Services;
+using SchoolSystem.App.ViewModels.Activity;
 using SchoolSystem.BL.Facades;
 using SchoolSystem.BL.Models;
 
@@ -94,7 +95,9 @@ public partial class SubjectListViewModel(
     public async Task GoToActivitiesAsync(Guid id)
     {
         // Navigate to the edit view with the constructed URI
-        await navigationService.GoToAsync("/activities");
+        await navigationService.GoToAsync("/activities",
+        new Dictionary<string, object?>
+        { [nameof(ActivityListViewModel.SubjectId)] = id });
     }
 
     /*
