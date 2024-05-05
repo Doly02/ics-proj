@@ -11,18 +11,20 @@ namespace SchoolSystem.App.ViewModels.Activity;
 public partial class ActivityEditViewModel(
     IActivityFacade activityFacade,
     INavigationService navigationService,
-    IMessengerService messengerService)
+    IMessengerService messengerService,
+    Guid subjectId)
     : ViewModelBase(messengerService),
         IRecipient<ActivityAddMessage>,
         IRecipient<ActivityDeleteMessage>
 {
     public ActivityDetailModel Activity { get; set; } = ActivityDetailModel.Empty;
+    public Guid SubjectId { get; set; } = subjectId;
 
     // SAVE
     [RelayCommand]
     private async Task SaveAsync()
     {
-        await activityFacade.SaveAsync(Activity);
+        await activityFacade.SaveAsync(Activity, SubjectId);
         MessengerService.Send(new ActivityEditMessage { ActivityId = Activity.Id });
         navigationService.SendBackButtonPressed();
     }
@@ -34,7 +36,7 @@ public partial class ActivityEditViewModel(
         try 
         {
             Activity.Id = Guid.NewGuid();
-            await activityFacade.SaveAsync(Activity);
+            await activityFacade.SaveAsync(Activity, SubjectId);
             MessengerService.Send(new StudentAddMessage());
             Activity = ActivityDetailModel.Empty;
         }

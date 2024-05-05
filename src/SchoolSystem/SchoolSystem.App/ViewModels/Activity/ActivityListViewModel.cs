@@ -8,11 +8,12 @@ using SchoolSystem.BL.Models;
 
 namespace SchoolSystem.App.ViewModels.Activity;
 
-public partial class ActivityListViewModel (
+public partial class ActivityListViewModel(
 
     IActivityFacade activityFacade,
     INavigationService navigationService,
-    IMessengerService messengerService) 
+    IMessengerService messengerService,
+    Guid subjectId)
     : ViewModelBase(messengerService),
         IRecipient<ActivityEditMessage>,
         IRecipient<ActivityDeleteMessage>
@@ -20,24 +21,30 @@ public partial class ActivityListViewModel (
     public IEnumerable<ActivityListModel> Activities { get; set; } = null!;
     public ObservableCollection<ActivityListModel> ObservableActivities { get; set; } = new ObservableCollection<ActivityListModel>();
 
+    public Guid SubjectId { get; set; } = subjectId;
    
+    
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
-        Activities = await activityFacade.GetAsync();
+        Activities = await activityFacade.GetActivitiesAsync(SubjectId);
     }
     
     ///////////////////// Navigates to the ActivityDetailViewModel /////////////////////////////////
     [RelayCommand]
     private async Task GoToDetailAsync(Guid id)
         => await navigationService.GoToAsync<ActivityDetailViewModel>(
-            new Dictionary<string, object?> { [nameof(ActivityDetailViewModel.Id)] = id });
+            new Dictionary<string, object?>
+            {
+                [nameof(ActivityDetailViewModel.Id)] = id,
+                [nameof(SubjectId)] = SubjectId 
+            });
     
     
     [RelayCommand]
     private async Task GoToCreateAsync()
     {
-        await navigationService.GoToAsync("/edit");
+        await navigationService.GoToAsync("/edit", new Dictionary<string, object?> { ["SubjectId"] = SubjectId });
     }
     
     ////////////////////////////////////// FILTERING ///////////////////////////////////////////////
@@ -54,7 +61,7 @@ public partial class ActivityListViewModel (
         var endDateTime = EndDateFilter.Date.Add(EndTimeFilter);
         
         var filteredActivities 
-            = await activityFacade.FilterActivitiesByTimeAsync(startDateTime, endDateTime);
+            = await activityFacade.FilterActivitiesByTimeAsync(startDateTime, endDateTime, SubjectId);
         ObservableActivities.Clear();
         foreach (var activity in filteredActivities)
         {
@@ -70,14 +77,14 @@ public partial class ActivityListViewModel (
     [RelayCommand]
     private async Task SortActivitiesAscendingAsync()
     {
-        Activities = await activityFacade.SortActivitiesAscendingAsync();
+        Activities = await activityFacade.SortActivitiesAscendingAsync(SubjectId);
         OnPropertyChanged(nameof(Activities));
     }
 
     [RelayCommand]
     private async Task SortActivitiesDescendingAsync()
     {
-        Activities = await activityFacade.SortActivitiesDescendingAsync();
+        Activities = await activityFacade.SortActivitiesDescendingAsync(SubjectId);
         OnPropertyChanged(nameof(Activities));
     }
     

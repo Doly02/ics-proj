@@ -10,11 +10,13 @@ namespace SchoolSystem.App.ViewModels.Activity;
 public partial class ActivityDetailViewModel(
     IActivityFacade activityFacade,
     INavigationService navigationService,
-    IMessengerService messengerService)
+    IMessengerService messengerService,
+    Guid subjectId)
     : ViewModelBase(messengerService), IRecipient<ActivityEditMessage>
 {
     public Guid Id { get; set; }
     private ActivityDetailModel? Activity { get; set; }
+    public Guid SubjectId { get; set; } = subjectId;
     
     protected override async Task LoadDataAsync()
     {

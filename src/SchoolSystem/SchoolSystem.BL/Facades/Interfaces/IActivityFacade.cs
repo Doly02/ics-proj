@@ -8,9 +8,10 @@ public interface IActivityFacade : IFacade<ActivityEntity, ActivityListModel, Ac
 {
 
     Task SaveAsync(ActivityDetailModel model, Guid Id);
-    Task<ObservableCollection<ActivityListModel>> FilterActivitiesByTimeAsync(DateTime startDateTime, DateTime endDateTime);
-    Task<ObservableCollection<ActivityListModel>> SortActivitiesAscendingAsync();
-    Task<ObservableCollection<ActivityListModel>> SortActivitiesDescendingAsync();
+    Task<IEnumerable<ActivityListModel>> GetActivitiesAsync(Guid subjectId);
+    Task<ObservableCollection<ActivityListModel>> FilterActivitiesByTimeAsync(DateTime startDateTime, DateTime endDateTime, Guid subjectId);
+    Task<ObservableCollection<ActivityListModel>> SortActivitiesAscendingAsync(Guid subjectId);
+    Task<ObservableCollection<ActivityListModel>> SortActivitiesDescendingAsync(Guid subjectId);
 
 
 }

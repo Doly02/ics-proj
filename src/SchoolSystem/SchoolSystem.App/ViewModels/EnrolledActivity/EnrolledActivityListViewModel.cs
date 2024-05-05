@@ -13,14 +13,15 @@ public partial class EnrolledActivityListViewModel (
 
     IActivityFacade activityFacade,
     INavigationService navigationService,
-    IMessengerService messengerService) 
+    IMessengerService messengerService, 
+    Guid subjectId) 
     : ViewModelBase(messengerService),
         IRecipient<ActivityAddEvalMessage>,
         IRecipient<ActivitySortMessage>
 {
     public IEnumerable<ActivityListModel> Activities { get; set; } = null!;
     public ObservableCollection<ActivityListModel> ObservableActivities { get; set; } = new ObservableCollection<ActivityListModel>();
-
+    public Guid SubjectId { get; set; } = subjectId;
    
     protected override async Task LoadDataAsync()
     {
@@ -52,7 +53,7 @@ public partial class EnrolledActivityListViewModel (
     [RelayCommand]
     private async Task SortActivitiesAscendingAsync()
     {
-        ObservableActivities = await activityFacade.SortActivitiesAscendingAsync();
+        ObservableActivities = await activityFacade.SortActivitiesAscendingAsync(SubjectId);
         Activities = ObservableActivities;
         OnPropertyChanged(nameof(Activities));
     }
@@ -60,7 +61,7 @@ public partial class EnrolledActivityListViewModel (
     [RelayCommand]
     private async Task SortActivitiesDescendingAsync()
     {
-        ObservableActivities = await activityFacade.SortActivitiesDescendingAsync();
+        ObservableActivities = await activityFacade.SortActivitiesDescendingAsync(SubjectId);
         Activities = ObservableActivities;
         OnPropertyChanged(nameof(Activities));
     }
