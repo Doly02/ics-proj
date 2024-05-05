@@ -62,7 +62,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="m:SubjectListModel">
                     <ViewCell>
-                        <Grid ColumnDefinitions="*,*,*,*">
+                        <Grid ColumnDefinitions="*,*,*,*,*">
                             <Label Grid.Column="0"                                  
                                    FontSize="12" LineBreakMode="WordWrap"
                                    Text="{Binding Abbreviation}"
@@ -82,7 +82,12 @@
                                     Text="edit"
                                     Style="{StaticResource PrimaryButtonStyle}"
                                     Command="{Binding Source={x:Reference SubjectListViewRoot}, Path=BindingContext.GoToEditCommand}"
-                                    CommandParameter="{Binding Id}" />              
+                                    CommandParameter="{Binding Id}" />
+                            <Button Grid.Column="4"
+                                    Text="activities"
+                                    Style="{StaticResource PrimaryButtonStyle}"
+                                    Command="{Binding Source={x:Reference SubjectListViewRoot}, Path=BindingContext.GoToActivitiesCommand}"
+                                    CommandParameter="{Binding Id}" />      
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

@@ -90,6 +90,13 @@ public partial class SubjectListViewModel(
             { [nameof(SubjectEditViewModel.Id)] = id});
     }
 
+    [RelayCommand]
+    public async Task GoToActivitiesAsync(Guid id)
+    {
+        // Navigate to the edit view with the constructed URI
+        await navigationService.GoToAsync("/activities");
+    }
+
     /*
     [RelayCommand]
     private async Task GoToActivityAsync(Guid subjectId)
