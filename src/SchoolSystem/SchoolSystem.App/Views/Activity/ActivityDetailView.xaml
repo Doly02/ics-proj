@@ -9,6 +9,106 @@
                        x:DataType="activity:ActivityDetailViewModel"
                        Style="{StaticResource ContentPageStyle}">
     <ScrollView>
-
+        <VerticalStackLayout Spacing="25" Padding="30">
+            <Button Text="Back" Command="{Binding BackCommand}" />
+            
+            <!-- Activity Name -->
+            <HorizontalStackLayout Spacing="5">
+                <Label Text="Name:"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       TextColor="Black"/>
+                <Label Text="{Binding Activity.Name}"
+                       FontSize="16"
+                       VerticalOptions="Center"
+                       HorizontalOptions="FillAndExpand"
+                       TextColor="Black"/>
+            </HorizontalStackLayout>
+            
+            <!-- Activity Place  -->
+            <HorizontalStackLayout Spacing="5">
+                <Label Text="Place:"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       TextColor="Black"/>
+                <Label Text="{Binding Activity.Place}"
+                       FontSize="16"
+                       VerticalOptions="Center"
+                       HorizontalOptions="FillAndExpand"
+                       TextColor="Black"/>
+            </HorizontalStackLayout>
+            
+            <!-- Activity Start  -->
+            <HorizontalStackLayout Spacing="5">
+                <Label Text="Start:"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       TextColor="Black"/>
+                <Label Text="{Binding Activity.Start}"
+                       FontSize="16"
+                       VerticalOptions="Center"
+                       HorizontalOptions="FillAndExpand"
+                       TextColor="Black"/>
+            </HorizontalStackLayout>
+            
+            <!-- Activity End  -->
+            <HorizontalStackLayout Spacing="5">
+                <Label Text="End:"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       TextColor="Black"/>
+                <Label Text="{Binding Activity.End}"
+                       FontSize="16"
+                       VerticalOptions="Center"
+                       HorizontalOptions="FillAndExpand"
+                       TextColor="Black"/>
+            </HorizontalStackLayout>
+            
+            <!-- Activity Type  -->
+            <HorizontalStackLayout Spacing="5">
+                <Label Text="Type:"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       TextColor="Black"/>
+                <Label Text="{Binding Activity.ActivityType}"
+                       FontSize="16"
+                       VerticalOptions="Center"
+                       HorizontalOptions="FillAndExpand"
+                       TextColor="Black"/>
+            </HorizontalStackLayout>
+            
+            <!-- Activity Description  -->
+            <HorizontalStackLayout Spacing="5">
+                <Label Text="Description:"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       TextColor="Black"/>
+                <Label Text="{Binding Activity.Description}"
+                       FontSize="16"
+                       VerticalOptions="Center"
+                       HorizontalOptions="FillAndExpand"
+                       TextColor="Black"/>
+            </HorizontalStackLayout>
+            
+            <!-- Buttons for operations -->
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Button Text="Edit"
+                        Command="{Binding GoToEditCommand}"
+                        BackgroundColor="#7AB2B2"
+                        TextColor="Black"
+                        HorizontalOptions="FillAndExpand" />
+                <Button Text="Delete"
+                        Command="{Binding DeleteCommand}"
+                        BackgroundColor="#FA7070"
+                        TextColor="Black"
+                        HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+        </VerticalStackLayout>
     </ScrollView>
 </views:ContentPageBase>
