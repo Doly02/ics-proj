@@ -21,8 +21,13 @@ public partial class EnrolledListViewModel(
 
     public IEnumerable<EnrolledSubjectsListModel> EnrolledList { get; set; } = null!;
 
+
+
     public ObservableCollection<EnrolledSubjectsListModel> sortedEnrolled { get; private set; } = new ObservableCollection<EnrolledSubjectsListModel>();
-    public EnrolledSubjectsListModel? Student { get; set; } = EnrolledSubjectsListModel.Empty;
+    public StudentDetailModel? Student { get; set; }
+
+    public string StudentFullName => $"{Student?.Name} {Student?.Surname}";
+
 
     public async void Receive(EnrolledDeleteMessage message)
     {
@@ -36,14 +41,13 @@ public partial class EnrolledListViewModel(
 
     protected override async Task LoadDataAsync()
     {
-        if (Student != null) // Kontrola, zda 'Student' není null
-        {
-            Student = await enrolledFacade.GetByIdAsync(Student.Id);
-        }
-        else
-        {
-            // Možné další ošetření, pokud je 'Student' null
-        }
+        await base.LoadDataAsync();
+
+            // Načítání předmětů zapsaných k tomuto studentovi
+       EnrolledList = await enrolledFacade.GetEnrolledSubjectsByStudentIdAsync(Student.Id);
+        
+        OnPropertyChanged(nameof(EnrolledList));
+
     }
 
     [RelayCommand]
@@ -63,19 +67,11 @@ public partial class EnrolledListViewModel(
 
 
 
-
-    [RelayCommand]
-    private async Task GoToCreateAsync()
-    {
-        await navigationService.GoToAsync("/edit", new Dictionary<string, object?> { [nameof(EnrolledEditViewModel.Student)] = Student});
-    }
-
-
     [RelayCommand]
     public async Task GoToEditAsync()
     {
         // Navigate to the edit view with the constructed URI
-        await navigationService.GoToAsync("/edit",
+        await navigationService.GoToAsync("//student/detail/enrolled/edit",
         new Dictionary<string, object?>
         { [nameof(EnrolledEditViewModel.Student)] = Student });
     }
@@ -88,5 +84,16 @@ public partial class EnrolledListViewModel(
         await navigationService.GoToAsync<Activity.ActivityDetailViewModel>(
            new Dictionary<string, object?> { [nameof(Activity.ActivityDetailViewModel.Id)] = Id });
     }
-    
+
+
+
+
+    [RelayCommand]
+    public async Task GoToDetailBackAsync()
+    {
+        await navigationService.GoToAsync("//student/detail",
+        new Dictionary<string, object?>
+        { [nameof(StudentDetailViewModel.StudDetail)] = Student });
+    }
+
 }

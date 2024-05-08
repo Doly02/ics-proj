@@ -22,11 +22,11 @@ public class EnrolledFacade(
 
         await using IUnitOfWork uow = UnitOfWorkFactory.Create();
         IRepository<EnrolledEntity> repository = uow.GetRepository<EnrolledEntity, EnrolledEntityMapper>();
-        if (await repository.ExistsEntityAsync(entity))
-        {
-            await repository.UpdateEntityAsync(entity);
-            await uow.CommitAsync();
-        }
+
+        repository.InsertEntityAsync(entity);
+
+        await uow.CommitAsync();
+
 
     }
 
@@ -57,6 +57,20 @@ public class EnrolledFacade(
         var mapper = new EnrolledModelMapper();
 
         return entity != null ? mapper.MapToListModel(entity) : null;
+    }
+
+    public async Task<IEnumerable<EnrolledSubjectsListModel>> GetEnrolledSubjectsByStudentIdAsync(Guid studentId)
+    {
+        await using var unitOfWork = UnitOfWorkFactory.Create();
+        var entities = await unitOfWork.GetRepository<EnrolledEntity, EnrolledEntityMapper>().Get()
+            .Include(e => e.Subject)
+                .ThenInclude(subject => subject.Activities)
+            .Include(e => e.Student)
+            .Where(e => e.StudentId == studentId) // Filtr podle StudentId
+            .ToListAsync();
+
+        var mapper = new EnrolledModelMapper();
+        return entities.Select(e => mapper.MapToListModel(e)).ToList();
     }
 
 

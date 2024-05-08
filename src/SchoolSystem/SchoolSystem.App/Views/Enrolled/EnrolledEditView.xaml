@@ -2,8 +2,7 @@
 <views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:SchoolSystem.App.Views"
-             xmlns:viewModels="clr-namespace:SchoolSystem.App.ViewModels"
-                       
+             xmlns:viewModels="clr-namespace:SchoolSystem.App.ViewModels"                       
              xmlns:models="clr-namespace:SchoolSystem.BL.Models;assembly=SchoolSystem.BL"
              x:Class="SchoolSystem.App.Views.Enrolled.EnrolledEditView"
 
@@ -21,8 +20,10 @@
 
             <!-- Button for adding the selected subject -->
             <Button Text="Add"
-                    Command="{Binding AddSubjectToStudentCommand}"
-                    Style="{StaticResource PrimaryButtonStyle}"/>
+                    Command="{Binding AddSubjectToStudentCommand}" />
+
+            <Button Text="Back"
+                    Command="{Binding GoBackToListCommand}"/>
         </VerticalStackLayout>
     </ScrollView>
 </views:ContentPageBase>

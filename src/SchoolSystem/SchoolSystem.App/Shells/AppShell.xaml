@@ -16,10 +16,13 @@
     <TabBar>
         <ShellContent Title="Home1" ContentTemplate="{DataTemplate local:MainPage}" Route="home1" />
         <ShellContent Title="Home2" ContentTemplate="{DataTemplate local:MainPage}" Route="home2" />
-        <ShellContent Title="Edit Student" ContentTemplate="{DataTemplate r:StudentEditView}" Route="student/edit" />
-        <ShellContent Title="Subject List" ContentTemplate="{DataTemplate s:SubjectListView}" Route="subjects" />
         <ShellContent Title="Student List" ContentTemplate="{DataTemplate r:StudentListView}" Route="students" />
+        <ShellContent Title="Edit Student" ContentTemplate="{DataTemplate r:StudentEditView}" Route="student/edit" />
+        <ShellContent Title="Edit Activity" ContentTemplate="{DataTemplate a:ActivityEditView}" Route="subjects/activities/edit" />
+        <ShellContent Title="Subject List" ContentTemplate="{DataTemplate s:SubjectListView}" Route="subjects" />
+        <ShellContent Title="Activity List" ContentTemplate="{DataTemplate a:ActivityListView}" Route="subjects/activities" />
         <ShellContent Title="Enrolled List" ContentTemplate="{DataTemplate en:EnrolledListView}" Route="enrolled" />
+        <ShellContent Title="Enrolled List" ContentTemplate="{DataTemplate en:EnrolledEditView}" Route="enrolled/edit" />
         <ShellContent Title="Evaluation Detail" ContentTemplate="{DataTemplate e:EvaluationDetailView}" Route="students/detail/enrolledSubjects/activities/detail/evaluation" />
         <ShellContent Title="Evaluation Edit" ContentTemplate="{DataTemplate e:EvaluationEditView}" Route="students/detail/enrolledSubjects/activities/detail/evaluation/edit" />
     </TabBar>

@@ -23,6 +23,8 @@ public class EnrolledModelMapper
                 
             Activities = observableActivitiesListModel,
             Id = entity.Id,
+            Abbreviation = entity.Subject.Abbreviation,
+            Name = entity.Subject.Name,
             StudentFullName = entity.Student.Name
         };
     }
@@ -56,10 +58,10 @@ public class EnrolledModelMapper
     public void MapToExistingListModel(EnrolledSubjectsListModel existingListModel,
        SubjectListModel subject)
     {
-        existingListModel.Id = subject.Id;
         existingListModel.Name = subject.Name;
         existingListModel.Abbreviation = subject.Abbreviation;
         existingListModel.Activities = subject.Activities;
+        existingListModel.SubjectId = subject.Id;
     }
 
     public override EnrolledDetailModel MapToDetailModel(EnrolledEntity entity)

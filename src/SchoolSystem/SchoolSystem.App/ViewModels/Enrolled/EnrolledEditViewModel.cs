@@ -34,6 +34,8 @@ public partial class EnrolledEditViewModel(
         AvailableSubjects.Clear();
         var subjects = await subjectFacade.GetAsync();
 
+
+
         foreach (var subject in subjects)
         {
             AvailableSubjects.Add(subject);
@@ -55,7 +57,19 @@ public partial class EnrolledEditViewModel(
             NewEnrollment = GetNewEnrollment();
 
             MessengerService.Send(new EnrolledAddMessage());
+
+            await navigationService.GoToAsync("//student/detail/enrolled",
+                new Dictionary<string, object?>
+                 { [nameof(EnrolledListViewModel.Student)] = Student });
         }
+    }
+
+    [RelayCommand]
+    public async Task GoBackToListAsync()
+    {
+        await navigationService.GoToAsync("//student/detail/enrolled",
+        new Dictionary<string, object?>
+        { [nameof(EnrolledListViewModel.Student)] = Student });
     }
 
 
@@ -66,6 +80,8 @@ public partial class EnrolledEditViewModel(
         {
             Id = Guid.NewGuid(),
             Name = subjectFirst.Name,
+            SubjectId = subjectFirst.Id,
+            Abbreviation = subjectFirst.Abbreviation,
             Activities = subjectFirst.Activities
         };
     }

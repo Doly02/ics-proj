@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using SchoolSystem.BL.Facades;
 using SchoolSystem.BL.Models;
@@ -96,8 +96,20 @@ public partial class StudentDetailViewModel(
     }
 
     [RelayCommand]
+    private async Task GoToEnrolledAsync()
+    {
+        await navigationService.GoToAsync("student/enrolled",
+            new Dictionary<string, object?>
+            { [nameof(EnrolledListViewModel.Student)] = StudDetail });
+    }
+
+
+
+    [RelayCommand]
     private async Task GoToList()
     {
         await navigationService.GoToAsync("//students");
     }
+
+
 }

@@ -10,6 +10,7 @@ public interface IEnrolledFacade : IFacade<EnrolledEntity, EnrolledSubjectsListM
     Task SaveAsync(EnrolledSubjectsListModel model, Guid id);
 
     Task SaveAsync(EnrolledDetailModel model, Guid id);
+    Task<IEnumerable<EnrolledSubjectsListModel>> GetEnrolledSubjectsByStudentIdAsync(Guid studentId);
     Task<IEnumerable<EnrolledSubjectsListModel>> SearchBySubjectNameAsync(string? subjectName = null);
     Task<IEnumerable<EnrolledSubjectsListModel>> SortEnrolledSubjectsAscAsync();
 }
