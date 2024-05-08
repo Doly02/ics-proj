@@ -16,10 +16,10 @@ public class ActivityFacade(
         FacadeBase<ActivityEntity, ActivityListModel, ActivityDetailModel,
             ActivityEntityMapper>(unitOfWorkFactory, activityModelMapper), IActivityFacade
 {
-    public async Task SaveAsync(ActivityDetailModel model, Guid id)
+    public async Task SaveAsync(ActivityDetailModel model, Guid subjectId)
     {
         var mapper = new ActivityModelMapper();
-        ActivityEntity entity = mapper.MapToEntity(model, id);
+        ActivityEntity entity = mapper.MapToEntity(model, subjectId);
 
         await using IUnitOfWork uow = UnitOfWorkFactory.Create();
         IRepository<ActivityEntity> repository =

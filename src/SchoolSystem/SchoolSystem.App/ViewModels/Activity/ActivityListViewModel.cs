@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using SchoolSystem.App.Messages;
@@ -26,6 +27,8 @@ public partial class ActivityListViewModel(
     
     protected override async Task LoadDataAsync()
     {
+        // Vypíšte SubjectId pre debugovacie účely
+        Debug.WriteLine($"Som v liste aktivit a predmet je SubjectId: {SubjectId}");
         await base.LoadDataAsync();
         Activities = await activityFacade.GetActivitiesAsync(SubjectId);
     }
@@ -37,15 +40,28 @@ public partial class ActivityListViewModel(
             new Dictionary<string, object?>
             {
                 [nameof(ActivityDetailViewModel.Id)] = id,
-                [nameof(SubjectId)] = SubjectId 
+                [nameof(ActivityDetailViewModel.SubjectId)] = SubjectId
             });
     
-    
+    /*
     [RelayCommand]
     private async Task GoToCreateAsync()
     {
         await navigationService.GoToAsync("/add");
     }
+    */
+    
+    ///////////////////// Navigates to the ActivityEditViewModel to add new activity /////////////////////////////////
+    [RelayCommand]
+    private async Task GoToCreateAsync()
+    {
+        await navigationService.GoToAsync<ActivityEditViewModel>(
+            new Dictionary<string, object?>
+            {
+                [nameof(ActivityDetailViewModel.SubjectId)] = SubjectId
+            });
+    }
+
     
     ////////////////////////////////////// FILTERING ///////////////////////////////////////////////
     public DateTime StartDateFilter { get; set; }

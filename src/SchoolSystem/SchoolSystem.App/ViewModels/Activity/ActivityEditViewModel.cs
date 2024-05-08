@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using System.Diagnostics;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using SchoolSystem.App.Messages;
 using SchoolSystem.App.Services;
@@ -42,12 +43,16 @@ public partial class ActivityEditViewModel(
     {
         if (Activity != null)
         {
-            await activityFacade.SaveAsync(Activity);
-            MessengerService.Send(new ActivityEditMessage { ActivityId = Activity.Id });
+            await activityFacade.SaveAsync(Activity, SubjectId);
+            MessengerService.Send(new ActivityEditMessage
+            {
+                ActivityId = Activity.Id 
+            });
         }
 
         navigationService.SendBackButtonPressed();
     }
+
     
     [RelayCommand]
     private async Task BackAsync()
