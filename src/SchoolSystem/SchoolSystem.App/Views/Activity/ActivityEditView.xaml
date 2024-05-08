@@ -10,20 +10,27 @@
                        Style="{StaticResource ContentPageStyle}">
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30">
+            <Button Text="back" Command="{Binding BackCommand}" />
             <!-- Activity name -->
             <Entry Placeholder="Name" Text="{Binding Activity.Name, Mode=TwoWay}" />
 
             <!-- Activity start -->
-            <!--Entry Placeholder="Start" Text="{Binding Activity.Start, Mode=TwoWay}" /-->
+            <Entry Placeholder="Start" Text="{Binding Activity.Start, Mode=TwoWay}" />
 
             <!-- Activity end -->
-            <!--Entry Placeholder="End" Text="{Binding Activity.End, Mode=TwoWay}" /-->
+            <Entry Placeholder="End" Text="{Binding Activity.End, Mode=TwoWay}" />
             
             <!-- Activity place -->
             <Entry Placeholder="Place" Text="{Binding Activity.Place, Mode=TwoWay}" />
+            
+            <!-- Activity type -->
+            <Entry Placeholder="Type" Text="{Binding Activity.ActivityType, Mode=TwoWay}" />
+            
+            <!-- Activity description -->
+            <Entry Placeholder="Description" Text="{Binding Activity.Description, Mode=TwoWay}" />
 
             <!-- Button For Storing Data -->
-            <Button Text="Add" Command="{Binding SaveCommand}" />
+            <Button Text="Enter" Command="{Binding SaveCommand}" />
             <!-- Should Be Implemented Soon Indicator if Operation Succeeded or Not -->
         </VerticalStackLayout>
     </ScrollView>
