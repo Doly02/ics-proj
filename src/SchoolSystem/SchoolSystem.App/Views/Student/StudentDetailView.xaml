@@ -60,6 +60,11 @@
                         BackgroundColor="#FA7070"
                         TextColor="Black"
                         HorizontalOptions="FillAndExpand" />
+                <Button Text="Enrolled"
+                        Command="{Binding GoToEnrolledCommand}"
+                        BackgroundColor="#FA7070"
+                        TextColor="Black"
+                        HorizontalOptions="FillAndExpand" />
             </StackLayout>
         </VerticalStackLayout>
     </ScrollView>
