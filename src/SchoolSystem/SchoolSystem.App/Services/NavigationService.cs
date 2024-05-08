@@ -44,7 +44,7 @@ public class NavigationService : INavigationService
         new("//subjects/activities/add", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
         
         new("//subjects/activities/detail", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
-        new("//subjects/activities/detail/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
+        new("//subjects/activities/detail/editActivity", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
         
         // new("//students/detail/enrolledSubjects/activities", typeof(ActivityListView), typeof(ActivityListViewModel)),
         // new("//students/detail/enrolledSubjects/activities/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),

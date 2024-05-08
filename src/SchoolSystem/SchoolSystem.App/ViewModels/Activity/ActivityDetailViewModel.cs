@@ -51,7 +51,7 @@ public partial class ActivityDetailViewModel(
     [RelayCommand]
     private async Task GoToEditAsync()
     {
-        await Shell.Current.GoToAsync("/edit",
+        await Shell.Current.GoToAsync("/editActivity",
             new Dictionary<string, object?>
             {
                 [nameof(ActivityEditViewModel.Id)] = Id,

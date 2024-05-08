@@ -27,8 +27,6 @@ public partial class ActivityListViewModel(
     
     protected override async Task LoadDataAsync()
     {
-        // Vypíšte SubjectId pre debugovacie účely
-        Debug.WriteLine($"Som v liste aktivit a predmet je SubjectId: {SubjectId}");
         await base.LoadDataAsync();
         Activities = await activityFacade.GetActivitiesAsync(SubjectId);
     }
@@ -36,26 +34,19 @@ public partial class ActivityListViewModel(
     ///////////////////// Navigates to the ActivityDetailViewModel /////////////////////////////////
     [RelayCommand]
     private async Task GoToDetailAsync(Guid id)
-        => await navigationService.GoToAsync<ActivityDetailViewModel>(
+        => await navigationService.GoToAsync( "/detail",
             new Dictionary<string, object?>
             {
                 [nameof(ActivityDetailViewModel.Id)] = id,
                 [nameof(ActivityDetailViewModel.SubjectId)] = SubjectId
             });
     
-    /*
-    [RelayCommand]
-    private async Task GoToCreateAsync()
-    {
-        await navigationService.GoToAsync("/add");
-    }
-    */
     
     ///////////////////// Navigates to the ActivityEditViewModel to add new activity /////////////////////////////////
     [RelayCommand]
     private async Task GoToCreateAsync()
     {
-        await navigationService.GoToAsync<ActivityEditViewModel>(
+        await navigationService.GoToAsync( "/add",
             new Dictionary<string, object?>
             {
                 [nameof(ActivityDetailViewModel.SubjectId)] = SubjectId
