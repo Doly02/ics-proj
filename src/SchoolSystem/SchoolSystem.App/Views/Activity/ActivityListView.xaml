@@ -19,6 +19,7 @@
         <!-- Activity List -->
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Spacing="25" Padding="30">
+                <Button Text="back" Command="{Binding BackCommand}" />
                 <ListView ItemsSource="{Binding Activities}">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="m:ActivityListModel">
@@ -26,10 +27,9 @@
                                 <Frame Margin="10" Padding="5" CornerRadius="10" BorderColor="#CCCCCC">
                                     <StackLayout Orientation="Horizontal" Margin="10">
                                         <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
-                                            <Label Text="{Binding ActivityName}" FontSize="16" FontAttributes="Bold"/>
-                                            <!--Label Text="{Binding }" FontSize="14"/-->
+                                            <Label Text="{Binding ActivityName}" FontSize="16" FontAttributes="Bold" />
                                         </StackLayout>
-                                        <Button Text="Edit" 
+                                        <Button Text="Detail" 
                                                 Command="{Binding Source={x:Reference ActivityListViewRoot}, Path=BindingContext.GoToDetailCommand}"
                                                 CommandParameter="{Binding Id}" /> 
                                     </StackLayout>

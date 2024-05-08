@@ -7,67 +7,51 @@ using SchoolSystem.BL.Models;
 
 namespace SchoolSystem.App.ViewModels.Activity;
 
-[QueryProperty(nameof(ViewModels.Activity), nameof(ViewModels.Activity))]
+[QueryProperty(nameof(Id), nameof(Id))]
+[QueryProperty(nameof(SubjectId), nameof(SubjectId))]
+
 public partial class ActivityEditViewModel(
     IActivityFacade activityFacade,
     INavigationService navigationService,
-    IMessengerService messengerService,
-    Guid subjectId)
-    : ViewModelBase(messengerService),
-        IRecipient<ActivityAddMessage>,
-        IRecipient<ActivityDeleteMessage>
+    IMessengerService messengerService)
+    : ViewModelBase(messengerService)
 {
-    public ActivityDetailModel Activity { get; set; } = ActivityDetailModel.Empty;
-    public Guid SubjectId { get; set; } = subjectId;
-
+    public ActivityDetailModel? Activity { get; private set; }
+    public Guid SubjectId { get; set; }
+    public Guid Id { get; set; }
+    
+    protected override async Task LoadDataAsync()
+    {
+        await base.LoadDataAsync();
+        
+        if (Id != Guid.Empty)
+        {
+            // Load the existing activity if ID is provided
+            Activity = await activityFacade.GetAsync(Id);
+        }
+        else
+        {
+            // Create a new activity if ID is not provided
+            Activity = ActivityDetailModel.Empty;
+        }
+    }
+    
     // SAVE
     [RelayCommand]
     private async Task SaveAsync()
     {
-        await activityFacade.SaveAsync(Activity, SubjectId);
-        MessengerService.Send(new ActivityEditMessage { ActivityId = Activity.Id });
+        if (Activity != null)
+        {
+            await activityFacade.SaveAsync(Activity);
+            MessengerService.Send(new ActivityEditMessage { ActivityId = Activity.Id });
+        }
+
         navigationService.SendBackButtonPressed();
     }
     
-    // ADD
     [RelayCommand]
-    public async Task AddAsync() 
+    private async Task BackAsync()
     {
-        try 
-        {
-            Activity.Id = Guid.NewGuid();
-            await activityFacade.SaveAsync(Activity, SubjectId);
-            MessengerService.Send(new StudentAddMessage());
-            Activity = ActivityDetailModel.Empty;
-        }
-        
-        catch (Exception exception)
-        {
-            // Propagate Exception
-        }
-    }
-    
-    //CLEAR
-    [RelayCommand]
-    private void Clear()
-    {
-        Activity = ActivityDetailModel.Empty;
-    }
-    
-    
-    private async Task ReloadDataAsync()
-    {
-        Activity = await activityFacade.GetAsync(Activity.Id)
-                   ?? ActivityDetailModel.Empty;
-    }
-    
-    public async void Receive(ActivityAddMessage message)
-    {
-        await ReloadDataAsync();
-    }
-    
-    public async void Receive(ActivityDeleteMessage message)
-    {
-        await ReloadDataAsync();
+        await Shell.Current.GoToAsync("..");
     }
 }

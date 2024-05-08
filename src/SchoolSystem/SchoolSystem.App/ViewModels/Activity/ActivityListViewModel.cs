@@ -44,7 +44,7 @@ public partial class ActivityListViewModel(
     [RelayCommand]
     private async Task GoToCreateAsync()
     {
-        await navigationService.GoToAsync("/edit", new Dictionary<string, object?> { ["SubjectId"] = SubjectId });
+        await navigationService.GoToAsync("/add");
     }
     
     ////////////////////////////////////// FILTERING ///////////////////////////////////////////////
@@ -102,6 +102,12 @@ public partial class ActivityListViewModel(
     private async Task GoToSortAsync()
     {
         await navigationService.GoToAsync("/sort");
+    }
+    
+    [RelayCommand]
+    private async Task BackAsync()
+    {
+        await Shell.Current.GoToAsync("..");
     }
     
     //////// These methods are expected to refresh the data, typically after some activity /////////
