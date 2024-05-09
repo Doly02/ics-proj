@@ -55,7 +55,7 @@ public partial class SubjectListViewModel(
     }
 
     [RelayCommand]
-    private async Task SearchAsync(string? search = null)
+    public async Task SearchAsync(string? search = null)
     {
         Subjects = await subjectFacade.SearchAsync(search);
         OnPropertyChanged(nameof(Subjects));
