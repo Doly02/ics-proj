@@ -8,91 +8,93 @@
                        Style="{StaticResource ContentPageStyle}"
                        x:Name="SubjectListViewRoot"
                        x:DataType="vm:SubjectListViewModel">
-    <Grid HorizontalOptions="FillAndExpand" RowDefinitions="*, *" ColumnDefinitions="*, *, *, *, *">
-        <SearchBar Placeholder="search"
-                   Grid.Row="1"
-                   Grid.Column="0"
-                   Grid.ColumnSpan="2"
-                   x:Name="searchBar"
-                   TextChanged="searchBar_TextChanged"
-                   SearchCommand="{Binding SearchCommand}"
-                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
+    
+    <Grid HorizontalOptions="FillAndExpand" RowDefinitions="*, Auto">
 
-        <Button Text="add"
-                Grid.Row="1"
-                Grid.Column="4"
-                Padding="12, 6"
-                Command="{Binding GoToCreateCommand}"
-                CornerRadius="5" FontFamily="MontserratMedium"
-                Style="{StaticResource PrimaryButtonStyle}" />
-        <Grid Grid.Row="1" Grid.Column="2" HorizontalOptions="FillAndExpand" RowDefinitions="*, *" ColumnDefinitions="*, *">
-            <Label Grid.Column="0"
-                   Grid.Row="0"
-                   Grid.RowSpan="2"
-                   Text="Sort by name"/>
-            <Button Grid.Row="0"
-                    Grid.Column="1"
-                    Text="asc"
-                    Command="{Binding SortByNameAscCommand}"
-                    Style="{StaticResource PrimaryButtonStyle}" />
-            <Button Grid.Row="1"
-                    Grid.Column="1"
-                    Text="desc"
-                    Command="{Binding SortByNameDescCommand}"
-                    Style="{StaticResource PrimaryButtonStyle}" />  
-        </Grid>
-        <Grid Grid.Row="1" Grid.Column="3" HorizontalOptions="FillAndExpand" RowDefinitions="*, *" ColumnDefinitions="*, *">
-            <Label Grid.Column="0"
-                   Grid.Row="0"
-                   Grid.RowSpan="2"
-                   Text="Sort by Abbreviation"/>
-            <Button Grid.Row="0"
-                    Grid.Column="1"
-                    Text="asc"
-                    Command="{Binding SortByAbbrAscCommand}"
-                    Style="{StaticResource PrimaryButtonStyle}" />
-            <Button Grid.Row="1"
-                    Grid.Column="1"
-                    Text="desc"
-                    Command="{Binding SortByAbbrDescCommand}"
-                    Style="{StaticResource PrimaryButtonStyle}" />
-        </Grid>
-        <ListView Grid.Row="0" Grid.ColumnSpan="5" Grid.Column="0"
-                        ItemsSource="{Binding Subjects}">
+        
 
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="m:SubjectListModel">
-                    <ViewCell>
-                        <Grid ColumnDefinitions="*,*,*,*,*">
-                            <Label Grid.Column="0"                                  
-                                   FontSize="12" LineBreakMode="WordWrap"
-                                   Text="{Binding Abbreviation}"
-                                   VerticalOptions="End" />
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Spacing="25" Padding="30">
+                <CollectionView ItemsSource="{Binding Subjects}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="m:SubjectListModel">
+                            <Frame Margin="10" Padding="5" CornerRadius="10" BorderColor="#CCCCCC">
+                                <Grid ColumnDefinitions="*,4*,6*">
+                                    <Label Grid.Column="0"
+                                           FontSize="16"
+                                           FontAttributes="Bold"
+                                           Text="{Binding Abbreviation}"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Start"/>
 
-                            <Label Grid.Column="1"                                  
-                                    FontSize="12" LineBreakMode="WordWrap"
-                                    Text="{Binding Name}"
-                                    VerticalOptions="End" />
+                                    <Label Grid.Column="1"
+                                           FontSize="14"
+                                           Text="{Binding Name}"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Start" />
+                                    <StackLayout Grid.Column="2" Orientation="Horizontal" HorizontalOptions="End" VerticalOptions="Center" Spacing="20">
+                                        <Button Text="delete"
+                                                TextColor="Black"
+                                                BackgroundColor="IndianRed"
+                                                Command="{Binding Source={x:Reference SubjectListViewRoot}, Path=BindingContext.RemoveIngredientCommand}"
+                                                CommandParameter="{Binding Id}" />
 
-                            <Button Grid.Column="2"
-                                    Text="delete"
-                                    Style="{StaticResource PrimaryButtonStyle}"
-                                    Command="{Binding Source={x:Reference SubjectListViewRoot}, Path=BindingContext.RemoveIngredientCommand}"
-                                    CommandParameter="{Binding Id}" /> 
-                            <Button Grid.Column="3"
-                                    Text="edit"
-                                    Style="{StaticResource PrimaryButtonStyle}"
-                                    Command="{Binding Source={x:Reference SubjectListViewRoot}, Path=BindingContext.GoToEditCommand}"
-                                    CommandParameter="{Binding Id}" />
-                            <Button Grid.Column="4"
-                                    Text="activities"
-                                    Style="{StaticResource PrimaryButtonStyle}"
-                                    Command="{Binding Source={x:Reference SubjectListViewRoot}, Path=BindingContext.GoToActivitiesCommand}"
-                                    CommandParameter="{Binding Id}" />      
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                                        <Button Text="edit"
+                                                TextColor="Black"
+                                                BackgroundColor="Yellow"
+                                                Command="{Binding Source={x:Reference SubjectListViewRoot}, Path=BindingContext.GoToEditCommand}"
+                                                CommandParameter="{Binding Id}"/>
+                                    
+                                        <Button Text="activities"
+                                                TextColor="Black"
+                                                Command="{Binding Source={x:Reference SubjectListViewRoot}, Path=BindingContext.GoToActivitiesCommand}"
+                                                CommandParameter="{Binding Id}"/>
+                                    </StackLayout>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+        <!-- buttons -->
+        <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="20" Padding="10">
+            <Button Text="Add" 
+            Command="{Binding GoToCreateCommand}"
+            TextColor="Black"/>
+            <SearchBar Placeholder="enter search text"
+                       x:Name="searchBar"
+                       TextChanged="searchBar_TextChanged"
+                       SearchCommand="{Binding SearchCommand}"
+                       SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
+            <Grid ColumnDefinitions="2*, *, *">
+                <Label Grid.Column="0"
+                       Grid.RowSpan="2"
+                       Text="Sort by name"/>
+                <Button Grid.Column="1"
+                        Text="asc"
+                        Command="{Binding SortByNameAscCommand}"
+                        TextColor="Black" />
+                <Button Grid.Column="2"
+                        Text="desc"
+                        Command="{Binding SortByNameDescCommand}"
+                        TextColor="Black" />
+            </Grid>
+            <Grid ColumnDefinitions="2*, *, *">
+                <Label Grid.Column="0"
+                       Grid.Row="0"
+                       Grid.RowSpan="2"
+                       Text="Sort by Abbreviation"/>
+                <Button Grid.Column="1"
+                        Text="asc"
+                        Command="{Binding SortByAbbrAscCommand}"
+                        TextColor="Black" />
+                <Button Grid.Column="2"
+                        Text="desc"
+                        Command="{Binding SortByAbbrDescCommand}"
+                        TextColor="Black" />
+            </Grid>
+        </StackLayout>
+
     </Grid>
 </views:ContentPageBase>
