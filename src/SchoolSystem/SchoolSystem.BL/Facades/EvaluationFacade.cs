@@ -45,6 +45,37 @@ public class EvaluationFacade(
             : ModelMapper.MapToDetailModel(evalEntity);
     }
     
+    // Returns a new detail model with information from student and activity 
+    public virtual async Task<EvaluationDetailModel?> GetEmptyModel(Guid activityId, Guid studentId)
+    {
+        await using IUnitOfWork UnitOfWork = UnitOfWorkFactory.Create();
+
+        EvaluationEntity evalEntity = new()
+        {
+            Id = Guid.Empty,
+            Activity = null!,
+            ActivityId = activityId,
+            Student = null!,
+            StudentId = studentId
+        };
+        
+        // Including student and activity
+        IQueryable<StudentEntity> studQuery = UnitOfWork.GetRepository<StudentEntity, StudentEntityMapper>().Get();
+        StudentEntity? studentEntity = await studQuery.SingleOrDefaultAsync(e => e.Id == evalEntity.StudentId).ConfigureAwait(false);
+    
+        IQueryable<ActivityEntity> activityQuery = UnitOfWork.GetRepository<ActivityEntity, ActivityEntityMapper>().Get();
+        ActivityEntity? activityEntity = await activityQuery.SingleOrDefaultAsync(e => e.Id == evalEntity.ActivityId).ConfigureAwait(false);
+        
+        if (studentEntity is not null && activityEntity is not null)
+        {
+            evalEntity.Student = studentEntity;
+            evalEntity.Activity = activityEntity;
+            return ModelMapper.MapToDetailModel(evalEntity);
+        }
+
+        return EvaluationDetailModel.Empty;
+    }
+    
     public override async Task<EvaluationDetailModel> SaveAsync(EvaluationDetailModel model)
     {
         EvaluationDetailModel res;
@@ -98,7 +129,6 @@ public class EvaluationFacade(
                 studentEntity.Evaluations.Add(entity);
             
             // activity
-            // student
             foreach (var evaluation in activityEntity.Evaluations)
             {
                 if(evaluation.Id == entity.Id)

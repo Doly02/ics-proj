@@ -8,7 +8,7 @@ public static class ActivitySeeds
 {
     public static readonly ActivityEntity Project = new()
     {
-        Id = Guid.NewGuid(),
+        Id = Guid.Parse(input: "8e615f4a-7a3b-4f86-b199-d7d48c4652e8"),
         Description = "",
         Start = new DateTime(2024, 2, 1, 1, 1, 1),
         End = new DateTime(2024, 6, 1, 1, 1, 1),
