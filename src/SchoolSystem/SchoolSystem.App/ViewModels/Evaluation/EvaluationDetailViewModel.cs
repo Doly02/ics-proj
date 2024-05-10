@@ -4,6 +4,7 @@ using SchoolSystem.BL.Facades;
 using SchoolSystem.BL.Models;
 using SchoolSystem.App.Messages;
 using SchoolSystem.App.Services;
+using SchoolSystem.DAL.UnitOfWork;
 
 
 namespace SchoolSystem.App.ViewModels;
@@ -17,7 +18,9 @@ public partial class EvaluationDetailViewModel(
     IAlertService alertService)
     : ViewModelBase(messengerService), IRecipient<EvaluationEditMessage>
 {
-    public Guid Id = Guid.Parse("c0a5c2d1-8a95-4e09-bba2-67c3d133e20e");
+    public Guid Id = Guid.Empty; //Guid.Parse("c0a5c2d1-8a95-4e09-bba2-67c3d133e20e");
+    public Guid studentId = Guid.Parse(input: "0d4fa150-ad80-4d46-a511-4c666166ec5e");// { get; set; }
+    public Guid activityId = Guid.Parse(input: "8e615f4a-7a3b-4f86-b199-d7d48c4652e8");// { get; set; }
     public EvaluationDetailModel? EvaluationDetail { get; private set; }
     
     public async void Receive(EvaluationEditMessage message)
@@ -33,6 +36,11 @@ public partial class EvaluationDetailViewModel(
         await base.LoadDataAsync();
 
         EvaluationDetail = await evaluationFacade.GetAsync(Id);
+        if (EvaluationDetail is null)
+        {
+            EvaluationDetail = await evaluationFacade.GetEmptyModel(activityId, studentId);
+        }
+            
     }
 
     [RelayCommand]
