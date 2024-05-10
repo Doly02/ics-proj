@@ -22,10 +22,17 @@ public class ActivityFacade(
         ActivityEntity entity = mapper.MapToEntity(model, subjectId);
 
         await using IUnitOfWork uow = UnitOfWorkFactory.Create();
-        IRepository<ActivityEntity> repository =
-            uow.GetRepository<ActivityEntity, ActivityEntityMapper>();
+        IRepository<ActivityEntity> repository = uow.GetRepository<ActivityEntity, ActivityEntityMapper>();
 
-        repository.InsertEntityAsync(entity);
+        if (await repository.ExistsEntityAsync(entity))
+        {
+            await repository.UpdateEntityAsync(entity);
+        }
+        else
+        {
+            repository.InsertEntityAsync(entity);
+        }
+
         await uow.CommitAsync();
     }
 

@@ -44,10 +44,7 @@ public partial class ActivityEditViewModel(
         if (Activity != null)
         {
             await activityFacade.SaveAsync(Activity, SubjectId);
-            MessengerService.Send(new ActivityEditMessage
-            {
-                ActivityId = Activity.Id 
-            });
+            MessengerService.Send(new ActivityEditMessage { ActivityId = Activity.Id });
         }
 
         navigationService.SendBackButtonPressed();
