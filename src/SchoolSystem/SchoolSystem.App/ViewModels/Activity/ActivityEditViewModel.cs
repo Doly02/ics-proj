@@ -5,6 +5,7 @@ using SchoolSystem.App.Messages;
 using SchoolSystem.App.Services;
 using SchoolSystem.BL.Facades;
 using SchoolSystem.BL.Models;
+using SchoolSystem.DAL.Enums;
 
 namespace SchoolSystem.App.ViewModels;
 
@@ -14,12 +15,19 @@ namespace SchoolSystem.App.ViewModels;
 public partial class ActivityEditViewModel(
     IActivityFacade activityFacade,
     INavigationService navigationService,
-    IMessengerService messengerService)
+    IMessengerService messengerService,
+    IAlertService alertService)
     : ViewModelBase(messengerService)
 {
     public ActivityDetailModel? Activity { get; private set; }
     public Guid SubjectId { get; set; }
     public Guid Id { get; set; }
+
+    public DateTime StartDate { get; set; } = DateTime.Today;
+    public TimeSpan StartTime { get; set; } = TimeSpan.Zero;
+    
+    public DateTime EndDate { get; set; } = DateTime.Today;
+    public TimeSpan EndTime { get; set; } = TimeSpan.Zero;
     
     protected override async Task LoadDataAsync()
     {
@@ -29,11 +37,23 @@ public partial class ActivityEditViewModel(
         {
             // Load the existing activity if ID is provided
             Activity = await activityFacade.GetAsync(Id);
+            if (Activity != null)
+            {
+                StartDate = Activity.Start.Date;
+                StartTime = Activity.Start.TimeOfDay;
+                EndDate = Activity.End.Date;
+                EndTime = Activity.End.TimeOfDay;
+            }
         }
         else
         {
             // Create a new activity if ID is not provided
-            Activity = ActivityDetailModel.Empty;
+            Activity = new ActivityDetailModel
+            {
+                Start = StartDate + StartTime,
+                End = EndDate + EndTime,
+                ActivityType = ActivityType.Other
+            };
         }
     }
     
@@ -43,14 +63,28 @@ public partial class ActivityEditViewModel(
     {
         if (Activity != null)
         {
-            await activityFacade.SaveAsync(Activity, SubjectId);
-            MessengerService.Send(new ActivityEditMessage { ActivityId = Activity.Id });
+            DateTime StartDateTime = StartDate.Date + StartTime;
+            DateTime EndDateTime = EndDate.Date + EndTime;
+            
+            if (StartDateTime <= EndDateTime)
+            {
+                // Update the Activity.Start and Activity.End with the selected Date and Time
+                Activity.Start = StartDateTime;
+                Activity.End = EndDateTime;
+            
+                await activityFacade.SaveAsync(Activity, SubjectId);
+                MessengerService.Send(new ActivityEditMessage { ActivityId = Activity.Id });
+            }
+            else
+            {
+                await alertService.DisplayAsync("Operation Failed",
+                    "Start date must be before End date.");
+            }
         }
 
         navigationService.SendBackButtonPressed();
     }
 
-    
     [RelayCommand]
     private async Task BackAsync()
     {

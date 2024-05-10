@@ -18,7 +18,7 @@
         <!-- Activity List -->
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Spacing="25" Padding="30">
-                <Button Text="back" Command="{Binding BackCommand}" />
+                <Button Text="Back" Command="{Binding BackCommand}" />
                 <ListView ItemsSource="{Binding Activities}">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="m:ActivityListModel">

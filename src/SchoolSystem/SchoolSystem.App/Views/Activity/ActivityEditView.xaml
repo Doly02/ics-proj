@@ -10,20 +10,29 @@
                        Style="{StaticResource ContentPageStyle}">
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30">
-            <Button Text="back" Command="{Binding BackCommand}" />
+            <Button Text="Back" Command="{Binding BackCommand}" />
             <!-- Activity name -->
             <Entry Placeholder="Name" Text="{Binding Activity.Name, Mode=TwoWay}" />
-
+            
             <!-- Activity start -->
-            <Entry Placeholder="Start" Text="{Binding Activity.Start, Mode=TwoWay}" />
-
+            <Label Text="Start date:" />
+            <HorizontalStackLayout>
+                <DatePicker Date="{Binding StartDate, Mode=TwoWay}" />
+                <TimePicker Time="{Binding StartTime, Mode=TwoWay}" />
+            </HorizontalStackLayout>
+            
             <!-- Activity end -->
-            <Entry Placeholder="End" Text="{Binding Activity.End, Mode=TwoWay}" />
+            <Label Text="End date:" />
+            <HorizontalStackLayout>
+                <DatePicker Date="{Binding EndDate, Mode=TwoWay}" />
+                <TimePicker Time="{Binding EndTime, Mode=TwoWay}" />
+            </HorizontalStackLayout>
             
             <!-- Activity place -->
             <Entry Placeholder="Place" Text="{Binding Activity.Place, Mode=TwoWay}" />
             
             <!-- Activity type -->
+            <Label Text="Type:" />
             <Entry Placeholder="Type" Text="{Binding Activity.ActivityType, Mode=TwoWay}" />
             
             <!-- Activity description -->
