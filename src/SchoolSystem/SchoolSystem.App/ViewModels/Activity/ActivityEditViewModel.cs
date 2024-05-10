@@ -29,6 +29,10 @@ public partial class ActivityEditViewModel(
     public DateTime EndDate { get; set; } = DateTime.Today;
     public TimeSpan EndTime { get; set; } = TimeSpan.Zero;
     
+    public ActivityType SelectedActivityType { get; set; }
+    public List<ActivityType> ActivityTypes { get; } = Enum.GetValues(typeof(ActivityType)).Cast<ActivityType>().ToList();
+
+    
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
@@ -43,6 +47,7 @@ public partial class ActivityEditViewModel(
                 StartTime = Activity.Start.TimeOfDay;
                 EndDate = Activity.End.Date;
                 EndTime = Activity.End.TimeOfDay;
+                SelectedActivityType = Activity.ActivityType;
             }
         }
         else
@@ -54,6 +59,7 @@ public partial class ActivityEditViewModel(
                 End = EndDate + EndTime,
                 ActivityType = ActivityType.Other
             };
+            SelectedActivityType = ActivityType.Other;
         }
     }
     
@@ -68,12 +74,13 @@ public partial class ActivityEditViewModel(
             
             if (StartDateTime <= EndDateTime)
             {
-                // Update the Activity.Start and Activity.End with the selected Date and Time
                 Activity.Start = StartDateTime;
                 Activity.End = EndDateTime;
+                Activity.ActivityType = SelectedActivityType;
             
                 await activityFacade.SaveAsync(Activity, SubjectId);
                 MessengerService.Send(new ActivityEditMessage { ActivityId = Activity.Id });
+                navigationService.SendBackButtonPressed();
             }
             else
             {
@@ -81,8 +88,6 @@ public partial class ActivityEditViewModel(
                     "Start date must be before End date.");
             }
         }
-
-        navigationService.SendBackButtonPressed();
     }
 
     [RelayCommand]

@@ -32,8 +32,9 @@
             <Entry Placeholder="Place" Text="{Binding Activity.Place, Mode=TwoWay}" />
             
             <!-- Activity type -->
-            <Label Text="Type:" />
-            <Entry Placeholder="Type" Text="{Binding Activity.ActivityType, Mode=TwoWay}" />
+            <Picker Title="Type:"
+                    ItemsSource="{Binding ActivityTypes}"
+                    SelectedItem="{Binding SelectedActivityType}" />
             
             <!-- Activity description -->
             <Entry Placeholder="Description" Text="{Binding Activity.Description, Mode=TwoWay}" />
