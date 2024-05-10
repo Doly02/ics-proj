@@ -3,11 +3,10 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using SchoolSystem.App.Messages;
 using SchoolSystem.App.Services;
-using SchoolSystem.App.ViewModels.Activity;
 using SchoolSystem.BL.Facades;
 using SchoolSystem.BL.Models;
 
-namespace SchoolSystem.App.ViewModels.EnrolledActivity;
+namespace SchoolSystem.App.ViewModels;
 
 public partial class EnrolledActivityListViewModel (
 

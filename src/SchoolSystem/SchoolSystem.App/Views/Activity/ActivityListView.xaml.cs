@@ -1,4 +1,4 @@
-﻿using SchoolSystem.App.ViewModels.Activity;
+﻿using SchoolSystem.App.ViewModels;
 
 namespace SchoolSystem.App.Views.Activity;
 

@@ -81,8 +81,8 @@ public partial class EnrolledListViewModel(
     private async Task GoToDetailAsync(Guid Id)
     {
 
-        await navigationService.GoToAsync<Activity.ActivityDetailViewModel>(
-           new Dictionary<string, object?> { [nameof(Activity.ActivityDetailViewModel.Id)] = Id });
+        await navigationService.GoToAsync<ActivityDetailViewModel>(
+           new Dictionary<string, object?> { [nameof(ActivityDetailViewModel.Id)] = Id });
     }
 
 

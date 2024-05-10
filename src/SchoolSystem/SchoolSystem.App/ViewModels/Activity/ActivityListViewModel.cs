@@ -7,7 +7,7 @@ using SchoolSystem.App.Services;
 using SchoolSystem.BL.Facades;
 using SchoolSystem.BL.Models;
 
-namespace SchoolSystem.App.ViewModels.Activity;
+namespace SchoolSystem.App.ViewModels;
 
 [QueryProperty(nameof(SubjectId), nameof(SubjectId))]
 public partial class ActivityListViewModel(

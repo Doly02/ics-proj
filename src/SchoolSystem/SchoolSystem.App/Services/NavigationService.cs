@@ -1,6 +1,5 @@
 using SchoolSystem.App.Models;
 using SchoolSystem.App.ViewModels;
-using SchoolSystem.App.ViewModels.Activity;
 using SchoolSystem.App.Views.Activity;
 using SchoolSystem.App.Views.Enrolled;
 using SchoolSystem.App.Views.Student;

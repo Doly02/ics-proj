@@ -3,10 +3,10 @@
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                        xmlns:views="clr-namespace:SchoolSystem.App.Views"
                        xmlns:models="clr-namespace:SchoolSystem.BL.Models;assembly=SchoolSystem.BL"
-                       xmlns:activity="clr-namespace:SchoolSystem.App.ViewModels.Activity"
-                       
+                       xmlns:viewModels="clr-namespace:SchoolSystem.App.ViewModels"
+
                        x:Class="SchoolSystem.App.Views.Activity.ActivityDetailView"
-                       x:DataType="activity:ActivityDetailViewModel"
+                       x:DataType="viewModels:ActivityDetailViewModel"
                        Style="{StaticResource ContentPageStyle}">
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30">

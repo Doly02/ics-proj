@@ -4,12 +4,11 @@
                        xmlns:views="clr-namespace:SchoolSystem.App.Views"
                        xmlns:m="clr-namespace:SchoolSystem.BL.Models;assembly=SchoolSystem.BL"
                        xmlns:vm="clr-namespace:SchoolSystem.App.ViewModels"
-                       xmlns:activity="clr-namespace:SchoolSystem.App.ViewModels.Activity"
                        
                        x:Class="SchoolSystem.App.Views.Activity.ActivityListView"
                        Style="{StaticResource ContentPageStyle}"
                        x:Name="ActivityListViewRoot"
-                       x:DataType="activity:ActivityListViewModel">
+                       x:DataType="vm:ActivityListViewModel">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
