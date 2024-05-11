@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using SchoolSystem.App.Messages;
@@ -31,7 +31,7 @@ public partial class EnrolledActivityListViewModel (
     ///////////////////// Navigates to the ActivityDetailViewModel /////////////////////////////////
     [RelayCommand]
     private async Task GoToDetailAsync(Guid id)
-        => await navigationService.GoToAsync( "/detail",
+        => await navigationService.GoToAsync( "/detailActivity",
             new Dictionary<string, object?>
             {
                 [nameof(ActivityDetailViewModel.Id)] = id,
