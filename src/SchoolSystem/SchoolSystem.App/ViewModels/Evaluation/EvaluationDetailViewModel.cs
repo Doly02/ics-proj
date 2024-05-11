@@ -10,7 +10,8 @@ using SchoolSystem.DAL.UnitOfWork;
 namespace SchoolSystem.App.ViewModels;
 
 
-[QueryProperty(nameof(Id), nameof(Id))] 
+[QueryProperty(nameof(studentId), nameof(studentId))] 
+[QueryProperty(nameof(activityId), nameof(activityId))] 
 public partial class EvaluationDetailViewModel(
     IEvaluationFacade evaluationFacade,
     INavigationService navigationService,
@@ -65,9 +66,16 @@ public partial class EvaluationDetailViewModel(
     [RelayCommand]
     private async Task GoToEditAsync()
     {
-        await navigationService.GoToAsync("/edit",
+        /*await navigationService.GoToAsync("/edit",
             new Dictionary<string, object?>
-                { [nameof(EvaluationEditViewModel.EvaluationDetail)] = EvaluationDetail });
+                { [nameof(EvaluationEditViewModel.EvaluationDetail)] = EvaluationDetail });*/
+        
+        await navigationService.GoToAsync("//students/detail/enrolledSubjects/enrolledActivities/evaluation/edit",
+            new Dictionary<string, object?>
+            {
+                [nameof(studentId)] = studentId,
+                [nameof(activityId)] = activityId
+            });
     }
     
 }
