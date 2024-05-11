@@ -32,7 +32,7 @@ public class NavigationService : INavigationService
         
         // Evaluation
         new("//students/detail/enrolledSubjects/enrolledActivities/evaluation", typeof(EvaluationDetailView), typeof(EvaluationDetailViewModel)),
-        new("//students/detail/enrolledSubjects/enrolledActivities/evaluation/edit", typeof(EvaluationEditView), typeof(EvaluationEditViewModel)),
+        new("//students/detail/enrolledSubjects/enrolledActivities/evaluation/evaluationEdit", typeof(EvaluationEditView), typeof(EvaluationEditViewModel)),
 
         // Subjects
         new("//subjects", typeof(SubjectListView), typeof(SubjectListViewModel)),

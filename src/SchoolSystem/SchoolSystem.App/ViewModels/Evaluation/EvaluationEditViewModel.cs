@@ -16,11 +16,7 @@ public partial class EvaluationEditViewModel(
 {
     private static Guid studentId { get; set; }
     private static Guid activityId { get; set; }
-    public EvaluationDetailModel EvaluationDetail { get; init; } = EvaluationDetailModel.Empty with
-    {
-        StudentId = studentId,
-        ActivityId = activityId
-    };
+    public EvaluationDetailModel? EvaluationDetail { get; private set; }
 
     [RelayCommand]
     private async Task SaveAsync()
@@ -29,6 +25,17 @@ public partial class EvaluationEditViewModel(
         MessengerService.Send(new EvaluationEditMessage { EvaluationId = EvaluationDetail.Id });
 
         navigationService.SendBackButtonPressed();
+    }
+    
+    protected override async Task LoadDataAsync()
+    {
+        await base.LoadDataAsync();
+
+        //EvaluationDetail = await evaluationFacade.GetAsync(Id);
+        
+        EvaluationDetail = await evaluationFacade.GetEmptyModel(activityId, studentId);
+        
+            
     }
     
     [RelayCommand]

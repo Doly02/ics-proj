@@ -13,7 +13,7 @@
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30">
             <!-- Back -->
-            <Button Text="Back"  />
+            <Button Text="Back" Command="{Binding BackCommand}" />
             <!-- Header -->
             <Label Text="Evaluation" FontSize="Large" />
 

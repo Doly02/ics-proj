@@ -20,8 +20,8 @@ public partial class EvaluationDetailViewModel(
     : ViewModelBase(messengerService), IRecipient<EvaluationEditMessage>
 {
     public Guid Id = Guid.Empty; //Guid.Parse("c0a5c2d1-8a95-4e09-bba2-67c3d133e20e");
-    public Guid studentId = Guid.Parse(input: "0d4fa150-ad80-4d46-a511-4c666166ec5e");// { get; set; }
-    public Guid activityId = Guid.Parse(input: "8e615f4a-7a3b-4f86-b199-d7d48c4652e8");// { get; set; }
+    public Guid studentId { get; set; } /*Guid.Parse(input: "0d4fa150-ad80-4d46-a511-4c666166ec5e");*/
+    public Guid activityId { get; set; } /*Guid.Parse(input: "8e615f4a-7a3b-4f86-b199-d7d48c4652e8");*/
     public EvaluationDetailModel? EvaluationDetail { get; private set; }
     
     public async void Receive(EvaluationEditMessage message)
@@ -62,19 +62,22 @@ public partial class EvaluationDetailViewModel(
             }
         }
     }
+    
+    [RelayCommand]
+    private async Task BackAsync()
+    {
+        await Shell.Current.GoToAsync("..");
+    }
 
     [RelayCommand]
     private async Task GoToEditAsync()
     {
-        /*await navigationService.GoToAsync("/edit",
-            new Dictionary<string, object?>
-                { [nameof(EvaluationEditViewModel.EvaluationDetail)] = EvaluationDetail });*/
-        
-        await navigationService.GoToAsync("//students/detail/enrolledSubjects/enrolledActivities/evaluation/edit",
+        await navigationService.GoToAsync("//students/detail/enrolledSubjects/enrolledActivities/evaluation/evaluationEdit",
             new Dictionary<string, object?>
             {
-                [nameof(studentId)] = studentId,
-                [nameof(activityId)] = activityId
+                /*[nameof(EvaluationDetailViewModel.studentId)] = studentId,
+                [nameof(EvaluationDetailViewModel.activityId)] = activityId*/
+                [nameof(EvaluationDetailViewModel)] = EvaluationDetail
             });
     }
     

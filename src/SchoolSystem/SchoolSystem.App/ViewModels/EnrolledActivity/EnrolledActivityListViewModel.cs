@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using SchoolSystem.App.Messages;
@@ -20,7 +20,7 @@ public partial class EnrolledActivityListViewModel (
 {
     public IEnumerable<ActivityListModel> EnrolledActivities { get; set; } = null!;
     public Guid SubjectId { get; set; }
-    public string? StudentId { get; set; }
+    public Guid StudentId { get; set; }
 
     protected override async Task LoadDataAsync()
     {

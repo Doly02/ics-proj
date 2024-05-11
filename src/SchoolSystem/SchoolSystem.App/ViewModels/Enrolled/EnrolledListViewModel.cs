@@ -136,7 +136,8 @@ public partial class EnrolledListViewModel(
         await navigationService.GoToAsync("/enrolledActivities",
            new Dictionary<string, object?>
            {
-               [nameof(EnrolledActivityListViewModel.SubjectId)] = Id
+               [nameof(EnrolledActivityListViewModel.SubjectId)] = Id,
+               [nameof(EnrolledActivityListViewModel.StudentId)] = StudentId
            });
 
     }
