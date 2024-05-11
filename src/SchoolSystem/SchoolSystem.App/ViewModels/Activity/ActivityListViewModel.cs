@@ -1,9 +1,10 @@
 using System.Collections.ObjectModel;
-using System.Diagnostics;
+using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using SchoolSystem.App.Messages;
 using SchoolSystem.App.Services;
+using SchoolSystem.App.Views.Activity;
 using SchoolSystem.BL.Facades;
 using SchoolSystem.BL.Models;
 
@@ -78,8 +79,22 @@ public partial class ActivityListViewModel(
         Activities = ObservableActivities;
         OnPropertyChanged(nameof(Activities));
     }
+
+    [RelayCommand]
+    private async Task ShowFilterPopup()
+    {
+        var popup = new FilterRangePopup(this);
+        if (Application.Current?.MainPage != null)
+            await Application.Current.MainPage.ShowPopupAsync(popup);
+    }
     
-    
+    [RelayCommand]
+    private async Task ResetFiltersAsync()
+    {
+        // Show all activities
+        await LoadDataAsync();
+    }
+
     ///////////////////////////////////////// SORTING ///////////////////////////////////////////////
     [RelayCommand]
     private async Task SortActivitiesAscendingAsync()
