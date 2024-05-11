@@ -23,9 +23,10 @@ public class EnrolledModelMapper
                 
             Activities = observableActivitiesListModel,
             Id = entity.Id,
-            Abbreviation = entity.Subject.Abbreviation,
-            Name = entity.Subject.Name,
-            StudentFullName = entity.Student.Name
+            Abbreviation = entity.Subject?.Abbreviation,
+            Name = entity.Subject?.Name,
+            StudentFullName = entity.Student?.Name,
+
         };
     }
 

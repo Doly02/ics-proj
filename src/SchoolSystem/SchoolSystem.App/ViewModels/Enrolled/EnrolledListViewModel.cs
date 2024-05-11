@@ -15,8 +15,9 @@ public partial class EnrolledListViewModel(
     IEnrolledFacade enrolledFacade,
     IStudentFacade studentFacade,
     INavigationService navigationService,
-    IMessengerService messengerService)
-    : ViewModelBase(messengerService), IRecipient<EnrolledEditMessage>, IRecipient<EnrolledDeleteMessage>
+    IMessengerService messengerService,
+    IAlertService alertService)
+    : ViewModelBase(messengerService), IRecipient<EnrolledEditMessage>, IRecipient<EnrolledDeleteMessage>, IRecipient<EnrolledAddMessage>
 {
 
     public IEnumerable<EnrolledSubjectsListModel> EnrolledList { get; set; } = null!;
@@ -27,6 +28,13 @@ public partial class EnrolledListViewModel(
     public StudentDetailModel? Student { get; set; }
 
     public string StudentFullName => $"{Student?.Name} {Student?.Surname}";
+
+    private string _SearchText;
+    public string SearchText
+    {
+        get => _SearchText;
+        set => SetProperty(ref _SearchText, value);
+    }
 
 
     public async void Receive(EnrolledDeleteMessage message)
@@ -39,29 +47,55 @@ public partial class EnrolledListViewModel(
         await LoadDataAsync();
     }
 
+    public async void Receive(EnrolledAddMessage message)
+    {
+        await LoadDataAsync();
+    }
+
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
 
-            // Načítání předmětů zapsaných k tomuto studentovi
-       EnrolledList = await enrolledFacade.GetEnrolledSubjectsByStudentIdAsync(Student.Id);
-        
+        // Načítání předmětů zapsaných k tomuto studentovi
+        EnrolledList = await enrolledFacade.GetEnrolledSubjectsByStudentIdAsync(Student.Id);
+
         OnPropertyChanged(nameof(EnrolledList));
 
     }
 
     [RelayCommand]
-    private async Task SortBySubjectAscAsync()
+    private async Task SortByNameAscAsync()
     {
-        EnrolledList = await enrolledFacade.SortEnrolledSubjectsAscAsync();
+        EnrolledList = await enrolledFacade.GetSortedAsync(true, true, Student.Id);
+        OnPropertyChanged(nameof(EnrolledList));
+    }
+
+    [RelayCommand]
+    private async Task SortByNameDescAsync()
+    {
+        EnrolledList = await enrolledFacade.GetSortedAsync(false, true, Student.Id);
+        OnPropertyChanged(nameof(EnrolledList));
+    }
+
+    [RelayCommand]
+    private async Task SortByAbbrAscAsync()
+    {
+        EnrolledList = await enrolledFacade.GetSortedAsync(true, false, Student.Id);
+        OnPropertyChanged(nameof(EnrolledList));
+    }
+
+    [RelayCommand]
+    private async Task SortByAbbrDescAsync()
+    {
+        EnrolledList = await enrolledFacade.GetSortedAsync(false, false, Student.Id);
         OnPropertyChanged(nameof(EnrolledList));
     }
 
 
     [RelayCommand]
-    private async Task SearchAsync(string? search = null)
+    private async Task SearchAsync()
     {
-        EnrolledList = await enrolledFacade.SearchBySubjectNameAsync(search);
+        EnrolledList = await enrolledFacade.SearchBySubjectNameAsync(Student.Id, SearchText);
         OnPropertyChanged(nameof(EnrolledList));
     }
 
@@ -74,6 +108,21 @@ public partial class EnrolledListViewModel(
         await navigationService.GoToAsync("//student/detail/enrolled/edit",
         new Dictionary<string, object?>
         { [nameof(EnrolledEditViewModel.Student)] = Student });
+    }
+
+
+    [RelayCommand]
+    private async Task RemoveEnrolledSubject(Guid id)
+    {
+        try
+        {
+            await enrolledFacade.DeleteAsync(id);
+            MessengerService.Send(new EnrolledDeleteMessage());
+        }
+        catch (InvalidOperationException)
+        {
+            await alertService.DisplayAsync("Operation Failed", "Removal of the Subject Failed.");
+        }
     }
 
 
@@ -97,3 +146,4 @@ public partial class EnrolledListViewModel(
     }
 
 }
+

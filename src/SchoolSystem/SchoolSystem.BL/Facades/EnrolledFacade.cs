@@ -74,14 +74,17 @@ public class EnrolledFacade(
     }
 
 
-    public async Task<IEnumerable<EnrolledSubjectsListModel>> SearchBySubjectNameAsync(string? subjectName = null)
+    public async Task<IEnumerable<EnrolledSubjectsListModel>> SearchBySubjectNameAsync(Guid studentId, string? subjectName = null)
     {
         await using var unitOfWork = UnitOfWorkFactory.Create();
-        IQueryable<EnrolledEntity> query = unitOfWork.GetRepository<EnrolledEntity, EnrolledEntityMapper>().Get();
+        IQueryable<EnrolledEntity> query = unitOfWork.GetRepository<EnrolledEntity, EnrolledEntityMapper>().Get()
+                                                      .Include(e => e.Subject) 
+                                                      .Where(e => e.StudentId == studentId);
 
         if (!string.IsNullOrEmpty(subjectName))
         {
-            query = query.Where(e => EF.Functions.Like(e.Subject.Name, $"%{subjectName}%"));
+            query = query.Where(e => EF.Functions.Like(e.Subject.Name, $"%{subjectName}%") ||
+                                EF.Functions.Like(e.Subject.Abbreviation, $"%{subjectName}%"));
         }
 
         List<EnrolledEntity> entities = await query.ToListAsync();
@@ -89,16 +92,40 @@ public class EnrolledFacade(
         return entities.Select(entity => enrolledModelMapper.MapToListModel(entity)).ToList();
     }
 
-    public async Task<IEnumerable<EnrolledSubjectsListModel>> SortEnrolledSubjectsAscAsync()
+    public async Task<IEnumerable<EnrolledSubjectsListModel>> GetSortedAsync(bool ascending, bool byName, Guid studentId)
     {
-        await using var unitOfWork = UnitOfWorkFactory.Create();
-        IQueryable<EnrolledEntity> query = unitOfWork.GetRepository<EnrolledEntity, EnrolledEntityMapper>().Get();
+        await using var uow = UnitOfWorkFactory.Create();
 
-        query = query.OrderBy(e => e.Subject);
+        IQueryable<EnrolledEntity> query = uow.GetRepository<EnrolledEntity, EnrolledEntityMapper>().Get()
+                                                .Include(e => e.Subject)
+                                                  .Where(e => e.StudentId == studentId);
+
+        if (byName) // Sort by name
+        {
+            if (ascending)
+            {
+                query = query.OrderBy(e => e.Subject.Name);
+            }
+            else
+            {
+                query = query.OrderByDescending(e => e.Subject.Name);
+            }
+        }
+        else // Sort by abbreviation
+        {
+            if (ascending)
+            {
+                query = query.OrderBy(e => e.Subject.Abbreviation);
+            }
+            else
+            {
+                query = query.OrderByDescending(e => e.Subject.Abbreviation);
+            }
+        }
 
         List<EnrolledEntity> entities = await query.ToListAsync();
 
-        return entities.Select(entity => ModelMapper.MapToListModel(entity)).ToList();
+        return entities.Select(entity => enrolledModelMapper.MapToListModel(entity)).ToList();
     }
 
 

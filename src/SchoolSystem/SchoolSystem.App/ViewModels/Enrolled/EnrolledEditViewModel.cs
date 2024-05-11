@@ -1,4 +1,5 @@
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using SchoolSystem.App.Messages;
 using SchoolSystem.App.Services;
 using SchoolSystem.BL.Facades;
@@ -16,7 +17,7 @@ public partial class EnrolledEditViewModel(
     EnrolledModelMapper enrolledModelMapper,
     INavigationService navigationService,
     IMessengerService messengerService)
-    : ViewModelBase(messengerService)
+    : ViewModelBase(messengerService), IRecipient<EnrolledEditMessage>, IRecipient<EnrolledDeleteMessage>, IRecipient<EnrolledAddMessage>
 {
     public StudentDetailModel? Student { get; set; }
 
@@ -84,6 +85,21 @@ public partial class EnrolledEditViewModel(
             Abbreviation = subjectFirst.Abbreviation,
             Activities = subjectFirst.Activities
         };
+    }
+
+    public async void Receive(EnrolledDeleteMessage message)
+    {
+        await LoadDataAsync();
+    }
+
+    public async void Receive(EnrolledEditMessage message)
+    {
+        await LoadDataAsync();
+    }
+
+    public async void Receive(EnrolledAddMessage message)
+    {
+        await LoadDataAsync();
     }
 
 }
