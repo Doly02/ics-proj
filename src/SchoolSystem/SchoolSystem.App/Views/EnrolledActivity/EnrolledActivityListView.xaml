@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:SchoolSystem.App.Views"
+                       xmlns:m="clr-namespace:SchoolSystem.BL.Models;assembly=SchoolSystem.BL"
+                       xmlns:vm="clr-namespace:SchoolSystem.App.ViewModels"
+                       
+                       x:Class="SchoolSystem.App.Views.EnrolledActivity.EnrolledActivityListView"
+                       Style="{StaticResource ContentPageStyle}"
+                       x:Name="EnrolledActivityListViewRoot"
+                       x:DataType="vm:EnrolledActivityListViewModel">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Activity List -->
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Spacing="25" Padding="30">
+                <Button Text="Back" Command="{Binding BackCommand}" />
+                <CollectionView ItemsSource="{Binding Activities}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="m:StudentActivityListModel">
+                            <Frame Margin="10" Padding="5" CornerRadius="10" BorderColor="#CCCCCC">
+                                <StackLayout Orientation="Vertical" Margin="10">
+                                    <Label Text="{Binding ActivityName}" FontSize="16" FontAttributes="Bold"/>
+                                </StackLayout>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference EnrolledActivityListViewRoot}, Path=BindingContext.GoToDetailCommand}" CommandParameter="{Binding Id}" />
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Bottom Bar With Buttons -->
+        <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Padding="10">
+            <Button Text="Sort Ascending" Command="{Binding SortActivitiesAscendingCommand}" />
+            <Button Text="Sort Descending" Command="{Binding SortActivitiesDescendingCommand}" />
+        </StackLayout>
+    </Grid>
+</views:ContentPageBase>

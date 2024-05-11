@@ -8,6 +8,7 @@
     xmlns:en="clr-namespace:SchoolSystem.App.Views.Enrolled"
     xmlns:local="clr-namespace:SchoolSystem.App"
     xmlns:a="clr-namespace:SchoolSystem.App.Views.Activity"
+    xmlns:enrolledActivity="using:SchoolSystem.App.Views.EnrolledActivity"
     x:Class="SchoolSystem.App.Shells.AppShell"
     x:Name="AppShellRoot"
     Shell.FlyoutBehavior="Disabled"
@@ -18,6 +19,7 @@
         <ShellContent Title="Home2" ContentTemplate="{DataTemplate local:MainPage}" Route="home2" />
         <ShellContent Title="Student List" ContentTemplate="{DataTemplate r:StudentListView}" Route="students" />
         <ShellContent Title="Edit Student" ContentTemplate="{DataTemplate r:StudentEditView}" Route="student/edit" />
+        <ShellContent Title="EnrolledActivities" ContentTemplate="{DataTemplate enrolledActivity:EnrolledActivityListView}" Route="activities" />
         <ShellContent Title="Subject List" ContentTemplate="{DataTemplate s:SubjectListView}" Route="subjects" />
         <ShellContent Title="Enrolled List" ContentTemplate="{DataTemplate en:EnrolledListView}" Route="enrolled" />
         <ShellContent Title="Enrolled List" ContentTemplate="{DataTemplate en:EnrolledEditView}" Route="enrolled/edit" />

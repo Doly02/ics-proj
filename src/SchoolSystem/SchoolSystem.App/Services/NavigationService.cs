@@ -2,6 +2,7 @@ using SchoolSystem.App.Models;
 using SchoolSystem.App.ViewModels;
 using SchoolSystem.App.Views.Activity;
 using SchoolSystem.App.Views.Enrolled;
+using SchoolSystem.App.Views.EnrolledActivity;
 using SchoolSystem.App.Views.Student;
 using SchoolSystem.App.Views.Subject;
 using SchoolSystem.App.Views.Evaluation;
@@ -45,15 +46,12 @@ public class NavigationService : INavigationService
         new("//subjects/activities/detail", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
         new("//subjects/activities/detail/editActivity", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
         
-        // new("//students/detail/enrolledSubjects/activities", typeof(ActivityListView), typeof(ActivityListViewModel)),
-        // new("//students/detail/enrolledSubjects/activities/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
-        
-        // new("//students/detail/enrolledSubjects/activities/detail", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
-        // new("//students/detail/enrolledSubjects/activities/detail/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
+        new("//students/detail/enrolledSubjects/enrolledActivities", typeof(EnrolledActivityListView), typeof(EnrolledActivityListViewModel)),
+        new("//students/detail/enrolledSubjects/enrolledActivities/detail", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
         
         // Evaluation
-        new("//students/detail/enrolledSubjects/activities/detail/evaluation", typeof(EvaluationDetailView), typeof(EvaluationDetailViewModel)),
-        new("//students/detail/enrolledSubjects/activities/detail/evaluation/edit", typeof(EvaluationEditView), typeof(EvaluationEditViewModel)),
+        new("//students/detail/enrolledSubjects/enrolledActivities/evaluation", typeof(EvaluationDetailView), typeof(EvaluationDetailViewModel)),
+        new("//students/detail/enrolledSubjects/enrolledActivities/evaluation/edit", typeof(EvaluationEditView), typeof(EvaluationEditViewModel)),
     };
 
     public async Task GoToAsync<TViewModel>()
