@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using SchoolSystem.App.Messages;
@@ -47,14 +47,14 @@ public partial class StudentListViewModel(
     [RelayCommand]
     private async Task GoToCreateAsync()
     {
-        await navigationService.GoToAsync("//student/add");
+        await navigationService.GoToAsync("//students/add");
     }
 
     
     [RelayCommand]
     private async Task GoToDetailAsync(Guid id)
     {
-        await navigationService.GoToAsync<StudentDetailViewModel>(new Dictionary<string, object?>
+        await navigationService.GoToAsync("/detail", new Dictionary<string, object?>
             { [nameof(StudentDetailViewModel.Id)] = id });
     }
     

@@ -59,7 +59,7 @@ public partial class EnrolledEditViewModel(
 
             MessengerService.Send(new EnrolledAddMessage());
 
-            await navigationService.GoToAsync("//student/detail/enrolled",
+            await navigationService.GoToAsync("//students/detail/enrolledSubjects",
                 new Dictionary<string, object?>
                  { [nameof(EnrolledListViewModel.StudentId)] = Student.Id });
         }
@@ -68,7 +68,7 @@ public partial class EnrolledEditViewModel(
     [RelayCommand]
     public async Task GoBackToListAsync()
     {
-        await navigationService.GoToAsync("//student/detail/enrolled",
+        await navigationService.GoToAsync("//students/detail/enrolledSubjects",
         new Dictionary<string, object?>
         { [nameof(EnrolledListViewModel.StudentId)] = Student.Id });
     }

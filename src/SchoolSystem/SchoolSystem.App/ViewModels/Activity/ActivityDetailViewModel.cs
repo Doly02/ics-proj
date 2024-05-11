@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using SchoolSystem.App.Messages;
 using SchoolSystem.App.Services;
@@ -51,7 +51,7 @@ public partial class ActivityDetailViewModel(
     [RelayCommand]
     private async Task GoToEditAsync()
     {
-        await Shell.Current.GoToAsync("/editActivity",
+        await Shell.Current.GoToAsync("/edit",
             new Dictionary<string, object?>
             {
                 [nameof(ActivityEditViewModel.Id)] = Id,

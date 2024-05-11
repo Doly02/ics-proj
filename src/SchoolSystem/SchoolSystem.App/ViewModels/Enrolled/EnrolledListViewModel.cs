@@ -109,7 +109,7 @@ public partial class EnrolledListViewModel(
     public async Task GoToEditAsync()
     {
         // Navigate to the edit view with the constructed URI
-        await navigationService.GoToAsync("//student/detail/enrolled/edit",
+        await navigationService.GoToAsync("//students/detail/enrolledSubjects/edit",
         new Dictionary<string, object?>
         { [nameof(EnrolledEditViewModel.Student)] = Student });
     }
@@ -133,11 +133,12 @@ public partial class EnrolledListViewModel(
     [RelayCommand]
     private async Task GoToDetailAsync(Guid Id)
     {
-        await navigationService.GoToAsync<EnrolledActivityListViewModel>(
+        await navigationService.GoToAsync("/enrolledActivities",
            new Dictionary<string, object?>
            {
                [nameof(EnrolledActivityListViewModel.SubjectId)] = Id
            });
+
     }
 
 

@@ -90,7 +90,7 @@ public partial class StudentDetailViewModel(
     [RelayCommand]
     private async Task GoToEditAsync()
     {
-        await navigationService.GoToAsync("student/edit",
+        await navigationService.GoToAsync("/edit",
             new Dictionary<string, object?>
                 { [nameof(StudentEditViewModel.StudDetail)] = StudDetail });
     }
@@ -98,7 +98,7 @@ public partial class StudentDetailViewModel(
     [RelayCommand]
     private async Task GoToEnrolledAsync(Guid id)
     {
-        await navigationService.GoToAsync<EnrolledListViewModel>(new Dictionary<string, object?>
+        await navigationService.GoToAsync("/enrolledSubjects", new Dictionary<string, object?>
         { [nameof(EnrolledListViewModel.StudentId)] = id });
     }
 
