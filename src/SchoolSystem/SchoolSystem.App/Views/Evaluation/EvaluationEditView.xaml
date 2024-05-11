@@ -12,7 +12,7 @@
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30">
             <!-- Back -->
-            <Button Text="Back"  />
+            <Button Text="Back" Command="{Binding GoToDetailCommand}" />
 
             <!-- Activity name -->
             <Entry Placeholder="Activity" Text="{Binding EvaluationDetail.ActivityName, Mode=TwoWay}" />

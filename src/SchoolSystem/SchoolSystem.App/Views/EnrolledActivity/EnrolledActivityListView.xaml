@@ -19,9 +19,9 @@
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Spacing="25" Padding="30">
                 <Button Text="Back" Command="{Binding BackCommand}" />
-                <CollectionView ItemsSource="{Binding Activities}">
+                <CollectionView ItemsSource="{Binding EnrolledActivities}">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="m:StudentActivityListModel">
+                        <DataTemplate x:DataType="m:ActivityListModel">
                             <Frame Margin="10" Padding="5" CornerRadius="10" BorderColor="#CCCCCC">
                                 <StackLayout Orientation="Vertical" Margin="10">
                                     <Label Text="{Binding ActivityName}" FontSize="16" FontAttributes="Bold"/>
