@@ -129,9 +129,11 @@ public partial class EnrolledListViewModel(
     [RelayCommand]
     private async Task GoToDetailAsync(Guid Id)
     {
-
-        await navigationService.GoToAsync<ActivityDetailViewModel>(
-           new Dictionary<string, object?> { [nameof(ActivityDetailViewModel.Id)] = Id });
+        await navigationService.GoToAsync<EnrolledActivityListViewModel>(
+           new Dictionary<string, object?>
+           {
+               [nameof(EnrolledActivityListViewModel.SubjectId)] = Id
+           });
     }
 
 

@@ -18,15 +18,14 @@ public partial class EnrolledActivityListViewModel (
     : ViewModelBase(messengerService),
         IRecipient<ActivityEditMessage>
 {
-    public IEnumerable<ActivityListModel> Activities { get; set; } = null!;
-    public ObservableCollection<ActivityListModel> ObservableActivities { get; set; } = new ObservableCollection<ActivityListModel>();
+    public IEnumerable<ActivityListModel> EnrolledActivities { get; set; } = null!;    // asi treba zmenit na StudentActivityListModel
     public Guid SubjectId { get; set; }
     public string? StudentName { get; set; }
 
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
-        Activities = await activityFacade.GetActivitiesAsync(SubjectId);
+        EnrolledActivities = await activityFacade.GetActivitiesAsync(SubjectId);   // tu nebude fungovat GetActivitiesAsync ... treba asi vytvorit novu fasadu
     }
     
     ///////////////////// Navigates to the ActivityDetailViewModel /////////////////////////////////
@@ -55,15 +54,15 @@ public partial class EnrolledActivityListViewModel (
     [RelayCommand]
     private async Task SortActivitiesAscendingAsync()
     {
-        Activities = await activityFacade.SortActivitiesAscendingAsync(SubjectId);
-        OnPropertyChanged(nameof(Activities));
+        EnrolledActivities = await activityFacade.SortActivitiesAscendingAsync(SubjectId);
+        OnPropertyChanged(nameof(EnrolledActivities));
     }
 
     [RelayCommand]
     private async Task SortActivitiesDescendingAsync()
     {
-        Activities = await activityFacade.SortActivitiesDescendingAsync(SubjectId);
-        OnPropertyChanged(nameof(Activities));
+        EnrolledActivities = await activityFacade.SortActivitiesDescendingAsync(SubjectId);
+        OnPropertyChanged(nameof(EnrolledActivities));
     }
     
     ////////////////////////////////////////////////////////////////////////////////////////////////
