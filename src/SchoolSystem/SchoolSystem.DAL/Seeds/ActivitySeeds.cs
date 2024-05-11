@@ -57,6 +57,11 @@ public static class ActivitySeeds
         ActivityType = ActivityType.Other,
         Name = "AI Workshop"
     };
+    
+    static ActivitySeeds()
+    {
+        Project.Evaluations.Add(EvaluationSeeds.EvaluationJohn);
+    }
 
     
     public static void Seed(this ModelBuilder modelBuilder)

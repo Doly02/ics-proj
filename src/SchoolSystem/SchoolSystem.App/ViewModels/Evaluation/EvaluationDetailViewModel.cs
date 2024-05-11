@@ -36,11 +36,11 @@ public partial class EvaluationDetailViewModel(
     {
         await base.LoadDataAsync();
 
-        EvaluationDetail = await evaluationFacade.GetAsync(Id);
-        if (EvaluationDetail is null)
+        EvaluationDetail = await evaluationFacade.GetAsync(studentId, activityId);
+        /*if (EvaluationDetail is null)
         {
             EvaluationDetail = await evaluationFacade.GetEmptyModel(activityId, studentId);
-        }
+        }*/
             
     }
 

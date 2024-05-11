@@ -31,9 +31,9 @@ public partial class EvaluationEditViewModel(
     {
         await base.LoadDataAsync();
 
-        //EvaluationDetail = await evaluationFacade.GetAsync(Id);
+        EvaluationDetail = await evaluationFacade.GetAsync(studentId, activityId);
         
-        EvaluationDetail = await evaluationFacade.GetEmptyModel(activityId, studentId);
+        //EvaluationDetail = await evaluationFacade.GetEmptyModel(activityId, studentId);
         
             
     }

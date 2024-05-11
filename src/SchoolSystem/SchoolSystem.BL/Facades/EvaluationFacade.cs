@@ -16,35 +16,73 @@ public class EvaluationFacade(
             EvaluationEntityMapper>(unitOfWorkFactory, evaluationModelMapper), IEvaluationFacade
 {
     // Retrieves a detail model for a specific entity ID
-    public override async Task<EvaluationDetailModel?> GetAsync(Guid id)
+    /*public override async Task<EvaluationDetailModel?> GetAsync(Guid id)
+    {
+         throw new NotImplementedException("Use the other override");
+    }*/
+
+    public async Task<EvaluationDetailModel?> GetAsync(Guid studentId, Guid activityId)
     {
         await using IUnitOfWork UnitOfWork = UnitOfWorkFactory.Create();
+    
+        // trying to get existing activity
+        IQueryable<EvaluationEntity> evalQuery =
+            UnitOfWork.GetRepository<EvaluationEntity, EvaluationEntityMapper>().Get();
+        EvaluationEntity? evaluationEntity = await evalQuery
+            .SingleOrDefaultAsync(e => e.StudentId == studentId && e.ActivityId == activityId)
+            .ConfigureAwait(false);
 
-        IQueryable<EvaluationEntity> query = UnitOfWork.GetRepository<EvaluationEntity, EvaluationEntityMapper>().Get();
+        // Getting existing entities from id
+        IQueryable<StudentEntity> studQuery =
+            UnitOfWork.GetRepository<StudentEntity, StudentEntityMapper>().Get();
+        StudentEntity? studentEntity = await studQuery.SingleOrDefaultAsync(e => e.Id == studentId)
+            .ConfigureAwait(false);
 
-        EvaluationEntity? evalEntity = await query.SingleOrDefaultAsync(e => e.Id == id).ConfigureAwait(false);
-        
-        if (evalEntity is not null)
+        IQueryable<ActivityEntity> activityQuery =
+            UnitOfWork.GetRepository<ActivityEntity, ActivityEntityMapper>().Get();
+        ActivityEntity? activityEntity = await activityQuery
+            .SingleOrDefaultAsync(e => e.Id == activityId).ConfigureAwait(false);
+
+        // Getting evaluation if it exists
+        /*if (studentEntity is not null && activityEntity is not null)
         {
-            // Including student and activity
-            IQueryable<StudentEntity> studQuery = UnitOfWork.GetRepository<StudentEntity, StudentEntityMapper>().Get();
-            StudentEntity? studentEntity = await studQuery.SingleOrDefaultAsync(e => e.Id == evalEntity.StudentId).ConfigureAwait(false);
-        
-            IQueryable<ActivityEntity> activityQuery = UnitOfWork.GetRepository<ActivityEntity, ActivityEntityMapper>().Get();
-            ActivityEntity? activityEntity = await activityQuery.SingleOrDefaultAsync(e => e.Id == evalEntity.ActivityId).ConfigureAwait(false);
-            
-            if (studentEntity is not null && activityEntity is not null)
+            foreach (var evalEntityInStudent in studentEntity.Evaluations)
             {
-                evalEntity.Student = studentEntity;
-                evalEntity.Activity = activityEntity;
+                foreach (var evalEntityInActivity in activityEntity.Evaluations)
+                {
+                    if (evalEntityInStudent.Id == evalEntityInActivity.Id)
+                    {
+                        //EvaluationEntity evaluationEntity = evalEntityInStudent;
+                        evaluationEntity.Student = studentEntity;
+                        evaluationEntity.Activity = activityEntity;
+                        return ModelMapper.MapToDetailModel(evaluationEntity);
+                    }
+                }
+            }*/
+        if (studentEntity is not null && activityEntity is not null)
+        {
+            if (evaluationEntity is not null)
+            {
+                evaluationEntity.Student = studentEntity;
+                evaluationEntity.Activity = activityEntity;
+                return ModelMapper.MapToDetailModel(evaluationEntity);
             }
+            // Not found, empty model
+            EvaluationEntity evalEntity = new()
+            {
+                Id = Guid.Empty,
+                Activity = activityEntity,
+                ActivityId = activityId,
+                Student = studentEntity,
+                StudentId = studentId
+            };
+            return ModelMapper.MapToDetailModel(evalEntity);
         }
 
-        return evalEntity is null
-            ? null
-            : ModelMapper.MapToDetailModel(evalEntity);
+        return EvaluationDetailModel.Empty;
     }
     
+    /*
     // Returns a new detail model with information from student and activity 
     public virtual async Task<EvaluationDetailModel?> GetEmptyModel(Guid activityId, Guid studentId)
     {
@@ -74,7 +112,7 @@ public class EvaluationFacade(
         }
 
         return EvaluationDetailModel.Empty;
-    }
+    }*/
     
     public override async Task<EvaluationDetailModel> SaveAsync(EvaluationDetailModel model)
     {
