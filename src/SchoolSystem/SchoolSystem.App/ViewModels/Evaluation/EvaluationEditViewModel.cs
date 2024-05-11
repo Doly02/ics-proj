@@ -14,8 +14,8 @@ public partial class EvaluationEditViewModel(
     IMessengerService messengerService)
     : ViewModelBase(messengerService)
 {
-    private static Guid studentId { get; set; }
-    private static Guid activityId { get; set; }
+    public Guid studentId { get; set; }
+    public Guid activityId { get; set; }
     public EvaluationDetailModel? EvaluationDetail { get; private set; }
 
     [RelayCommand]

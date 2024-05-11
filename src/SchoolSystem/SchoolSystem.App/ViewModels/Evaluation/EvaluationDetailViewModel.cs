@@ -72,12 +72,12 @@ public partial class EvaluationDetailViewModel(
     [RelayCommand]
     private async Task GoToEditAsync()
     {
-        await navigationService.GoToAsync("//students/detail/enrolledSubjects/enrolledActivities/evaluation/evaluationEdit",
+        await navigationService.GoToAsync("/evaluationEdit",
             new Dictionary<string, object?>
             {
-                /*[nameof(EvaluationDetailViewModel.studentId)] = studentId,
-                [nameof(EvaluationDetailViewModel.activityId)] = activityId*/
-                [nameof(EvaluationDetailViewModel)] = EvaluationDetail
+                [nameof(EvaluationDetailViewModel.studentId)] = studentId,
+                [nameof(EvaluationDetailViewModel.activityId)] = activityId
+                //[nameof(EvaluationDetailViewModel)] = EvaluationDetail
             });
     }
     
