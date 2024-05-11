@@ -32,7 +32,7 @@
             <!-- Edit -->
             <Button Text="Edit" Command="{Binding GoToEditCommand}" />
             <!-- Remove -->
-            <Button Text="Remove" />
+            <Button Text="Remove" Command="{Binding DeleteCommand}"/>
 
         </VerticalStackLayout>
     </ScrollView>

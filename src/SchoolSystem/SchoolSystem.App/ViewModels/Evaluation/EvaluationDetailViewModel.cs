@@ -43,7 +43,7 @@ public partial class EvaluationDetailViewModel(
         }*/
             
     }
-
+    
     [RelayCommand]
     private async Task DeleteAsync()
     {
@@ -52,7 +52,6 @@ public partial class EvaluationDetailViewModel(
             try
             {
                 await evaluationFacade.DeleteAsync(EvaluationDetail.Id);
-                MessengerService.Send(new EvaluationDeleteMessage());
                 navigationService.SendBackButtonPressed();
             }
             catch (InvalidOperationException)
