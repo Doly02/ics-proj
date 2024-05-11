@@ -61,7 +61,8 @@
                         TextColor="Black"
                         HorizontalOptions="FillAndExpand" />
                 <Button Text="Enrolled"
-                        Command="{Binding GoToEnrolledCommand}"
+                        Command="{Binding Source={x:Reference StudentDetailViewRoot}, Path=BindingContext.GoToEnrolledCommand}"
+                        CommandParameter="{Binding Id}"
                         BackgroundColor="#FA7070"
                         TextColor="Black"
                         HorizontalOptions="FillAndExpand" />
