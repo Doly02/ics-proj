@@ -8,7 +8,7 @@ using SchoolSystem.BL.Models;
 
 namespace SchoolSystem.App.ViewModels;
 
-[QueryProperty(nameof(StudentName), nameof(StudentName))]
+[QueryProperty(nameof(StudentId), nameof(StudentId))]
 [QueryProperty(nameof(SubjectId), nameof(SubjectId))]
 public partial class EnrolledActivityListViewModel (
 
@@ -18,20 +18,20 @@ public partial class EnrolledActivityListViewModel (
     : ViewModelBase(messengerService),
         IRecipient<ActivityEditMessage>
 {
-    public IEnumerable<ActivityListModel> EnrolledActivities { get; set; } = null!;    // asi treba zmenit na StudentActivityListModel
+    public IEnumerable<ActivityListModel> EnrolledActivities { get; set; } = null!;
     public Guid SubjectId { get; set; }
-    public string? StudentName { get; set; }
+    public string? StudentId { get; set; }
 
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
-        EnrolledActivities = await activityFacade.GetActivitiesAsync(SubjectId);   // tu nebude fungovat GetActivitiesAsync ... treba asi vytvorit novu fasadu
+        EnrolledActivities = await activityFacade.GetActivitiesAsync(SubjectId);
     }
-    
+
     ///////////////////// Navigates to the ActivityDetailViewModel /////////////////////////////////
     [RelayCommand]
     private async Task GoToDetailAsync(Guid id)
-        => await navigationService.GoToAsync( "/detailActivity",
+        => await navigationService.GoToAsync( "/activityDetail",
             new Dictionary<string, object?>
             {
                 [nameof(ActivityDetailViewModel.Id)] = id,
@@ -45,8 +45,9 @@ public partial class EnrolledActivityListViewModel (
         await navigationService.GoToAsync("/evaluation",
             new Dictionary<string, object?>
             {
-                [nameof(EvaluationDetailViewModel.Id)] = id,
-                [nameof(ActivityDetailViewModel.SubjectId)] = SubjectId
+                [nameof(EvaluationDetailViewModel.activityId)] = id,
+                //[nameof(EvaluationDetailViewModel.subjectId)] = SubjectId, 
+                [nameof(EvaluationDetailViewModel.studentId)] = StudentId
             });
     }
     

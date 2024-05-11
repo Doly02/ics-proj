@@ -48,21 +48,6 @@ public class ActivityFacade(
 
         return ModelMapper.MapToListModel(activities);
     }
-    
-    /*
-    public async Task<IEnumerable<StudentActivityListModel>> GetEnrolledActivitiesAsync(Guid subjectId)
-    {
-        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
-        var activities = await uow
-            .GetRepository<ActivityEntity, ActivityEntityMapper>()
-            .Get()
-            .Where(activity => activity.SubjectId == subjectId)
-            .ToListAsync()
-            .ConfigureAwait(false);
-
-        return ModelMapper.MapToListModel(activities);
-    }
-    */
 
     public async Task<ObservableCollection<ActivityListModel>> FilterActivitiesByTimeAsync(
         DateTime startDateTime, 

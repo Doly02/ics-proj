@@ -17,20 +17,6 @@ public class ActivityModelMapper :
                 Activity = [MapToDetailModel(entity)],
                 SubjectName = entity.Subject?.Name
             };
-    
-    /*
-    public StudentActivityListModel MapToListModelEnrolled(ActivityEntity? entity)
-        => entity is null
-            ? StudentActivityListModel.Empty
-            : new StudentActivityListModel
-            {
-                Id = entity.Id, 
-                ActivityName = entity.Name,
-                Activity = [MapToDetailModel(entity)],
-                SubjectName = entity.Subject?.Name,
-                Evaluation = entity.Evaluations
-            };
-            */
 
     public override ActivityDetailModel MapToDetailModel(ActivityEntity? entity)
         => entity is null
