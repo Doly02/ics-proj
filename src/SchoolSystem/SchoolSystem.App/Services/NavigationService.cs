@@ -28,7 +28,7 @@ public class NavigationService : INavigationService
 
         // Enrolled activities
         new("//students/detail/enrolledSubjects/enrolledActivities", typeof(EnrolledActivityListView), typeof(EnrolledActivityListViewModel)),
-        new("//students/detail/enrolledSubjects/enrolledActivities/detail", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
+        new("//students/detail/enrolledSubjects/enrolledActivities/activityDetail", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
         
         // Evaluation
         new("//students/detail/enrolledSubjects/enrolledActivities/evaluation", typeof(EvaluationDetailView), typeof(EvaluationDetailViewModel)),

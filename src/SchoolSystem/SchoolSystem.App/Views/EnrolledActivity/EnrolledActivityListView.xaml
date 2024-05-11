@@ -23,9 +23,18 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="m:ActivityListModel">
                             <Frame Margin="10" Padding="5" CornerRadius="10" BorderColor="#CCCCCC">
-                                <StackLayout Orientation="Vertical" Margin="10">
-                                    <Label Text="{Binding ActivityName}" FontSize="16" FontAttributes="Bold"/>
-                                </StackLayout>
+                                <!-- Use Grid for horizontal layout of label and button -->
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/> <!-- Takes as much space as possible for the activity name -->
+                                        <ColumnDefinition Width="Auto"/> <!-- Takes as little space as necessary for the button -->
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Text="{Binding ActivityName}" FontSize="16" FontAttributes="Bold" VerticalOptions="Center"/>
+                                    <Button Grid.Column="1" Text="Evaluation" 
+                                            Command="{Binding Source={x:Reference EnrolledActivityListViewRoot}, Path=BindingContext.GoToEvaluationDetailCommand}" 
+                                            CommandParameter="{Binding Id}" 
+                                            HorizontalOptions="End"/>
+                                </Grid>
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={x:Reference EnrolledActivityListViewRoot}, Path=BindingContext.GoToDetailCommand}" CommandParameter="{Binding Id}" />
                                 </Frame.GestureRecognizers>
@@ -35,6 +44,7 @@
                 </CollectionView>
             </VerticalStackLayout>
         </ScrollView>
+
 
         <!-- Bottom Bar With Buttons -->
         <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Padding="10">
