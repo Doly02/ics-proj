@@ -15,8 +15,12 @@
             <Label Text="End:" FontAttributes="Bold"/>
             <DatePicker x:Name="EndDatePopup" />
             <TimePicker x:Name="EndTimePopup" />
-            <Button Text="Enter" Clicked="EnterClick" BorderColor="#7AB2B2" />
-            <Button Text="Reset Filters" Clicked="ResetFiltersClick" BorderColor="#FA7070" />
+            <Button Text="Enter" Clicked="EnterClick" 
+                    BackgroundColor="#7AB2B2"
+                    TextColor="Black"/>
+            <Button Text="Reset Filters" Clicked="ResetFiltersClick" 
+                    BackgroundColor="#FA7070" 
+                    TextColor="Black"/>
             <Button Text="Cancel" Clicked="CancelClick" />
         </VerticalStackLayout>
     </Frame>
