@@ -61,7 +61,7 @@ public partial class EnrolledEditViewModel(
 
             await navigationService.GoToAsync("//student/detail/enrolled",
                 new Dictionary<string, object?>
-                 { [nameof(EnrolledListViewModel.Student)] = Student });
+                 { [nameof(EnrolledListViewModel.StudentId)] = Student.Id });
         }
     }
 
@@ -70,7 +70,7 @@ public partial class EnrolledEditViewModel(
     {
         await navigationService.GoToAsync("//student/detail/enrolled",
         new Dictionary<string, object?>
-        { [nameof(EnrolledListViewModel.Student)] = Student });
+        { [nameof(EnrolledListViewModel.StudentId)] = Student.Id });
     }
 
 

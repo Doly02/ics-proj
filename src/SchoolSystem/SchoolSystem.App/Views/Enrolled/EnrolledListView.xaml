@@ -25,7 +25,8 @@
 
             <!-- Back Button -->
             <Button Text="Back" Grid.Column="0"
-                Command="{Binding GoToDetailBackCommand}"
+                Command="{Binding Source={x:Reference EnrolledListViewRoot}, Path=BindingContext.GoToDetailBackCommand}" 
+                CommandParameter="{Binding StudentId}"
                 HorizontalOptions="Start" VerticalOptions="Center"
                 BackgroundColor="LightGray" TextColor="Black" Margin="10"/>
 

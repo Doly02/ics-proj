@@ -10,7 +10,7 @@ using System.Collections.ObjectModel;
 namespace SchoolSystem.App.ViewModels;
 
 
-[QueryProperty(nameof(Student), nameof(Student))]
+[QueryProperty(nameof(StudentId), nameof(StudentId))]
 public partial class EnrolledListViewModel(
     IEnrolledFacade enrolledFacade,
     IStudentFacade studentFacade,
@@ -26,6 +26,8 @@ public partial class EnrolledListViewModel(
 
     public ObservableCollection<EnrolledSubjectsListModel> sortedEnrolled { get; private set; } = new ObservableCollection<EnrolledSubjectsListModel>();
     public StudentDetailModel? Student { get; set; }
+
+    public Guid StudentId { get; set; }
 
     public string StudentFullName => $"{Student?.Name} {Student?.Surname}";
 
@@ -57,37 +59,40 @@ public partial class EnrolledListViewModel(
         await base.LoadDataAsync();
 
         // Načítání předmětů zapsaných k tomuto studentovi
-        EnrolledList = await enrolledFacade.GetEnrolledSubjectsByStudentIdAsync(Student.Id);
+        EnrolledList = await enrolledFacade.GetEnrolledSubjectsByStudentIdAsync(StudentId);
+        Student = await studentFacade.GetAsync(StudentId);
 
         OnPropertyChanged(nameof(EnrolledList));
+        OnPropertyChanged(nameof(Student));
+        OnPropertyChanged(nameof(StudentFullName));
 
     }
 
     [RelayCommand]
     private async Task SortByNameAscAsync()
     {
-        EnrolledList = await enrolledFacade.GetSortedAsync(true, true, Student.Id);
+        EnrolledList = await enrolledFacade.GetSortedAsync(true, true, StudentId);
         OnPropertyChanged(nameof(EnrolledList));
     }
 
     [RelayCommand]
     private async Task SortByNameDescAsync()
     {
-        EnrolledList = await enrolledFacade.GetSortedAsync(false, true, Student.Id);
+        EnrolledList = await enrolledFacade.GetSortedAsync(false, true, StudentId);
         OnPropertyChanged(nameof(EnrolledList));
     }
 
     [RelayCommand]
     private async Task SortByAbbrAscAsync()
     {
-        EnrolledList = await enrolledFacade.GetSortedAsync(true, false, Student.Id);
+        EnrolledList = await enrolledFacade.GetSortedAsync(true, false, StudentId);
         OnPropertyChanged(nameof(EnrolledList));
     }
 
     [RelayCommand]
     private async Task SortByAbbrDescAsync()
     {
-        EnrolledList = await enrolledFacade.GetSortedAsync(false, false, Student.Id);
+        EnrolledList = await enrolledFacade.GetSortedAsync(false, false, StudentId);
         OnPropertyChanged(nameof(EnrolledList));
     }
 
@@ -95,10 +100,9 @@ public partial class EnrolledListViewModel(
     [RelayCommand]
     private async Task SearchAsync()
     {
-        EnrolledList = await enrolledFacade.SearchBySubjectNameAsync(Student.Id, SearchText);
+        EnrolledList = await enrolledFacade.SearchBySubjectNameAsync(StudentId, SearchText);
         OnPropertyChanged(nameof(EnrolledList));
     }
-
 
 
     [RelayCommand]
@@ -130,19 +134,18 @@ public partial class EnrolledListViewModel(
     private async Task GoToDetailAsync(Guid Id)
     {
 
-        await navigationService.GoToAsync<ActivityDetailViewModel>(
-           new Dictionary<string, object?> { [nameof(ActivityDetailViewModel.Id)] = Id });
+        await navigationService.GoToAsync<EnrolledActivityListViewModel>(
+           new Dictionary<string, object?> { [nameof(EnrolledActivityListViewModel.SubjectId)] = Id });
     }
 
 
 
 
     [RelayCommand]
-    public async Task GoToDetailBackAsync()
+    public async Task GoToDetailBackAsync(Guid Id)
     {
-        await navigationService.GoToAsync("//student/detail",
-        new Dictionary<string, object?>
-        { [nameof(StudentDetailViewModel.StudDetail)] = Student });
+        await navigationService.GoToAsync<StudentDetailViewModel>(
+           new Dictionary<string, object?> { [nameof(StudentDetailViewModel.Id)] = Id });
     }
 
 }
