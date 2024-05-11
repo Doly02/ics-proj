@@ -55,7 +55,7 @@
                                     </StackLayout>
                                     <Button Grid.Column="1" Text="Activity" 
                                             Command="{Binding Source={x:Reference EnrolledListViewRoot}, Path=BindingContext.GoToDetailCommand}" 
-                                            CommandParameter="{Binding Id}"
+                                            CommandParameter="{Binding SubjectId}"
                                             BackgroundColor="Purple"
                                             TextColor="White"
                                             Margin="0,0,10,0"/>
