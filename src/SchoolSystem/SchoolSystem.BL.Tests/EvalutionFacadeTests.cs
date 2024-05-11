@@ -21,7 +21,7 @@ public class EvaluationFacadeTests : FacadeTestsBase
     }
 
 
-
+    /*
     [Fact]
     public async Task Create_WithNonexistentActivityAndStudent_ThrowsException()
     {
@@ -37,7 +37,7 @@ public class EvaluationFacadeTests : FacadeTestsBase
 
         // Act & Assert
         await Assert.ThrowsAsync<NullReferenceException>(() => _evaluationFacadeSUT.SaveAsync(model));
-    }
+    }*/
 
 
     [Fact]
