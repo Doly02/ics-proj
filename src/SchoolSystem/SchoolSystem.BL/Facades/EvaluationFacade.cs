@@ -21,7 +21,7 @@ public class EvaluationFacade(
          throw new NotImplementedException("Use the other override");
     }*/
 
-    public async Task<EvaluationDetailModel?> GetAsync(Guid studentId, Guid activityId)
+    public async Task<EvaluationDetailModel> GetAsync(Guid studentId, Guid activityId)
     {
         await using IUnitOfWork UnitOfWork = UnitOfWorkFactory.Create();
     
@@ -42,23 +42,7 @@ public class EvaluationFacade(
             UnitOfWork.GetRepository<ActivityEntity, ActivityEntityMapper>().Get();
         ActivityEntity? activityEntity = await activityQuery
             .SingleOrDefaultAsync(e => e.Id == activityId).ConfigureAwait(false);
-
-        // Getting evaluation if it exists
-        /*if (studentEntity is not null && activityEntity is not null)
-        {
-            foreach (var evalEntityInStudent in studentEntity.Evaluations)
-            {
-                foreach (var evalEntityInActivity in activityEntity.Evaluations)
-                {
-                    if (evalEntityInStudent.Id == evalEntityInActivity.Id)
-                    {
-                        //EvaluationEntity evaluationEntity = evalEntityInStudent;
-                        evaluationEntity.Student = studentEntity;
-                        evaluationEntity.Activity = activityEntity;
-                        return ModelMapper.MapToDetailModel(evaluationEntity);
-                    }
-                }
-            }*/
+        
         if (studentEntity is not null && activityEntity is not null)
         {
             if (evaluationEntity is not null)
@@ -82,38 +66,6 @@ public class EvaluationFacade(
         return EvaluationDetailModel.Empty;
     }
     
-    /*
-    // Returns a new detail model with information from student and activity 
-    public virtual async Task<EvaluationDetailModel?> GetEmptyModel(Guid activityId, Guid studentId)
-    {
-        await using IUnitOfWork UnitOfWork = UnitOfWorkFactory.Create();
-
-        EvaluationEntity evalEntity = new()
-        {
-            Id = Guid.Empty,
-            Activity = null!,
-            ActivityId = activityId,
-            Student = null!,
-            StudentId = studentId
-        };
-        
-        // Including student and activity
-        IQueryable<StudentEntity> studQuery = UnitOfWork.GetRepository<StudentEntity, StudentEntityMapper>().Get();
-        StudentEntity? studentEntity = await studQuery.SingleOrDefaultAsync(e => e.Id == evalEntity.StudentId).ConfigureAwait(false);
-    
-        IQueryable<ActivityEntity> activityQuery = UnitOfWork.GetRepository<ActivityEntity, ActivityEntityMapper>().Get();
-        ActivityEntity? activityEntity = await activityQuery.SingleOrDefaultAsync(e => e.Id == evalEntity.ActivityId).ConfigureAwait(false);
-        
-        if (studentEntity is not null && activityEntity is not null)
-        {
-            evalEntity.Student = studentEntity;
-            evalEntity.Activity = activityEntity;
-            return ModelMapper.MapToDetailModel(evalEntity);
-        }
-
-        return EvaluationDetailModel.Empty;
-    }*/
-    
     public override async Task<EvaluationDetailModel> SaveAsync(EvaluationDetailModel model)
     {
         EvaluationDetailModel res;
@@ -129,6 +81,8 @@ public class EvaluationFacade(
         {
             EvaluationEntity updatedEntity = await evalRepository.UpdateEntityAsync(entity).ConfigureAwait(false);
             res = ModelMapper.MapToDetailModel(updatedEntity);
+            res.ActivityName = model.ActivityName;
+            res.StudentFullName = model.StudentFullName;
         }
         else
         {
@@ -138,7 +92,7 @@ public class EvaluationFacade(
         }
         
         // needed for updating student and activity
-        IRepository<StudentEntity> studRepository = UnitOfWork.GetRepository<StudentEntity, StudentEntityMapper>();
+        /*IRepository<StudentEntity> studRepository = UnitOfWork.GetRepository<StudentEntity, StudentEntityMapper>();
         IRepository<ActivityEntity> actRepository = UnitOfWork.GetRepository<ActivityEntity, ActivityEntityMapper>();
 
         IQueryable<StudentEntity> studQuery = UnitOfWork.GetRepository<StudentEntity, StudentEntityMapper>().Get();
@@ -183,7 +137,7 @@ public class EvaluationFacade(
             // update db
             await studRepository.UpdateEntityAsync(studentEntity).ConfigureAwait(false);
             await actRepository.UpdateEntityAsync(activityEntity).ConfigureAwait(false);
-        }
+        }*/
         
         await UnitOfWork.CommitAsync().ConfigureAwait(false);
 

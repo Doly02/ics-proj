@@ -15,7 +15,7 @@
             <Button Text="Back" Command="{Binding GoToDetailCommand}" />
 
             <!-- Activity name -->
-            <Entry Placeholder="Activity" Text="{Binding EvaluationDetail.ActivityName, Mode=TwoWay}" />
+            <Label Text="{Binding EvaluationDetail.ActivityName}"/>
 
             <!-- Points -->
             <Entry Placeholder="Score" Text="{Binding EvaluationDetail.Score, Mode=TwoWay}" />

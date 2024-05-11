@@ -12,10 +12,10 @@ public class EvaluationModelMapper
             : new StudentActivityListModel
             {
                 Id = entity.Id,
-                ActivityName = entity.Activity.Name,
+                ActivityName = entity.Activity?.Name,
                 Score = entity.Score,
-                StudentFullName = entity.Student.Name,
-                SubjectName = entity.Activity.Subject.Name,
+                StudentFullName = entity.Student?.Name,
+                SubjectName = entity.Activity?.Subject?.Name,
                 Evaluation = [MapToDetailModel(entity)]
             };
     
@@ -29,8 +29,8 @@ public class EvaluationModelMapper
                 ActivityId = entity.ActivityId,
                 Score = entity.Score,
                 Note = entity.Note,
-                StudentFullName = entity.Student.Name + " " + entity.Student.Surname,
-                ActivityName = entity.Activity.Name
+                StudentFullName = entity.Student?.Name + " " + entity.Student?.Surname,
+                ActivityName = entity.Activity?.Name
             };
     
     public override EvaluationEntity MapToEntity(EvaluationDetailModel model)
