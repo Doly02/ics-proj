@@ -53,6 +53,7 @@ public partial class EvaluationDetailViewModel(
             try
             {
                 await evaluationFacade.DeleteAsync(EvaluationDetail.Id);
+                MessengerService.Send(new ActivityEditMessage {ActivityId = activityId});
                 navigationService.SendBackButtonPressed();
             }
             catch (InvalidOperationException)
