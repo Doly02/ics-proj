@@ -46,7 +46,7 @@ public partial class EnrolledActivityListViewModel (
             new Dictionary<string, object?>
             {
                 [nameof(EvaluationDetailViewModel.activityId)] = id,
-                //[nameof(EvaluationDetailViewModel.subjectId)] = SubjectId, 
+                [nameof(EvaluationDetailViewModel.subjectId)] = SubjectId, 
                 [nameof(EvaluationDetailViewModel.studentId)] = StudentId
             });
     }

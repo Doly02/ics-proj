@@ -10,7 +10,8 @@ using SchoolSystem.DAL.UnitOfWork;
 namespace SchoolSystem.App.ViewModels;
 
 
-[QueryProperty(nameof(studentId), nameof(studentId))] 
+[QueryProperty(nameof(studentId), nameof(studentId))]
+[QueryProperty(nameof(subjectId), nameof(subjectId))] 
 [QueryProperty(nameof(activityId), nameof(activityId))] 
 public partial class EvaluationDetailViewModel(
     IEvaluationFacade evaluationFacade,
@@ -19,9 +20,9 @@ public partial class EvaluationDetailViewModel(
     IAlertService alertService)
     : ViewModelBase(messengerService), IRecipient<EvaluationEditMessage>
 {
-    public Guid Id = Guid.Empty; //Guid.Parse("c0a5c2d1-8a95-4e09-bba2-67c3d133e20e");
-    public Guid studentId { get; set; } /*Guid.Parse(input: "0d4fa150-ad80-4d46-a511-4c666166ec5e");*/
-    public Guid activityId { get; set; } /*Guid.Parse(input: "8e615f4a-7a3b-4f86-b199-d7d48c4652e8");*/
+    public Guid studentId { get; set; } 
+    public Guid activityId { get; set; } 
+    public Guid subjectId { get; set; }
     public EvaluationDetailModel? EvaluationDetail { get; private set; }
     
     public async void Receive(EvaluationEditMessage message)
@@ -65,7 +66,12 @@ public partial class EvaluationDetailViewModel(
     [RelayCommand]
     private async Task BackAsync()
     {
-        await Shell.Current.GoToAsync("..");
+        await navigationService.GoToAsync("//students/detail/enrolledSubjects/enrolledActivities",
+            new Dictionary<string, object?>
+            {
+                [nameof(EnrolledActivityListViewModel.StudentId)] = studentId,
+                [nameof(EnrolledActivityListViewModel.SubjectId)] = subjectId
+            });
     }
 
     [RelayCommand]
@@ -74,9 +80,9 @@ public partial class EvaluationDetailViewModel(
         await navigationService.GoToAsync("/evaluationEdit",
             new Dictionary<string, object?>
             {
-                [nameof(EvaluationDetailViewModel.studentId)] = studentId,
-                [nameof(EvaluationDetailViewModel.activityId)] = activityId
-                //[nameof(EvaluationDetailViewModel)] = EvaluationDetail
+                [nameof(EvaluationEditViewModel.studentId)] = studentId,
+                [nameof(EvaluationEditViewModel.subjectId)] = subjectId,
+                [nameof(EvaluationEditViewModel.activityId)] = activityId
             });
     }
     

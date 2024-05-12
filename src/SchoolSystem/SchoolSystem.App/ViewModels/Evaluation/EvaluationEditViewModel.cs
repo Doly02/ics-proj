@@ -7,6 +7,7 @@ using SchoolSystem.BL.Models;
 namespace SchoolSystem.App.ViewModels;
 
 [QueryProperty(nameof(studentId), nameof(studentId))] 
+[QueryProperty(nameof(subjectId), nameof(subjectId))] 
 [QueryProperty(nameof(activityId), nameof(activityId))] 
 public partial class EvaluationEditViewModel(
     IEvaluationFacade evaluationFacade,
@@ -16,13 +17,16 @@ public partial class EvaluationEditViewModel(
 {
     public Guid studentId { get; set; }
     public Guid activityId { get; set; }
+    public Guid subjectId { get; set; }
     public EvaluationDetailModel? EvaluationDetail { get; private set; }
 
     [RelayCommand]
     private async Task SaveAsync()
     {
         await evaluationFacade.SaveAsync(EvaluationDetail);
-        MessengerService.Send(new EvaluationEditMessage { EvaluationId = EvaluationDetail.Id });
+        
+        MessengerService.Send(new EvaluationEditMessage {EvaluationId = EvaluationDetail.Id});
+        MessengerService.Send(new ActivityEditMessage {ActivityId = activityId});
 
         navigationService.SendBackButtonPressed();
     }
@@ -44,8 +48,9 @@ public partial class EvaluationEditViewModel(
         await navigationService.GoToAsync("//students/detail/enrolledSubjects/enrolledActivities/evaluation",
             new Dictionary<string, object?>
             {
-                [nameof(studentId)] = studentId,
-                [nameof(activityId)] = activityId
+                [nameof(EvaluationDetailViewModel.activityId)] = activityId,
+                [nameof(EvaluationDetailViewModel.subjectId)] = subjectId, 
+                [nameof(EvaluationDetailViewModel.studentId)] = studentId
             });
     }
 }
