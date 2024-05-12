@@ -13,4 +13,6 @@ public interface IEnrolledFacade : IFacade<EnrolledEntity, EnrolledSubjectsListM
     Task<IEnumerable<EnrolledSubjectsListModel>> GetEnrolledSubjectsByStudentIdAsync(Guid studentId);
     Task<IEnumerable<EnrolledSubjectsListModel>> SearchBySubjectNameAsync(Guid studentId, string? subjectName = null);
     Task<IEnumerable<EnrolledSubjectsListModel>> GetSortedAsync(bool ascending, bool byName, Guid studentId);
+
+    Task<bool> IsSubjectAlreadyEnrolled(Guid studentId, Guid subjectId);
 }

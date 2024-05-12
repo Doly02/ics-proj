@@ -129,5 +129,18 @@ public class EnrolledFacade(
     }
 
 
+    public async Task<bool> IsSubjectAlreadyEnrolled(Guid studentId, Guid subjectId)
+    {
+        await using var unitOfWork = UnitOfWorkFactory.Create();
+        var repository = unitOfWork.GetRepository<EnrolledEntity, EnrolledEntityMapper>();
+
+        bool isEnrolled = await repository.Get()
+                                          .AnyAsync(e => e.StudentId == studentId && e.SubjectId == subjectId);
+
+        return isEnrolled;
+    }
+
+
+
 }
 

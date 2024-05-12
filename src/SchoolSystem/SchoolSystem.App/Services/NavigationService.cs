@@ -24,7 +24,7 @@ public class NavigationService : INavigationService
 
         // Enrolled of student
         new("//students/detail/enrolledSubjects",  typeof(EnrolledListView), typeof(EnrolledListViewModel)),
-        new("//students/detail/enrolledSubjects/edit", typeof(EnrolledEditView), typeof(EnrolledEditViewModel)),
+        new("//students/detail/enrolledSubjects/edit2", typeof(EnrolledEditView), typeof(EnrolledEditViewModel)),
 
         // Enrolled activities
         new("//students/detail/enrolledSubjects/enrolledActivities", typeof(EnrolledActivityListView), typeof(EnrolledActivityListViewModel)),
@@ -42,7 +42,7 @@ public class NavigationService : INavigationService
         new("//subjects/activities", typeof(ActivityListView), typeof(ActivityListViewModel)),
         new("//subjects/activities/add", typeof(ActivityEditView), typeof(ActivityEditViewModel)),       
         new("//subjects/activities/detail", typeof(ActivityDetailView), typeof(ActivityDetailViewModel)),
-        new("//subjects/activities/detail/edit", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
+        new("//subjects/activities/detail/editActivity", typeof(ActivityEditView), typeof(ActivityEditViewModel)),
         
 
     };

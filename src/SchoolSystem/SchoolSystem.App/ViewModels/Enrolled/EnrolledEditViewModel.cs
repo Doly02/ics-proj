@@ -16,7 +16,8 @@ public partial class EnrolledEditViewModel(
     IEnrolledFacade enrolledFacade,
     EnrolledModelMapper enrolledModelMapper,
     INavigationService navigationService,
-    IMessengerService messengerService)
+    IMessengerService messengerService,
+    IAlertService alertService)
     : ViewModelBase(messengerService), IRecipient<EnrolledEditMessage>, IRecipient<EnrolledDeleteMessage>, IRecipient<EnrolledAddMessage>
 {
     public StudentDetailModel? Student { get; set; }
@@ -47,7 +48,10 @@ public partial class EnrolledEditViewModel(
     [RelayCommand]
     private async Task AddSubjectToStudentAsync()
     {
-        if (NewEnrollment is not null && SelectedSubject is not null && Student is not null)
+
+        bool isSubjectAlreadyEnrolled = await enrolledFacade.IsSubjectAlreadyEnrolled(Student.Id, SelectedSubject.Id);
+
+        if (NewEnrollment is not null && SelectedSubject is not null && Student is not null && !isSubjectAlreadyEnrolled)
         {
             enrolledModelMapper.MapToExistingListModel(NewEnrollment, SelectedSubject);
 
@@ -62,6 +66,12 @@ public partial class EnrolledEditViewModel(
             await navigationService.GoToAsync("//students/detail/enrolledSubjects",
                 new Dictionary<string, object?>
                  { [nameof(EnrolledListViewModel.StudentId)] = Student.Id });
+        }
+
+        else if (isSubjectAlreadyEnrolled)
+        {
+            // Zobrazit chybovou zprávu, pokud je předmět již zapsán
+            await alertService.DisplayAsync("Error", "This subject is already enrolled for the student.");
         }
     }
 
