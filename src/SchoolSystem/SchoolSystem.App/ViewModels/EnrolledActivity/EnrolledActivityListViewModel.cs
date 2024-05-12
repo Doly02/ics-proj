@@ -25,7 +25,7 @@ public partial class EnrolledActivityListViewModel (
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
-        EnrolledActivities = await activityFacade.GetActivitiesAsync(SubjectId);
+        EnrolledActivities = await activityFacade.GetActivitiesWithEvalAsync(SubjectId, StudentId);
     }
 
     ///////////////////// Navigates to the ActivityDetailViewModel /////////////////////////////////

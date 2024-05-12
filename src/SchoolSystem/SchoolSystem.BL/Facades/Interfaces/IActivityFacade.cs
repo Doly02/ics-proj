@@ -13,5 +13,7 @@ public interface IActivityFacade : IFacade<ActivityEntity, ActivityListModel, Ac
     Task<ObservableCollection<ActivityListModel>> SortActivitiesAscendingAsync(Guid subjectId);
     Task<ObservableCollection<ActivityListModel>> SortActivitiesDescendingAsync(Guid subjectId);
 
+    Task<IEnumerable<ActivityListModel>> GetActivitiesWithEvalAsync(Guid subjectId, Guid studentId);
+
 
 }

@@ -17,6 +17,18 @@ public class ActivityModelMapper :
                 Activity = [MapToDetailModel(entity)],
                 SubjectName = entity.Subject?.Name
             };
+    
+    public ActivityListModel MapToListModelWithEval(ActivityEntity? entity, int score)
+        => entity is null
+            ? ActivityListModel.Empty
+            : new ActivityListModel
+            {
+                Id = entity.Id, 
+                ActivityName = entity.Name,
+                Activity = [MapToDetailModel(entity)],
+                SubjectName = entity.Subject?.Name,
+                Score = score
+            };
 
     public override ActivityDetailModel MapToDetailModel(ActivityEntity? entity)
         => entity is null

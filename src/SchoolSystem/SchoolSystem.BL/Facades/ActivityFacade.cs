@@ -48,6 +48,38 @@ public class ActivityFacade(
 
         return ModelMapper.MapToListModel(activities);
     }
+    
+    public async Task<IEnumerable<ActivityListModel>> GetActivitiesWithEvalAsync(Guid subjectId, Guid studentId)
+    {
+        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
+        // get all activities
+        var activities = await uow
+            .GetRepository<ActivityEntity, ActivityEntityMapper>()
+            .Get()
+            .Where(activity => activity.SubjectId == subjectId)
+            .ToListAsync()
+            .ConfigureAwait(false);
+        
+        IQueryable<EvaluationEntity> evalQuery = uow.GetRepository<EvaluationEntity, EvaluationEntityMapper>().Get();
+        
+        // // something like
+        // public IEnumerable<ActivityListModel> MapToListModelWithEval(IEnumerable<ActivityEntity> entities)
+        //     => entities.Select(MapToListModelWithEval(entity);
+        List<ActivityListModel> listModel = new List<ActivityListModel>();
+        foreach (var activity in activities)
+        {
+            EvaluationEntity? evaluationEntity = await evalQuery
+                .SingleOrDefaultAsync(e => e.StudentId == studentId && e.ActivityId == activity.Id)
+                .ConfigureAwait(false);
+            
+            if (evaluationEntity is not null)
+                listModel.Add(activityModelMapper.MapToListModelWithEval(activity, evaluationEntity.Score));
+            else
+                listModel.Add(activityModelMapper.MapToListModelWithEval(activity, 0));
+        }
+        
+        return listModel;
+    }
 
     public async Task<ObservableCollection<ActivityListModel>> FilterActivitiesByTimeAsync(
         DateTime startDateTime, 

@@ -7,6 +7,7 @@ namespace SchoolSystem.BL.Models
         public string? ActivityName { get; set; }
         public string? SubjectName { get; set; }
         public required ObservableCollection<ActivityDetailModel> Activity { get; set; }
+        public int Score { get; set; }
         
         public static ActivityListModel Empty
             => new()
@@ -14,7 +15,8 @@ namespace SchoolSystem.BL.Models
                 Id = Guid.Empty,
                 ActivityName = string.Empty,
                 SubjectName = string.Empty,
-                Activity = new ObservableCollection<ActivityDetailModel>()
+                Activity = new ObservableCollection<ActivityDetailModel>(),
+                Score = 0
             };
     }
 }

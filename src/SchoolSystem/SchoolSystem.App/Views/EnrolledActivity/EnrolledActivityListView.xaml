@@ -27,13 +27,16 @@
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/> <!-- Takes as much space as possible for the activity name -->
-                                        <ColumnDefinition Width="Auto"/> <!-- Takes as little space as necessary for the button -->
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition />
+                                        <!-- Takes as little space as necessary for the button -->
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Column="0" Text="{Binding ActivityName}" FontSize="16" FontAttributes="Bold" VerticalOptions="Center"/>
                                     <Button Grid.Column="1" Text="Evaluation" 
                                             Command="{Binding Source={x:Reference EnrolledActivityListViewRoot}, Path=BindingContext.GoToEvaluationDetailCommand}" 
                                             CommandParameter="{Binding Id}" 
                                             HorizontalOptions="End"/>
+                                    <Button Grid.Column="2" Text="{Binding Score}" FontSize="16" FontAttributes="Bold" VerticalOptions="Center"/>
                                 </Grid>
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={x:Reference EnrolledActivityListViewRoot}, Path=BindingContext.GoToDetailCommand}" CommandParameter="{Binding Id}" />
