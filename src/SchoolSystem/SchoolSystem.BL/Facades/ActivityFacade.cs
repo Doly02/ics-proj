@@ -49,6 +49,7 @@ public class ActivityFacade(
         return ModelMapper.MapToListModel(activities);
     }
     
+    // Getting activity list with score of evaluation for a student
     public async Task<IEnumerable<ActivityListModel>> GetActivitiesWithEvalAsync(Guid subjectId, Guid studentId)
     {
         await using IUnitOfWork uow = UnitOfWorkFactory.Create();
@@ -62,9 +63,6 @@ public class ActivityFacade(
         
         IQueryable<EvaluationEntity> evalQuery = uow.GetRepository<EvaluationEntity, EvaluationEntityMapper>().Get();
         
-        // // something like
-        // public IEnumerable<ActivityListModel> MapToListModelWithEval(IEnumerable<ActivityEntity> entities)
-        //     => entities.Select(MapToListModelWithEval(entity);
         List<ActivityListModel> listModel = new List<ActivityListModel>();
         foreach (var activity in activities)
         {
@@ -79,6 +77,28 @@ public class ActivityFacade(
         }
         
         return listModel;
+    }
+
+    // Adding student's evaluation to activity list
+    public async Task<IEnumerable<ActivityListModel>> AddEvalToList(
+        IEnumerable<ActivityListModel> enrolledActivities, Guid studentId)
+    {
+        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
+        var activityWithEvalList = enrolledActivities.ToList();
+        
+        IQueryable<EvaluationEntity> evalQuery = uow.GetRepository<EvaluationEntity, EvaluationEntityMapper>().Get();
+        foreach (var activity in activityWithEvalList)
+        {
+            EvaluationEntity? evaluationEntity = await evalQuery
+                .SingleOrDefaultAsync(e => e.StudentId == studentId && e.ActivityId == activity.Id)
+                .ConfigureAwait(false);
+
+            if (evaluationEntity is not null)
+                activity.Score = evaluationEntity.Score;
+            else
+                activity.Score = 0;
+        }
+        return activityWithEvalList;
     }
 
     public async Task<ObservableCollection<ActivityListModel>> FilterActivitiesByTimeAsync(
