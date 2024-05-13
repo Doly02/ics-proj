@@ -23,12 +23,6 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- Back Button -->
-            <Button Text="Back" Grid.Column="0"
-                Command="{Binding Source={x:Reference EnrolledListViewRoot}, Path=BindingContext.GoToDetailBackCommand}" 
-                CommandParameter="{Binding StudentId}"
-                HorizontalOptions="Start" VerticalOptions="Center"
-                BackgroundColor="LightGray" TextColor="Black" Margin="10"/>
 
             <!-- Student Name Label -->
             <Label Text="{Binding StudentFullName}" Grid.Column="1"
@@ -74,11 +68,18 @@
 
 
         <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Padding="10">
+
+            <Button Text="Back"
+            Command="{Binding Source={x:Reference EnrolledListViewRoot}, Path=BindingContext.GoToDetailBackCommand}" 
+            CommandParameter="{Binding StudentId}"
+            TextColor="Black"/>
+
             <Button Text="Add" 
             Command="{Binding GoToEditCommand}"
             TextColor="Black"/>
             <HorizontalStackLayout>
-                <Entry Placeholder="Enter search text" 
+                <Entry Placeholder="Enter search text"
+                PlaceholderColor="Black"
                Text="{Binding SearchText, Mode=TwoWay}"
                WidthRequest="300" MinimumWidthRequest="200" MaximumWidthRequest="400" VerticalOptions="Center"
                BackgroundColor="#CCCCCC"
@@ -86,13 +87,37 @@
                 <Button Text="Search" 
                 Command="{Binding SearchCommand}" VerticalOptions="Center"
                 TextColor="Black"/>
-            </HorizontalStackLayout>
-            <Button Text="Sort By Surname Ascending" 
+            <Grid ColumnDefinitions="2*, *, *">
+                <Label Grid.Column="0"
+           Grid.RowSpan="2"
+           Text="Sort by name"/>
+                <Button Grid.Column="1"
+            Text="asc"
             Command="{Binding SortByNameAscCommand}"
-            TextColor="Black"/>
-            <Button Text="Sort By Surname Descending" 
+            TextColor="Black" />
+                <Button Grid.Column="2"
+            Text="desc"
             Command="{Binding SortByNameDescCommand}"
-            TextColor="Black"/>
+            TextColor="Black" />
+            </Grid>
+
+            <Grid ColumnDefinitions="2*, *, *">
+                <Label Grid.Column="0"
+           Grid.Row="0"
+           Grid.RowSpan="2"
+           Text="Sort by Abbreviation"/>
+                <Button Grid.Column="1"
+            Text="asc"
+            Command="{Binding SortByAbbrAscCommand}"
+            TextColor="Black" />
+                <Button Grid.Column="2"
+            Text="desc"
+            Command="{Binding SortByAbbrDescCommand}"
+            TextColor="Black" />
+            </Grid>
+
+                
+            </HorizontalStackLayout>
         </StackLayout>
 
 
