@@ -25,15 +25,20 @@
                 <!-- Student's Name -->
                 <Entry Placeholder="Name" 
                        TextColor="Black"
-                       Text="{Binding NewStud.Name, Mode=TwoWay}" />
+                       Text="{Binding NewStud.Name, Mode=TwoWay}"
+                       Background="#CCCCCC" />
 
                 <!-- Student's Surname -->
                 <Entry Placeholder="Surname" 
                        TextColor="Black"
+                       Background="#CCCCCC"
                        Text="{Binding NewStud.Surname, Mode=TwoWay}" />
 
                 <!-- URL of Picture -->
-                <Entry Placeholder="URL of Profile Picture" Text="{Binding NewStud.ImageUrl, Mode=TwoWay}" />
+                <Entry Placeholder="URL of Profile Picture" 
+                       Text="{Binding NewStud.ImageUrl, Mode=TwoWay}"
+                       TextColor="Black"
+                       Background="#CCCCCC"/>
             </VerticalStackLayout>
             </ScrollView>
             <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Padding="10">

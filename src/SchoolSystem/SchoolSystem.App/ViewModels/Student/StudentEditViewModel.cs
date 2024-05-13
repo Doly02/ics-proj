@@ -12,7 +12,8 @@ namespace SchoolSystem.App.ViewModels;
 public partial class StudentEditViewModel(
     IStudentFacade studentFacade,
     INavigationService navigationService,
-    IMessengerService messengerService)
+    IMessengerService messengerService,
+    IAlertService alertService)
     : ViewModelBase(messengerService), IRecipient<StudentAddMessage>, IRecipient<StudentDeleteMessage>
 {
     public StudentDetailModel StudDetail { get; set; } = StudentDetailModel.Empty;
@@ -20,11 +21,23 @@ public partial class StudentEditViewModel(
     [RelayCommand]
     private async Task SaveAsync()
     {
-        await studentFacade.SaveAsync(StudDetail);
-        MessengerService.Send(new StudentEditMessage { StudentId = StudDetail.Id });
-
-        //navigationService.SendBackButtonPressed();
-        await navigationService.GoToAsync("//students");
+        if (string.IsNullOrWhiteSpace(StudDetail.Name))
+        {
+            await alertService.DisplayAsync("Operation Failed",
+                "The Name is Empty.");
+        }
+        else if (string.IsNullOrWhiteSpace(StudDetail.Surname))
+        {
+            await alertService.DisplayAsync("Operation Failed",
+                "The Surname is Empty.");
+        }
+        else
+        {
+            await studentFacade.SaveAsync(StudDetail);
+            MessengerService.Send(new StudentEditMessage { StudentId = StudDetail.Id });
+            //navigationService.SendBackButtonPressed();
+            await navigationService.GoToAsync("//students");
+        }
     }
     
     [RelayCommand]

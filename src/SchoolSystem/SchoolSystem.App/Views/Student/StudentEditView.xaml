@@ -14,17 +14,20 @@
             <!-- Student's Name -->
             <Entry Placeholder="Name" 
                    Text="{Binding StudDetail.Name, Mode=TwoWay}" 
-                   TextColor="Black"/>
+                   TextColor="Black"
+                   Background="#CCCCCC"/>
 
             <!-- Student's Surname -->
             <Entry Placeholder="Surname" 
                    Text="{Binding StudDetail.Surname, Mode=TwoWay}" 
-                   TextColor="Black"/>
+                   TextColor="Black"
+                   Background="#CCCCCC"/>
 
             <!-- URL of Picture -->
             <Entry Placeholder="URL of Picture" 
                    Text="{Binding StudDetail.ImageUrl, Mode=TwoWay}" 
-                   TextColor="Black"/>
+                   TextColor="Black"
+                   Background="#CCCCCC"/>
 
             <!-- Button For Storing Data -->
             <Button Text="Save" 
