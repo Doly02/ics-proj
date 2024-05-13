@@ -10,7 +10,7 @@
         BackgroundColor="White">
         <VerticalStackLayout Spacing="25" Padding="30">
             <!-- Image of the Student -->
-            <Image Source="{Binding StudDetail.ImageUrl, FallbackValue='default_student.jpeg'}"
+            <Image Source="{Binding StudDetail.ImageUrl, TargetNullValue='default_student.jpeg',FallbackValue='default_student.jpeg'}"
                    Aspect="AspectFit"
                    WidthRequest="400"
                    HeightRequest="400"

@@ -17,7 +17,7 @@
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Spacing="25" Padding="30">
                 <!-- Image of the Student -->
-                <Image Source="{Binding NewStud.ImageUrl, FallbackValue='default_student.jpeg'}"
+                <Image Source="{Binding NewStud.ImageUrl, TargetNullValue='default_student.jpeg',FallbackValue='default_student.jpeg'}"
                        Aspect="AspectFit"
                        HeightRequest="200"
                        HorizontalOptions="Center" />
