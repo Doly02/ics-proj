@@ -15,5 +15,6 @@ public interface IActivityFacade : IFacade<ActivityEntity, ActivityListModel, Ac
 
     Task<IEnumerable<ActivityListModel>> GetActivitiesWithEvalAsync(Guid subjectId, Guid studentId);
 
-
+    Task<IEnumerable<ActivityListModel>> AddEvalToList(
+        IEnumerable<ActivityListModel> enrolledActivities, Guid studentId);
 }

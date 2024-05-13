@@ -56,6 +56,7 @@ public partial class EnrolledActivityListViewModel (
     private async Task SortActivitiesAscendingAsync()
     {
         EnrolledActivities = await activityFacade.SortActivitiesAscendingAsync(SubjectId);
+        EnrolledActivities = await activityFacade.AddEvalToList(EnrolledActivities, StudentId);
         OnPropertyChanged(nameof(EnrolledActivities));
     }
 
@@ -63,6 +64,7 @@ public partial class EnrolledActivityListViewModel (
     private async Task SortActivitiesDescendingAsync()
     {
         EnrolledActivities = await activityFacade.SortActivitiesDescendingAsync(SubjectId);
+        EnrolledActivities = await activityFacade.AddEvalToList(EnrolledActivities, StudentId);
         OnPropertyChanged(nameof(EnrolledActivities));
     }
     
