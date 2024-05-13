@@ -60,8 +60,8 @@
 
         <!-- Bottom Bar With Buttons -->
         <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Padding="10">
-            <Button Text="Sort Ascending" Command="{Binding SortActivitiesAscendingCommand}" />
-            <Button Text="Sort Descending" Command="{Binding SortActivitiesDescendingCommand}" />
+            <Button Text="Sort by Name Ascending" Command="{Binding SortActivitiesAscendingCommand}" />
+            <Button Text="Sort by Name Descending" Command="{Binding SortActivitiesDescendingCommand}" />
         </StackLayout>
     </Grid>
 </views:ContentPageBase>
