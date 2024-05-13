@@ -9,20 +9,29 @@
                      
                        x:DataType="viewModels:SubjectEditViewModel"
                        Style="{StaticResource ContentPageStyle}">
-    <ScrollView>
-        <VerticalStackLayout Spacing="25" Padding="30">
-
-            <Button Text="back" Command="{Binding BackCommand}" BackgroundColor="MediumPurple"/>
-            <!-- Student's Name -->
-            <Entry Placeholder="Name" Text="{Binding Subject.Name, Mode=TwoWay}" />
-
-            <!-- Student's Surname -->
-            <Entry Placeholder="Abbreviation" Text="{Binding Subject.Abbreviation, Mode=TwoWay}" />
-
-            <!-- Button For Storing Data -->
-            <Button Text="Add" Command="{Binding SaveCommand}" />
-            <!-- Should Be Implemented Soon Indicator if Operation Succeeded or Not -->
-        </VerticalStackLayout>
-    </ScrollView>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Spacing="25" Padding="30">
+                <Entry Placeholder="Name"
+                       TextColor="Black"
+                       Text="{Binding Subject.Name, Mode=TwoWay}" />
+                <Entry Placeholder="Abbreviation"
+                       TextColor="Black"
+                       Text="{Binding Subject.Abbreviation, Mode=TwoWay}" />
+            </VerticalStackLayout>
+        </ScrollView>
+        <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Padding="10">
+            <Button Text="Back" 
+                    Command="{Binding BackCommand}"/>
+            <Button Text="Save" 
+                    Command="{Binding SaveCommand}"
+                    BackgroundColor="#7AB2B2"
+                    TextColor="Black"/>
+        </StackLayout>
+    </Grid>
 </views:ContentPageBase>
 

@@ -18,38 +18,37 @@
                 <CollectionView ItemsSource="{Binding Subjects}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="m:SubjectListModel">
-                            <Frame Margin="10" Padding="5" CornerRadius="10" BorderColor="#CCCCCC">
-                                <Grid ColumnDefinitions="*,4*,6*">
-                                    <Label Grid.Column="0"
-                                           FontSize="16"
-                                           FontAttributes="Bold"
-                                           Text="{Binding Abbreviation}"
-                                           VerticalOptions="Center"
-                                           HorizontalOptions="Start"/>
-
-                                    <Label Grid.Column="1"
-                                           FontSize="14"
-                                           Text="{Binding Name}"
-                                           VerticalOptions="Center"
-                                           HorizontalOptions="Start" />
-                                    <StackLayout Grid.Column="2" Orientation="Horizontal" HorizontalOptions="End" VerticalOptions="Center" Spacing="20">
-                                        <Button Text="delete"
-                                                TextColor="Black"
-                                                BackgroundColor="IndianRed"
-                                                Command="{Binding Source={x:Reference SubjectListViewRoot}, Path=BindingContext.RemoveIngredientCommand}"
-                                                CommandParameter="{Binding Id}" />
-
-                                        <Button Text="edit"
-                                                TextColor="Black"
-                                                BackgroundColor="Yellow"
-                                                Command="{Binding Source={x:Reference SubjectListViewRoot}, Path=BindingContext.GoToEditCommand}"
-                                                CommandParameter="{Binding Id}"/>
-                                    
-                                        <Button Text="activities"
-                                                TextColor="Black"
-                                                Command="{Binding Source={x:Reference SubjectListViewRoot}, Path=BindingContext.GoToActivitiesCommand}"
-                                                CommandParameter="{Binding Id}"/>
+                            <Frame Margin="10" Padding="5" CornerRadius="10" BorderColor="Black" BackgroundColor="#CCCCCC">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout Grid.Column="0" Orientation="Vertical" Margin="10">
+                                        <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                                        <Label Text="{Binding Abbreviation}" FontSize="14" TextColor="Black"/>
                                     </StackLayout>
+                                    <Button Grid.Column="1"
+                                            Text="Activities"
+                                            TextColor="Black"
+                                            Margin="0,0,10,0"
+                                            Command="{Binding Source={x:Reference SubjectListViewRoot}, Path=BindingContext.GoToActivitiesCommand}"
+                                            CommandParameter="{Binding Id}"/>
+                                    <Button Grid.Column="2"
+                                            Text="Edit"
+                                            TextColor="Black"
+                                            BackgroundColor="#7AB2B2"
+                                            Margin="0,0,10,0"
+                                            Command="{Binding Source={x:Reference SubjectListViewRoot}, Path=BindingContext.GoToEditCommand}"
+                                            CommandParameter="{Binding Id}"/>
+                                    <Button Grid.Column="3"
+                                            Text="Delete"
+                                            BackgroundColor="#FA7070"
+                                            TextColor="Black"
+                                            Command="{Binding Source={x:Reference SubjectListViewRoot}, Path=BindingContext.RemoveIngredientCommand}"
+                                            CommandParameter="{Binding Id}" />
                                 </Grid>
                             </Frame>
                         </DataTemplate>
@@ -67,33 +66,44 @@
                        TextChanged="searchBar_TextChanged"
                        SearchCommand="{Binding SearchCommand}"
                        SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
-            <Grid ColumnDefinitions="2*, *, *">
-                <Label Grid.Column="0"
-                       Grid.RowSpan="2"
-                       Text="Sort by name"/>
-                <Button Grid.Column="1"
-                        Text="asc"
-                        Command="{Binding SortByNameAscCommand}"
-                        TextColor="Black" />
-                <Button Grid.Column="2"
-                        Text="desc"
-                        Command="{Binding SortByNameDescCommand}"
-                        TextColor="Black" />
-            </Grid>
-            <Grid ColumnDefinitions="2*, *, *">
-                <Label Grid.Column="0"
-                       Grid.Row="0"
-                       Grid.RowSpan="2"
-                       Text="Sort by Abbreviation"/>
-                <Button Grid.Column="1"
-                        Text="asc"
-                        Command="{Binding SortByAbbrAscCommand}"
-                        TextColor="Black" />
-                <Button Grid.Column="2"
-                        Text="desc"
-                        Command="{Binding SortByAbbrDescCommand}"
-                        TextColor="Black" />
-            </Grid>
+            <Frame Padding="5"  CornerRadius="10" BorderColor="#CCCCCC">
+                <Grid ColumnDefinitions="Auto, Auto, Auto">
+                    <Label Grid.Column="0"
+                           Margin="2"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start"
+                           Text="Sort by name"/>
+                    <Button Grid.Column="1"
+                            Margin="2"
+                            Text="asc"
+                            Command="{Binding SortByNameAscCommand}"
+                            TextColor="Black" />
+                    <Button Grid.Column="2"
+                            Margin="2"
+                            Text="desc"
+                            Command="{Binding SortByNameDescCommand}"
+                            TextColor="Black" />    
+                </Grid>
+            </Frame>
+            <Frame Padding="5" CornerRadius="10" BorderColor="#CCCCCC">
+                <Grid ColumnDefinitions="Auto, Auto, Auto">
+                    <Label Grid.Column="0"
+                           Margin="2"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start"
+                           Text="Sort by abbreviation"/>
+                    <Button Grid.Column="1"
+                            Margin="2"
+                            Text="asc"
+                            Command="{Binding SortByAbbrAscCommand}"
+                            TextColor="Black" />
+                    <Button Grid.Column="2"
+                            Margin="2"
+                            Text="desc"
+                            Command="{Binding SortByAbbrDescCommand}"
+                            TextColor="Black" />
+                </Grid>
+            </Frame>
         </StackLayout>
 
     </Grid>
