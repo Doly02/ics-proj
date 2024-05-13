@@ -58,8 +58,6 @@
                         TextColor="Black"
                         BackgroundColor="#7AB2B2"/>
             </StackLayout>
-            
-            <!-- TODO Should Be Implemented Soon Indicator if Operation Succeeded or Not -->
         </VerticalStackLayout>
     </ScrollView>
 </views:ContentPageBase>

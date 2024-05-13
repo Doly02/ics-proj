@@ -77,10 +77,18 @@ public partial class ActivityEditViewModel(
                 Activity.Start = StartDateTime;
                 Activity.End = EndDateTime;
                 Activity.ActivityType = SelectedActivityType;
-            
-                await activityFacade.SaveAsync(Activity, SubjectId);
-                MessengerService.Send(new ActivityEditMessage { ActivityId = Activity.Id });
-                navigationService.SendBackButtonPressed();
+                
+                if (string.IsNullOrWhiteSpace(Activity.Name))
+                {
+                    await alertService.DisplayAsync("Operation Failed",
+                        "The Name is Empty.");
+                }
+                else
+                {
+                    await activityFacade.SaveAsync(Activity, SubjectId);
+                    MessengerService.Send(new ActivityEditMessage { ActivityId = Activity.Id });
+                    navigationService.SendBackButtonPressed();
+                }
             }
             else
             {
