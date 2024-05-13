@@ -10,38 +10,56 @@
                        Style="{StaticResource ContentPageStyle}">
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30">
-            <Button Text="Back" Command="{Binding BackCommand}" />
             <!-- Activity name -->
-            <Entry Placeholder="Name" Text="{Binding Activity.Name, Mode=TwoWay}" />
+            <Entry Placeholder="Name" 
+                   Text="{Binding Activity.Name, Mode=TwoWay}" 
+                   TextColor="Black"
+                   />
             
             <!-- Activity start -->
-            <Label Text="Start date:" />
+            <Label Text="Start date:" TextColor="Black"/>
             <HorizontalStackLayout>
-                <DatePicker Date="{Binding StartDate, Mode=TwoWay}" />
-                <TimePicker Time="{Binding StartTime, Mode=TwoWay}" />
+                <DatePicker Date="{Binding StartDate, Mode=TwoWay}" 
+                            TextColor="Black" />
+                <TimePicker Time="{Binding StartTime, Mode=TwoWay}" 
+                            TextColor="Black"/>
             </HorizontalStackLayout>
             
             <!-- Activity end -->
-            <Label Text="End date:" />
+            <Label Text="End date:" TextColor="Black"/>
             <HorizontalStackLayout>
-                <DatePicker Date="{Binding EndDate, Mode=TwoWay}" />
-                <TimePicker Time="{Binding EndTime, Mode=TwoWay}" />
+                <DatePicker Date="{Binding EndDate, Mode=TwoWay}" 
+                            TextColor="Black" />
+                <TimePicker Time="{Binding EndTime, Mode=TwoWay}" 
+                            TextColor="Black"/>
             </HorizontalStackLayout>
             
             <!-- Activity place -->
-            <Entry Placeholder="Place" Text="{Binding Activity.Place, Mode=TwoWay}" />
+            <Entry Placeholder="Place" 
+                   Text="{Binding Activity.Place, Mode=TwoWay}" 
+                   TextColor="Black"/>
             
             <!-- Activity type -->
             <Picker Title="Type:"
                     ItemsSource="{Binding ActivityTypes}"
-                    SelectedItem="{Binding SelectedActivityType}" />
+                    SelectedItem="{Binding SelectedActivityType}" 
+                    TextColor="Black"/>
             
             <!-- Activity description -->
-            <Entry Placeholder="Description" Text="{Binding Activity.Description, Mode=TwoWay}" />
+            <Entry Placeholder="Description" 
+                   Text="{Binding Activity.Description, Mode=TwoWay}"
+                   TextColor="Black"/>
 
             <!-- Button For Storing Data -->
-            <Button Text="Enter" Command="{Binding SaveCommand}" />
-            <!-- Should Be Implemented Soon Indicator if Operation Succeeded or Not -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Padding="10">
+                <Button Text="Back" Command="{Binding BackCommand}"
+                        TextColor="Black"/>
+                <Button Text="Save" Command="{Binding SaveCommand}" 
+                        TextColor="Black"
+                        BackgroundColor="#7AB2B2"/>
+            </StackLayout>
+            
+            <!-- TODO Should Be Implemented Soon Indicator if Operation Succeeded or Not -->
         </VerticalStackLayout>
     </ScrollView>
 </views:ContentPageBase>
