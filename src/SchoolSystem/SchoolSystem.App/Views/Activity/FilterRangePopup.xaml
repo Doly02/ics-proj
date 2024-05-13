@@ -7,14 +7,20 @@
                Color="Transparent"
                Size="300,500">
     
-    <Frame CornerRadius="20" Padding="0" Margin="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White">
+    <Frame CornerRadius="20" Padding="0" Margin="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#CCCCCC">
         <VerticalStackLayout Spacing="15" Padding="20">
-            <Label Text="Start:" FontAttributes="Bold"/>
-            <DatePicker x:Name="StartDatePopup" />
-            <TimePicker x:Name="StartTimePopup" />
-            <Label Text="End:" FontAttributes="Bold"/>
-            <DatePicker x:Name="EndDatePopup" />
-            <TimePicker x:Name="EndTimePopup" />
+            <Label Text="Start:" FontAttributes="Bold"
+                   TextColor="Black"/>
+            <DatePicker x:Name="StartDatePopup"
+                        TextColor="Black"/>
+            <TimePicker x:Name="StartTimePopup"
+                        TextColor="Black"/>
+            <Label Text="End:" FontAttributes="Bold"
+                   TextColor="Black"/>
+            <DatePicker x:Name="EndDatePopup"
+                        TextColor="Black"/>
+            <TimePicker x:Name="EndTimePopup"
+                        TextColor="Black"/>
             <Button Text="Enter" Clicked="EnterClick" 
                     BackgroundColor="#7AB2B2"
                     TextColor="Black"/>

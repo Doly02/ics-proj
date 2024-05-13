@@ -6,7 +6,8 @@
                        x:Class="SchoolSystem.App.Views.Student.StudentDetailView"
                        x:Name="StudentDetailViewRoot"
                        x:DataType="vm:StudentDetailViewModel">
-    <ScrollView>
+    <ScrollView
+        BackgroundColor="White">
         <VerticalStackLayout Spacing="25" Padding="30">
             <!-- Image of the Student -->
             <Image Source="{Binding StudDetail.ImageUrl, FallbackValue='default_student.jpeg'}"
@@ -60,10 +61,9 @@
                         BackgroundColor="#FA7070"
                         TextColor="Black"
                         HorizontalOptions="FillAndExpand" />
-                <Button Text="Enrolled"
+                <Button Text="Subjects"
                         Command="{Binding Source={x:Reference StudentDetailViewRoot}, Path=BindingContext.GoToEnrolledCommand}"
                         CommandParameter="{Binding Id}"
-                        BackgroundColor="#FA7070"
                         TextColor="Black"
                         HorizontalOptions="FillAndExpand" />
             </StackLayout>

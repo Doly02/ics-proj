@@ -33,6 +33,7 @@
             <!-- Student Name Label -->
             <Label Text="{Binding StudentFullName}" Grid.Column="1"
                FontSize="24" FontAttributes="Bold" 
+               TextColor="Black"
                HorizontalOptions="Center" VerticalOptions="Center"/>
         </Grid>
 
@@ -42,7 +43,7 @@
                 <CollectionView ItemsSource="{Binding EnrolledList}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="m:EnrolledSubjectsListModel">
-                            <Frame Margin="10" Padding="5" CornerRadius="10" BorderColor="#CCCCCC">
+                            <Frame Margin="10" Padding="5" CornerRadius="10" BorderColor="#CCCCCC" BackgroundColor="#CCCCCC">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
@@ -50,20 +51,19 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     <StackLayout Grid.Column="0" Orientation="Vertical" Margin="10">
-                                        <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold"/>
-                                        <Label Text="{Binding Abbreviation}" FontSize="14"/>
+                                        <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                                        <Label Text="{Binding Abbreviation}" FontSize="14" TextColor="Black"/>
                                     </StackLayout>
                                     <Button Grid.Column="1" Text="Activity" 
                                             Command="{Binding Source={x:Reference EnrolledListViewRoot}, Path=BindingContext.GoToDetailCommand}" 
                                             CommandParameter="{Binding SubjectId}"
-                                            BackgroundColor="Purple"
-                                            TextColor="White"
+                                            TextColor="Black"
                                             Margin="0,0,10,0"/>
                                     <Button Grid.Column="2" Text="Delete" 
                                             Command="{Binding Source={x:Reference EnrolledListViewRoot}, Path=BindingContext.RemoveEnrolledSubjectCommand}" 
                                             CommandParameter="{Binding Id}"
-                                            BackgroundColor="Red"
-                                            TextColor="White"/>
+                                            BackgroundColor="#FA7070"
+                                            TextColor="Black"/>
                                 </Grid>
                             </Frame>
                         </DataTemplate>
@@ -81,6 +81,7 @@
                 <Entry Placeholder="Enter search text" 
                Text="{Binding SearchText, Mode=TwoWay}"
                WidthRequest="300" MinimumWidthRequest="200" MaximumWidthRequest="400" VerticalOptions="Center"
+               BackgroundColor="#CCCCCC"
                TextColor="Black"/>
                 <Button Text="Search" 
                 Command="{Binding SearchCommand}" VerticalOptions="Center"
