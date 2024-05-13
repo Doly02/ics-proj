@@ -41,7 +41,7 @@
                 <Button Text="Back" 
                         Command="{Binding GoBackToListCommand}"/>
                 <Button Text="Save" 
-                        Command="{Binding AddCommand}"
+                        Command="{Binding SaveCommand}"
                         BackgroundColor="#7AB2B2"
                         TextColor="Black"/>
                 <Button Text="Clear" 

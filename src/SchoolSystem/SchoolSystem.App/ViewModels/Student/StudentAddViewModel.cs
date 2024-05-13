@@ -16,7 +16,16 @@ public partial class StudentAddViewModel(
 {
     public StudentDetailModel NewStud { get; set; } = StudentDetailModel.Empty;
 
+    [RelayCommand]
+    private async Task SaveAsync()
+    {
+        await studentFacade.SaveAsync(NewStud);
+        MessengerService.Send(new StudentEditMessage { StudentId = NewStud.Id });
 
+        //navigationService.SendBackButtonPressed();
+        await navigationService.GoToAsync("//students");
+    }
+    
     [RelayCommand]
     public async Task AddAsync()
     {

@@ -13,9 +13,7 @@ public class NavigationService : INavigationService
 {
     public IEnumerable<RouteModel> Routes { get; } = new List<RouteModel>
     {
-        // Home? would be before everything (//home/...)
-        //new("//home", typeof(HomeView), typeof(HomeViewModel)),
-        
+
         // Student
         new("//students", typeof(StudentListView), typeof(StudentListViewModel)),
         new("//students/add", typeof(StudentAddView), typeof(StudentAddViewModel)),
