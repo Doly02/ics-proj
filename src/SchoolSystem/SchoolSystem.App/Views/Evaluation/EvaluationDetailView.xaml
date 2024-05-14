@@ -10,35 +10,37 @@
 
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30">
-            
-            <!-- Header -->
-            <Label Text="EVALUATION"
-                   FontSize="16"
-                   VerticalOptions="Center"
-                   HorizontalOptions="Center"
-                   TextColor="Black"/>
-            
-            <!-- Activity and Student name -->
             <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                <!-- Header -->
+                <Label Text="EVALUATION"
+                       FontSize="22"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       FontAttributes="Bold"
+                       TextColor="Black"/>
+                <!-- Activity name -->
                 <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
                     <Label Text="of "
-                           FontSize="16"
+                           FontSize="18"
                            VerticalOptions="Center"
-                           TextColor="Black"/>
+                           TextColor="#222222"/>
                     <Label Text="{Binding EvaluationDetail.ActivityName}" 
-                           FontSize="16"
+                           FontSize="18"
                            VerticalOptions="Center"
-                           TextColor="Black"/>
+                           FontAttributes="Bold"
+                           TextColor="#222222"/>
                 </HorizontalStackLayout>
+                <!-- Student name -->
                 <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
                     <Label Text="for "
                            FontSize="16"
                            VerticalOptions="Center"
-                           TextColor="Black"/>
+                           TextColor="#444444"/>
                     <Label Text="{Binding EvaluationDetail.StudentFullName}" 
                            FontSize="16"
                            VerticalOptions="Center"
-                           TextColor="Black"/>
+                           FontAttributes="Bold"
+                           TextColor="#444444"/>
                 </HorizontalStackLayout>
             </VerticalStackLayout>
 
@@ -46,7 +48,7 @@
             <Frame BorderColor="Black" 
                    BackgroundColor="#CCCCCC" 
                    Padding="0"
-                   WidthRequest="200"
+                   WidthRequest="300"
                    CornerRadius="0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -74,16 +76,21 @@
             </Frame>
             
             <!-- Note -->
-            <Label Text="Note:"
-                   FontSize="16"
-                   TextColor="Black"/>
-            <Frame BorderColor="Black" 
-                   BackgroundColor="#CCCCCC" 
-                   Padding="10"
-                   MinimumHeightRequest="100">
-                <Label Text="{Binding EvaluationDetail.Note}" 
-                       TextColor="Black"/>
-            </Frame>
+            <VerticalStackLayout HorizontalOptions="Center" Spacing="5">
+                <Label Text="Note:"
+                       FontSize="16"
+                       TextColor="Black"
+                       HorizontalOptions="Start"/>
+                <Frame BorderColor="Black" 
+                       BackgroundColor="#CCCCCC"
+                       MinimumWidthRequest="800"
+                       Padding="10"
+                       MinimumHeightRequest="100"
+                       HorizontalOptions="Center">
+                    <Label Text="{Binding EvaluationDetail.Note}" 
+                           TextColor="Black"/>
+                </Frame>
+            </VerticalStackLayout>
             
             <!-- Buttons for operations -->
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Padding="10">

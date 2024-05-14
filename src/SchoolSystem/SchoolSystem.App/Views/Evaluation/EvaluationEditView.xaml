@@ -15,33 +15,58 @@
             <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
                 <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
                     <Label Text="{Binding EvaluationDetail.ActivityName}" 
-                           FontSize="16"
+                           FontSize="22"
                            VerticalOptions="Center"
+                           FontAttributes="Bold"
                            TextColor="Black"/>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
                     <Label Text="for "
-                           FontSize="16"
+                           FontSize="18"
                            VerticalOptions="Center"
-                           TextColor="Black"/>
+                           TextColor="#444444"/>
                     <Label Text="{Binding EvaluationDetail.StudentFullName}" 
-                           FontSize="16"
+                           FontSize="18"
                            VerticalOptions="Center"
-                           TextColor="Black"/>
+                           FontAttributes="Bold"
+                           TextColor="#444444"/>
                 </HorizontalStackLayout>
             </VerticalStackLayout>
 
             <!-- Points -->
-            <Entry Placeholder="Score" 
-                   Text="{Binding EvaluationDetail.Score, Mode=TwoWay}"
-                   TextColor="Black"
-                   Background="#CCCCCC"/>
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                <Label Text="Points:"
+                       WidthRequest="55"
+                       FontSize="16"
+                       TextColor="Black"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"/>
+                <Entry Placeholder="0" 
+                       TextColor="Black"
+                       Background="#CCCCCC"
+                       MinimumWidthRequest="800"
+                       HorizontalOptions="Center"
+                       Text="{Binding EvaluationDetail.Score, Mode=TwoWay}" />
+            </HorizontalStackLayout>
             
             <!-- Note -->
-            <Entry Placeholder="Note" 
-                   Text="{Binding EvaluationDetail.Note, Mode=TwoWay}"
-                   TextColor="Black"
-                   Background="#CCCCCC"/>
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                <Label Text="Note:"
+                       WidthRequest="55"
+                       Padding="0, 5, 0, 0"
+                       FontSize="16"
+                       TextColor="Black"
+                       VerticalOptions="Start"
+                       HorizontalOptions="Start"/>
+                <Editor Placeholder="Note" 
+                        VerticalOptions="Center"
+                        TextColor="Black"
+                        BackgroundColor="#CCCCCC"
+                        MinimumWidthRequest="800"
+                        HorizontalOptions="Center"
+                        Text="{Binding EvaluationDetail.Note, Mode=TwoWay}"
+                        AutoSize="TextChanges"/>
+            </HorizontalStackLayout>
             
             <!-- Buttons for operations -->
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Padding="10">
