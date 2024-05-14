@@ -12,27 +12,78 @@
 
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30">
-            <!-- Back -->
-            <Button Text="Back" Command="{Binding BackCommand}" />
+            
             <!-- Header -->
-            <Label Text="Evaluation" FontSize="Large" />
-
+            <Label Text="EVALUATION"
+                   FontSize="16"
+                   VerticalOptions="Center"
+                   TextColor="Black"/>
             <!-- Activity name -->
-            <Label Text="{Binding EvaluationDetail.ActivityName}" FontSize="Medium" />
-
+            <HorizontalStackLayout Spacing="5">
+                <Label Text="of "
+                       FontSize="16"
+                       VerticalOptions="Center"
+                       TextColor="Black"/>
+                <Label Text="{Binding EvaluationDetail.ActivityName}" 
+                       FontSize="16"
+                       VerticalOptions="Center"
+                       HorizontalOptions="FillAndExpand"
+                       TextColor="Black"/>
+            </HorizontalStackLayout>
             <!-- Student name -->
-            <Label Text="{Binding EvaluationDetail.StudentFullName}" FontSize="Medium" />
+            <HorizontalStackLayout Spacing="5">
+                <Label Text="for "
+                       FontSize="16"
+                       VerticalOptions="Center"
+                       TextColor="Black"/>
+                <Label Text="{Binding EvaluationDetail.StudentFullName}" 
+                       FontSize="16"
+                       VerticalOptions="Center"
+                       HorizontalOptions="FillAndExpand"
+                       TextColor="Black"/>
+            </HorizontalStackLayout>
             
             <!-- Points -->
-            <Label Text="{Binding EvaluationDetail.Score}" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+    
+                <Label Text="Points" 
+                       Grid.Column="0" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center"
+                       TextColor="Black"/>
+                <Label Text="{Binding EvaluationDetail.Score}" 
+                       Grid.Column="1" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center" 
+                       TextColor="Black"/>
+            </Grid>
 
             <!-- Note -->
-            <Label Text="{Binding EvaluationDetail.Note}" />
-
-            <!-- Edit -->
-            <Button Text="Edit" Command="{Binding GoToEditCommand}" />
-            <!-- Remove -->
-            <Button Text="Remove" Command="{Binding DeleteCommand}"/>
+            <Label Text="{Binding EvaluationDetail.Note}" 
+                   TextColor="Black"/>
+            
+            <!-- Buttons for operations -->
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <!-- Back -->
+                <Button Text="Back" Command="{Binding BackCommand}"
+                        HorizontalOptions="FillAndExpand" 
+                        TextColor="Black"/>
+                <!-- Edit -->
+                <Button Text="Edit" Command="{Binding GoToEditCommand}" 
+                        BackgroundColor="#7AB2B2"
+                        TextColor="Black"
+                        HorizontalOptions="FillAndExpand"/>
+                <!-- Remove -->
+                <Button Text="Delete"
+                        Command="{Binding DeleteCommand}"
+                        BackgroundColor="#FA7070"
+                        TextColor="Black"
+                        HorizontalOptions="FillAndExpand" />
+            </StackLayout>
 
         </VerticalStackLayout>
     </ScrollView>
