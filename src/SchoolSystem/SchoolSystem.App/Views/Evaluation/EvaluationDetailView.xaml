@@ -3,10 +3,8 @@
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                        xmlns:views="clr-namespace:SchoolSystem.App.Views"
                        xmlns:viewModels="clr-namespace:SchoolSystem.App.ViewModels"
-
                        xmlns:models="clr-namespace:SchoolSystem.BL.Models;assembly=SchoolSystem.BL"
                        x:Class="SchoolSystem.App.Views.Evaluation.EvaluationDetailView"
-                     
                        x:DataType="viewModels:EvaluationDetailViewModel"
                        Style="{StaticResource ContentPageStyle}">
 
@@ -17,76 +15,93 @@
             <Label Text="EVALUATION"
                    FontSize="16"
                    VerticalOptions="Center"
+                   HorizontalOptions="Center"
                    TextColor="Black"/>
-            <!-- Activity name -->
-            <HorizontalStackLayout Spacing="5">
-                <Label Text="of "
-                       FontSize="16"
-                       VerticalOptions="Center"
-                       TextColor="Black"/>
-                <Label Text="{Binding EvaluationDetail.ActivityName}" 
-                       FontSize="16"
-                       VerticalOptions="Center"
-                       HorizontalOptions="FillAndExpand"
-                       TextColor="Black"/>
-            </HorizontalStackLayout>
-            <!-- Student name -->
-            <HorizontalStackLayout Spacing="5">
-                <Label Text="for "
-                       FontSize="16"
-                       VerticalOptions="Center"
-                       TextColor="Black"/>
-                <Label Text="{Binding EvaluationDetail.StudentFullName}" 
-                       FontSize="16"
-                       VerticalOptions="Center"
-                       HorizontalOptions="FillAndExpand"
-                       TextColor="Black"/>
-            </HorizontalStackLayout>
             
+            <!-- Activity and Student name -->
+            <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Label Text="of "
+                           FontSize="16"
+                           VerticalOptions="Center"
+                           TextColor="Black"/>
+                    <Label Text="{Binding EvaluationDetail.ActivityName}" 
+                           FontSize="16"
+                           VerticalOptions="Center"
+                           TextColor="Black"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Label Text="for "
+                           FontSize="16"
+                           VerticalOptions="Center"
+                           TextColor="Black"/>
+                    <Label Text="{Binding EvaluationDetail.StudentFullName}" 
+                           FontSize="16"
+                           VerticalOptions="Center"
+                           TextColor="Black"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
             <!-- Points -->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-    
-                <Label Text="Points" 
-                       Grid.Column="0" 
-                       HorizontalOptions="Center" 
-                       VerticalOptions="Center"
-                       TextColor="Black"/>
-                <Label Text="{Binding EvaluationDetail.Score}" 
-                       Grid.Column="1" 
-                       HorizontalOptions="Center" 
-                       VerticalOptions="Center" 
-                       TextColor="Black"/>
-            </Grid>
+            <Frame BorderColor="Black" 
+                   BackgroundColor="#CCCCCC" 
+                   Padding="0"
+                   WidthRequest="200"
+                   CornerRadius="0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="1" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+        
+                    <Label Text="Points" 
+                           Grid.Column="0" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center"
+                           Margin="10"
+                           TextColor="Black"/>
+                    <BoxView Grid.Column="1" BackgroundColor="Black" 
+                             HorizontalOptions="FillAndExpand"
+                             VerticalOptions="FillAndExpand"/>
+                    <Label Text="{Binding EvaluationDetail.Score}" 
+                           Grid.Column="2" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center" 
+                           Margin="10"
+                           TextColor="Black"/>
+                </Grid>
+            </Frame>
 
             <!-- Note -->
-            <Label Text="{Binding EvaluationDetail.Note}" 
+            <!-- Note -->
+            <Label Text="Note:"
+                   FontSize="16"
                    TextColor="Black"/>
+            <Frame BorderColor="Black" 
+                   BackgroundColor="#CCCCCC" 
+                   Padding="10"
+                   MinimumHeightRequest="100">
+                <Label Text="{Binding EvaluationDetail.Note}" 
+                       TextColor="Black"/>
+            </Frame>
             
             <!-- Buttons for operations -->
-            <StackLayout Orientation="Horizontal" Spacing="10">
-                <!-- Back -->
-                <Button Text="Back" Command="{Binding BackCommand}"
-                        HorizontalOptions="FillAndExpand" 
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Padding="10">
+                <Button Text="Back" 
+                        Command="{Binding BackCommand}" 
                         TextColor="Black"/>
-                <!-- Edit -->
-                <Button Text="Edit" Command="{Binding GoToEditCommand}" 
+                <Button Text="Edit"
+                        Command="{Binding GoToEditCommand}"
                         BackgroundColor="#7AB2B2"
-                        TextColor="Black"
-                        HorizontalOptions="FillAndExpand"/>
-                <!-- Remove -->
+                        TextColor="Black"/>
                 <Button Text="Delete"
                         Command="{Binding DeleteCommand}"
                         BackgroundColor="#FA7070"
-                        TextColor="Black"
-                        HorizontalOptions="FillAndExpand" />
+                        TextColor="Black"/>
             </StackLayout>
 
         </VerticalStackLayout>
     </ScrollView>
     
 </views:ContentPageBase>
-
