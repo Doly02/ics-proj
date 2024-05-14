@@ -72,8 +72,7 @@
                            TextColor="Black"/>
                 </Grid>
             </Frame>
-
-            <!-- Note -->
+            
             <!-- Note -->
             <Label Text="Note:"
                    FontSize="16"

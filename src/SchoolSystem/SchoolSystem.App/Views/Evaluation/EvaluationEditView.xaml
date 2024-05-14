@@ -11,20 +11,48 @@
                        Style="{StaticResource ContentPageStyle}">
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30">
-            <!-- Back -->
-            <Button Text="Back" Command="{Binding GoToDetailCommand}" />
-
-            <!-- Activity name -->
-            <Label Text="{Binding EvaluationDetail.ActivityName}"/>
+            <!-- Activity and Student name -->
+            <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Label Text="{Binding EvaluationDetail.ActivityName}" 
+                           FontSize="16"
+                           VerticalOptions="Center"
+                           TextColor="Black"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Label Text="for "
+                           FontSize="16"
+                           VerticalOptions="Center"
+                           TextColor="Black"/>
+                    <Label Text="{Binding EvaluationDetail.StudentFullName}" 
+                           FontSize="16"
+                           VerticalOptions="Center"
+                           TextColor="Black"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
 
             <!-- Points -->
-            <Entry Placeholder="Score" Text="{Binding EvaluationDetail.Score, Mode=TwoWay}" />
+            <Entry Placeholder="Score" 
+                   Text="{Binding EvaluationDetail.Score, Mode=TwoWay}"
+                   TextColor="Black"
+                   Background="#CCCCCC"/>
             
             <!-- Note -->
-            <Entry Placeholder="Note" Text="{Binding EvaluationDetail.Note, Mode=TwoWay}" />
-
-            <!-- Save -->
-            <Button Text="Enter" Command="{Binding SaveCommand}" />
+            <Entry Placeholder="Note" 
+                   Text="{Binding EvaluationDetail.Note, Mode=TwoWay}"
+                   TextColor="Black"
+                   Background="#CCCCCC"/>
+            
+            <!-- Buttons for operations -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Padding="10">
+                <Button Text="Back" 
+                        Command="{Binding GoToDetailCommand}" 
+                        TextColor="Black"/>
+                <Button Text="Enter"
+                        Command="{Binding SaveCommand}"
+                        BackgroundColor="#7AB2B2"
+                        TextColor="Black"/>
+            </StackLayout>
 
         </VerticalStackLayout>
     </ScrollView>
