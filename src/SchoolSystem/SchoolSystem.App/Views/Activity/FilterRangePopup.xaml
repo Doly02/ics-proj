@@ -7,7 +7,7 @@
                Color="Transparent"
                Size="300,500">
     
-    <Frame CornerRadius="20" Padding="0" Margin="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#CCCCCC">
+    <Frame CornerRadius="20" Padding="0" Margin="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         <VerticalStackLayout Spacing="15" Padding="20">
             <Label Text="Start:" FontAttributes="Bold"
                    TextColor="Black"/>
@@ -27,7 +27,8 @@
             <Button Text="Reset Filters" Clicked="ResetFiltersClick" 
                     BackgroundColor="#FA7070" 
                     TextColor="Black"/>
-            <Button Text="Cancel" Clicked="CancelClick" />
+            <Button Text="Cancel" Clicked="CancelClick" 
+                    TextColor="Black"/>
         </VerticalStackLayout>
     </Frame>
 </toolkit:Popup>

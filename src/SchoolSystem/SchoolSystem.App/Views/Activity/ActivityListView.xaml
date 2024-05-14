@@ -18,16 +18,16 @@
         <!-- Activity List -->
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Spacing="25" Padding="30">
-                <Button Text="Back" Command="{Binding BackCommand}" />
                 <CollectionView ItemsSource="{Binding Activities}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="m:ActivityListModel">
-                            <Frame Margin="10" Padding="5" CornerRadius="10" BorderColor="#CCCCCC">
+                            <Frame Margin="10" Padding="5" BorderColor="Black" BackgroundColor="#CCCCCC">
                                 <StackLayout Orientation="Vertical" Margin="10">
-                                    <Label Text="{Binding ActivityName}" FontSize="16" FontAttributes="Bold"/>
+                                    <Label Text="{Binding ActivityName}" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
                                 </StackLayout>
                                 <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={x:Reference ActivityListViewRoot}, Path=BindingContext.GoToDetailCommand}" CommandParameter="{Binding Id}" />
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference ActivityListViewRoot}, Path=BindingContext.GoToDetailCommand}" 
+                                                          CommandParameter="{Binding Id}" />
                                 </Frame.GestureRecognizers>
                             </Frame>
                         </DataTemplate>
@@ -38,10 +38,21 @@
 
         <!-- Bottom Bar With Buttons -->
         <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Padding="10">
-            <Button Text="Add" Command="{Binding GoToCreateCommand}"/>
-            <Button Text="Filter" Command="{Binding ShowFilterPopupCommand}" />
-            <Button Text="Sort by Name Ascending" Command="{Binding SortActivitiesAscendingCommand}" />
-            <Button Text="Sort by Name Descending" Command="{Binding SortActivitiesDescendingCommand}" />
+            <Button Text="Back" 
+                    Command="{Binding BackCommand}" 
+                    TextColor="Black"/>
+            <Button Text="Add" 
+                    Command="{Binding GoToCreateCommand}"
+                    TextColor="Black"/>
+            <Button Text="Filter" 
+                    Command="{Binding ShowFilterPopupCommand}" 
+                    TextColor="Black"/>
+            <Button Text="Sort by Name Ascending" 
+                    Command="{Binding SortActivitiesAscendingCommand}"
+                    TextColor="Black"/>
+            <Button Text="Sort by Name Descending" 
+                    Command="{Binding SortActivitiesDescendingCommand}"
+                    TextColor="Black"/>
         </StackLayout>
     </Grid>
 </views:ContentPageBase>
