@@ -34,8 +34,8 @@ public partial class EnrolledActivityListViewModel (
         => await navigationService.GoToAsync( "/activityDetail",
             new Dictionary<string, object?>
             {
-                [nameof(ActivityDetailViewModel.Id)] = id,
-                [nameof(ActivityDetailViewModel.SubjectId)] = SubjectId,
+                [nameof(EnrolledActivityDetailViewModel.Id)] = id,
+                [nameof(EnrolledActivityDetailViewModel.SubjectId)] = SubjectId,
             });
     
     ///////////////////// Navigates to the EvaluationDetailViewModel /////////////////////////////////
