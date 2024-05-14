@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:SchoolSystem.App.Views"
+                       xmlns:models="clr-namespace:SchoolSystem.BL.Models;assembly=SchoolSystem.BL"
+                       xmlns:viewModels="clr-namespace:SchoolSystem.App.ViewModels"
+
+                       x:Class="SchoolSystem.App.Views.Activity.EnrolledActivityDetailView"
+                       x:DataType="viewModels:EnrolledActivityDetailViewModel"
+                       Style="{StaticResource ContentPageStyle}">
+    <ScrollView>
+        <VerticalStackLayout Spacing="25" Padding="30">
+            <!-- Activity Name -->
+            <HorizontalStackLayout Spacing="5">
+                <Label Text="Name:"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       TextColor="Black"/>
+                <Label Text="{Binding Activity.Name}"
+                       FontSize="16"
+                       VerticalOptions="Center"
+                       HorizontalOptions="FillAndExpand"
+                       TextColor="Black"/>
+            </HorizontalStackLayout>
+            
+            <!-- Activity Place  -->
+            <HorizontalStackLayout Spacing="5">
+                <Label Text="Place:"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       TextColor="Black"/>
+                <Label Text="{Binding Activity.Place}"
+                       FontSize="16"
+                       VerticalOptions="Center"
+                       HorizontalOptions="FillAndExpand"
+                       TextColor="Black"/>
+            </HorizontalStackLayout>
+            
+            <!-- Activity Start  -->
+            <HorizontalStackLayout Spacing="5">
+                <Label Text="Start:"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       TextColor="Black"/>
+                <Label Text="{Binding Activity.Start}"
+                       FontSize="16"
+                       VerticalOptions="Center"
+                       HorizontalOptions="FillAndExpand"
+                       TextColor="Black"/>
+            </HorizontalStackLayout>
+            
+            <!-- Activity End  -->
+            <HorizontalStackLayout Spacing="5">
+                <Label Text="End:"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       TextColor="Black"/>
+                <Label Text="{Binding Activity.End}"
+                       FontSize="16"
+                       VerticalOptions="Center"
+                       HorizontalOptions="FillAndExpand"
+                       TextColor="Black"/>
+            </HorizontalStackLayout>
+            
+            <!-- Activity Type  -->
+            <HorizontalStackLayout Spacing="5">
+                <Label Text="Type:"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       TextColor="Black"/>
+                <Label Text="{Binding Activity.ActivityType}"
+                       FontSize="16"
+                       VerticalOptions="Center"
+                       HorizontalOptions="FillAndExpand"
+                       TextColor="Black"/>
+            </HorizontalStackLayout>
+            
+            <!-- Activity Description  -->
+            <HorizontalStackLayout Spacing="5">
+                <Label Text="Description:"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center"
+                       TextColor="Black"/>
+                <Label Text="{Binding Activity.Description}"
+                       FontSize="16"
+                       VerticalOptions="Center"
+                       HorizontalOptions="FillAndExpand"
+                       TextColor="Black"/>
+            </HorizontalStackLayout>
+            
+            <!-- Buttons for operations -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Padding="10">
+                <Button Text="Back" 
+                        Command="{Binding BackCommand}" 
+                        TextColor="Black"/>
+            </StackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</views:ContentPageBase>
