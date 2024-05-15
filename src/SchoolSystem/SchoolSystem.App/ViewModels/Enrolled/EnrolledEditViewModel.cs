@@ -49,6 +49,12 @@ public partial class EnrolledEditViewModel(
     private async Task AddSubjectToStudentAsync()
     {
 
+        if (SelectedSubject is null)
+        {
+            await alertService.DisplayAsync("Error", "No subject selected. Please select a subject before adding.");
+            return;
+        }
+
         bool isSubjectAlreadyEnrolled = await enrolledFacade.IsSubjectAlreadyEnrolled(Student.Id, SelectedSubject.Id);
 
         if (NewEnrollment is not null && SelectedSubject is not null && Student is not null && !isSubjectAlreadyEnrolled)
@@ -70,7 +76,6 @@ public partial class EnrolledEditViewModel(
 
         else if (isSubjectAlreadyEnrolled)
         {
-            // Zobrazit chybovou zprávu, pokud je předmět již zapsán
             await alertService.DisplayAsync("Error", "This subject is already enrolled for the student.");
         }
     }
