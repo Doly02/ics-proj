@@ -17,4 +17,10 @@ public interface IActivityFacade : IFacade<ActivityEntity, ActivityListModel, Ac
 
     Task<IEnumerable<ActivityListModel>> AddEvalToList(
         IEnumerable<ActivityListModel> enrolledActivities, Guid studentId);
+
+    Task<IEnumerable<ActivityListModel>> SortActivitiesByEvalDescendingAsync(
+        IEnumerable<ActivityListModel> enrolledActivities);
+
+    Task<IEnumerable<ActivityListModel>> SortActivitiesByEvalAscendingAsync(
+        IEnumerable<ActivityListModel> enrolledActivities);
 }

@@ -19,27 +19,8 @@ public class EvaluationFacadeTests : FacadeTestsBase
     {
         _evaluationFacadeSUT = new EvaluationFacade(UnitOfWorkFactory, new EvaluationModelMapper());
     }
-
-
-    /*
-    [Fact]
-    public async Task Create_WithNonexistentActivityAndStudent_ThrowsException()
-    {
-        // Arrange
-        var model = new EvaluationDetailModel
-        {
-            Id = Guid.NewGuid(), 
-            ActivityId = Guid.NewGuid(), 
-            StudentId = Guid.NewGuid(), 
-            Score = 5, 
-            Note = "Good job" 
-        };
-
-        // Act & Assert
-        await Assert.ThrowsAsync<NullReferenceException>(() => _evaluationFacadeSUT.SaveAsync(model));
-    }*/
-
-
+    
+    
     [Fact]
     public async Task GetById_FromSeeded_EqualsSeeded()
     {

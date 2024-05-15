@@ -153,4 +153,17 @@ public class ActivityFacade(
 
         return new ObservableCollection<ActivityListModel>(sortedActivities.Select(mapper.MapToListModel));
     }
+    
+    
+    public async Task<IEnumerable<ActivityListModel>> SortActivitiesByEvalDescendingAsync(IEnumerable<ActivityListModel> enrolledActivities)
+    {
+        var activitiesSort = enrolledActivities.OrderByDescending(a => a.Score).ToList();
+        return await Task.FromResult(activitiesSort);
+    }
+    
+    public async Task<IEnumerable<ActivityListModel>> SortActivitiesByEvalAscendingAsync(IEnumerable<ActivityListModel> enrolledActivities)
+    {
+        var activitiesSort = enrolledActivities.OrderBy(a => a.Score).ToList();
+        return await Task.FromResult(activitiesSort);
+    }
 }

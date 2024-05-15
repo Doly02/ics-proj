@@ -70,6 +70,12 @@
             <Button Text="Sort by Name Descending" 
                     Command="{Binding SortActivitiesDescendingCommand}" 
                     TextColor="Black"/>
+            <Button Text="Sort by Evaluation Descending" 
+                    Command="{Binding SortActivitiesByEvalDescendingCommand}" 
+                    TextColor="Black"/>
+            <Button Text="Sort by Evaluation Descending" 
+                    Command="{Binding SortActivitiesByEvalAscendingCommand}" 
+                    TextColor="Black"/>
         </StackLayout>
     </Grid>
 </views:ContentPageBase>
