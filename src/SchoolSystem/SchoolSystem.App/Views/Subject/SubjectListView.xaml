@@ -64,6 +64,7 @@
             <SearchBar Placeholder="enter search text"
                        x:Name="searchBar"
                        TextChanged="searchBar_TextChanged"
+                       BackgroundColor="#CCCCCC"
                        SearchCommand="{Binding SearchCommand}"
                        SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
             <Frame Padding="5"  CornerRadius="10" BorderColor="#CCCCCC">

@@ -37,7 +37,7 @@
                 <CollectionView ItemsSource="{Binding EnrolledList}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="m:EnrolledSubjectsListModel">
-                            <Frame Margin="10" Padding="5" CornerRadius="10" BorderColor="#CCCCCC" BackgroundColor="#CCCCCC">
+                            <Frame Margin="10" Padding="5" CornerRadius="10" BorderColor="Black" BackgroundColor="#CCCCCC">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
@@ -77,48 +77,55 @@
             <Button Text="Add" 
             Command="{Binding GoToEditCommand}"
             TextColor="Black"/>
-            <HorizontalStackLayout>
-                <Entry Placeholder="Enter search text"
+
+                <SearchBar Placeholder="Enter search text"
                 PlaceholderColor="Black"
                Text="{Binding SearchText, Mode=TwoWay}"
-               WidthRequest="300" MinimumWidthRequest="200" MaximumWidthRequest="400" VerticalOptions="Center"
                BackgroundColor="#CCCCCC"
+               SearchCommand="{Binding SearchCommand}"
                TextColor="Black"/>
-                <Button Text="Search" 
-                Command="{Binding SearchCommand}" VerticalOptions="Center"
-                TextColor="Black"/>
-            <Grid ColumnDefinitions="2*, *, *">
-                <Label Grid.Column="0"
-           Grid.RowSpan="2"
-           Text="Sort by name"/>
-                <Button Grid.Column="1"
-            Text="asc"
-            Command="{Binding SortByNameAscCommand}"
-            TextColor="Black" />
-                <Button Grid.Column="2"
-            Text="desc"
-            Command="{Binding SortByNameDescCommand}"
-            TextColor="Black" />
-            </Grid>
 
-            <Grid ColumnDefinitions="2*, *, *">
-                <Label Grid.Column="0"
-           Grid.Row="0"
-           Grid.RowSpan="2"
-           Text="Sort by Abbreviation"
-           TextColor="Black"/>
-                <Button Grid.Column="1"
-            Text="asc"
-            Command="{Binding SortByAbbrAscCommand}"
-            TextColor="Black" />
-                <Button Grid.Column="2"
-            Text="desc"
-            Command="{Binding SortByAbbrDescCommand}"
-            TextColor="Black" />
-            </Grid>
+            <Frame Padding="5"  CornerRadius="10" BorderColor="#CCCCCC">
+                <Grid ColumnDefinitions="Auto, Auto, Auto">
+                    <Label Grid.Column="0"
+               Margin="2"
+               VerticalOptions="Center"
+               HorizontalOptions="Start"
+               Text="Sort by name"/>
+                    <Button Grid.Column="1"
+                Margin="2"
+                Text="asc"
+                Command="{Binding SortByNameAscCommand}"
+                TextColor="Black" />
+                    <Button Grid.Column="2"
+                Margin="2"
+                Text="desc"
+                Command="{Binding SortByNameDescCommand}"
+                TextColor="Black" />
+                </Grid>
+            </Frame>
 
-                
-            </HorizontalStackLayout>
+            <Frame Padding="5" CornerRadius="10" BorderColor="#CCCCCC">
+                <Grid ColumnDefinitions="Auto, Auto, Auto">
+                    <Label Grid.Column="0"
+               Margin="2"
+               VerticalOptions="Center"
+               HorizontalOptions="Start"
+               Text="Sort by abbreviation"/>
+                    <Button Grid.Column="1"
+                Margin="2"
+                Text="asc"
+                Command="{Binding SortByAbbrAscCommand}"
+                TextColor="Black" />
+                    <Button Grid.Column="2"
+                Margin="2"
+                Text="desc"
+                Command="{Binding SortByAbbrDescCommand}"
+                TextColor="Black" />
+                </Grid>
+            </Frame>
+
+
         </StackLayout>
 
 

@@ -9,8 +9,13 @@
                        
              x:DataType="viewModels:EnrolledEditViewModel"
                Style="{StaticResource ContentPageStyle}">
-    <ScrollView>
-        <VerticalStackLayout Spacing="25" Padding="30">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Spacing="25" Padding="30">
 
             <!-- Picker for selecting a subject -->
             <Picker Title="Select a subject"
@@ -18,13 +23,16 @@
                     ItemDisplayBinding="{Binding Name}"
                     SelectedItem="{Binding SelectedSubject}"
                     TextColor="Black"/>
+            </VerticalStackLayout>
+        </ScrollView>
 
-            <!-- Button for adding the selected subject -->
-            <Button Text="Add"
-                    Command="{Binding AddSubjectToStudentCommand}" />
-
-            <Button Text="Back"
-                    Command="{Binding GoBackToListCommand}"/>
-        </VerticalStackLayout>
-    </ScrollView>
+        <!-- Button for adding the selected subject -->
+            <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Padding="10">
+                <Button Text="Back" Command="{Binding GoBackToListCommand}"
+             TextColor="Black"/>
+                <Button Text="Save" Command="{Binding AddSubjectToStudentCommand}" 
+             TextColor="Black"
+             BackgroundColor="#7AB2B2"/>
+            </StackLayout>
+        </Grid>
 </views:ContentPageBase>
