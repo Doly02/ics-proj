@@ -68,6 +68,18 @@ public partial class EnrolledActivityListViewModel (
         OnPropertyChanged(nameof(EnrolledActivities));
     }
     
+    [RelayCommand]
+    private async Task SortActivitiesByEvalAscendingAsync()
+    {
+        EnrolledActivities = await activityFacade.SortActivitiesByEvalAscendingAsync(EnrolledActivities);
+    }
+    
+    [RelayCommand]
+    private async Task SortActivitiesByEvalDescendingAsync()
+    {
+        EnrolledActivities = await activityFacade.SortActivitiesByEvalDescendingAsync(EnrolledActivities);
+    }
+    
     ////////////////////////////////////////////////////////////////////////////////////////////////
     
     // Requests navigation to the "/sort" page using the navigation service.
