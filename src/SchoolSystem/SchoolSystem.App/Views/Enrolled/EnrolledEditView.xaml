@@ -16,7 +16,8 @@
             <Picker Title="Select a subject"
                     ItemsSource="{Binding AvailableSubjects}"
                     ItemDisplayBinding="{Binding Name}"
-                    SelectedItem="{Binding SelectedSubject}"/>
+                    SelectedItem="{Binding SelectedSubject}"
+                    TextColor="Black"/>
 
             <!-- Button for adding the selected subject -->
             <Button Text="Add"
