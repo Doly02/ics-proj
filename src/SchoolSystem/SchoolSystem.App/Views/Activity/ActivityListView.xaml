@@ -47,12 +47,25 @@
             <Button Text="Filter" 
                     Command="{Binding ShowFilterPopupCommand}" 
                     TextColor="Black"/>
-            <Button Text="Sort by Name Ascending" 
-                    Command="{Binding SortActivitiesAscendingCommand}"
-                    TextColor="Black"/>
-            <Button Text="Sort by Name Descending" 
-                    Command="{Binding SortActivitiesDescendingCommand}"
-                    TextColor="Black"/>
+            <Frame Padding="5"  CornerRadius="10" BorderColor="#CCCCCC">
+                <Grid ColumnDefinitions="Auto, Auto, Auto">
+                    <Label Grid.Column="0"
+                           Margin="2"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start"
+                           Text="Sort by name"/>
+                    <Button Grid.Column="1"
+                            Margin="2"
+                            Text="asc"
+                            Command="{Binding SortActivitiesAscendingCommand}"
+                            TextColor="Black" />
+                    <Button Grid.Column="2"
+                            Margin="2"
+                            Text="desc"
+                            Command="{Binding SortActivitiesDescendingCommand}"
+                            TextColor="Black" />    
+                </Grid>
+            </Frame>
         </StackLayout>
     </Grid>
 </views:ContentPageBase>

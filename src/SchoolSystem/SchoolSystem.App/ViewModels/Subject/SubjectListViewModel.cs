@@ -71,7 +71,7 @@ public partial class SubjectListViewModel(
         }
         catch (InvalidOperationException)
         {
-            await alertService.DisplayAsync("Operation Failed", "Removal of the Student Failed.");
+            await alertService.DisplayAsync("Operation Failed", "Removal of the Subject Failed.");
         }
     }
 
