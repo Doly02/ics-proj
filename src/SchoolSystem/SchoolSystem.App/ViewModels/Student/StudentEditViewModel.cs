@@ -67,6 +67,12 @@ public partial class StudentEditViewModel(
         StudDetail = StudentDetailModel.Empty;
     }
     
+    [RelayCommand]
+    private async Task GoBackToDetail()
+    {
+        await navigationService.GoToAsync("//students/detail");
+    }
+    
     public async void Receive(StudentAddMessage message)
     {
         await ReloadDataAsync();

@@ -46,26 +46,22 @@
             </HorizontalStackLayout>
             
             <!-- Buttons for operations -->
-            <StackLayout Orientation="Horizontal" Spacing="10">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="20" Padding="10">
                 <Button Text="Back"
                         Command="{Binding GoToListCommand}"
-                        HorizontalOptions="FillAndExpand" 
                         TextColor="Black"/>
                 <Button Text="Edit"
                         Command="{Binding GoToEditCommand}"
                         BackgroundColor="#7AB2B2"
-                        TextColor="Black"
-                        HorizontalOptions="FillAndExpand" />
+                        TextColor="Black"/>
                 <Button Text="Delete"
                         Command="{Binding DeleteCommand}"
                         BackgroundColor="#FA7070"
-                        TextColor="Black"
-                        HorizontalOptions="FillAndExpand" />
+                        TextColor="Black"/>
                 <Button Text="Subjects"
                         Command="{Binding Source={x:Reference StudentDetailViewRoot}, Path=BindingContext.GoToEnrolledCommand}"
                         CommandParameter="{Binding Id}"
-                        TextColor="Black"
-                        HorizontalOptions="FillAndExpand" />
+                        TextColor="Black"/>
             </StackLayout>
         </VerticalStackLayout>
     </ScrollView>

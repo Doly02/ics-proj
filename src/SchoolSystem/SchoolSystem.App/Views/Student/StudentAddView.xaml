@@ -44,7 +44,8 @@
             <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Padding="10">
                 <!-- Button For Storing Data -->
                 <Button Text="Back" 
-                        Command="{Binding GoBackToListCommand}"/>
+                        Command="{Binding GoBackToListCommand}"
+                        TextColor="Black"/>
                 <Button Text="Save" 
                         Command="{Binding SaveCommand}"
                         BackgroundColor="#7AB2B2"
@@ -53,8 +54,6 @@
                         Command="{Binding ClearCommand}" 
                         BackgroundColor="#FDDE55"
                         TextColor="Black"/>
-                
-                <!-- Should Be Implemented Soon Indicator if Operation Succeeded or Not -->
             </StackLayout>
     </Grid>
 </views:ContentPageBase>
