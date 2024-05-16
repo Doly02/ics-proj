@@ -29,14 +29,20 @@
                    TextColor="Black"
                    Background="#CCCCCC"/>
 
-            <!-- Button For Storing Data -->
-            <Button Text="Save" 
-                    Command="{Binding SaveCommand}"
-                    TextColor="Black"/>
-            <Button Text="Clear" 
-                    Command="{Binding ClearCommand}" 
-                    TextColor="Black"/>
-            <!-- Should Be Implemented Soon Indicator if Operation Succeeded or Not -->
+            <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Padding="10">
+                <!-- Button For Storing Data -->
+                <Button Text="Back" 
+                        TextColor="Black"
+                        Command="{Binding GoBackToDetailCommand}"/>
+                <Button Text="Save" 
+                        Command="{Binding SaveCommand}"
+                        BackgroundColor="#7AB2B2"
+                        TextColor="Black"/>
+                <Button Text="Clear" 
+                        Command="{Binding ClearCommand}" 
+                        BackgroundColor="#FDDE55"
+                        TextColor="Black"/>
+            </StackLayout>
         </VerticalStackLayout>
     </ScrollView>
 </views:ContentPageBase>
