@@ -41,22 +41,31 @@
             <Button Text="Add" 
                     Command="{Binding GoToCreateCommand}"
                     TextColor="Black"/>
-            <HorizontalStackLayout>
-                <Entry Placeholder="Enter search text" 
+            <SearchBar Placeholder="Enter search text"
+                       PlaceholderColor="Black"
                        Text="{Binding SearchText, Mode=TwoWay}"
-                       BackgroundColor="#CCCCCC "
-                       WidthRequest="300" MinimumWidthRequest="200" MaximumWidthRequest="400" VerticalOptions="Center"
+                       BackgroundColor="#CCCCCC"
+                       SearchCommand="{Binding SearchCommand}"
                        TextColor="Black"/>
-                <Button Text="Search" 
-                        Command="{Binding SearchCommand}" VerticalOptions="Center"
-                        TextColor="Black"/>
-            </HorizontalStackLayout>
-            <Button Text="Sort By Surname Ascending" 
-                    Command="{Binding SortStudentBySurnameAscendingCommand}"
-                    TextColor="Black"/>
-            <Button Text="Sort By Surname Descending" 
-                    Command="{Binding SortStudentBySurnameDescendingCommand}"
-                    TextColor="Black"/>
+            <Frame Padding="5"  CornerRadius="10" BorderColor="#CCCCCC">
+                <Grid ColumnDefinitions="Auto, Auto, Auto">
+                    <Label Grid.Column="0"
+                           Margin="2"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start"
+                           Text="Sort by name"/>
+                    <Button Grid.Column="1"
+                            Margin="2"
+                            Text="asc"
+                            Command="{Binding SortStudentBySurnameAscendingCommand}"
+                            TextColor="Black" />
+                    <Button Grid.Column="2"
+                            Margin="2"
+                            Text="desc"
+                            Command="{Binding SortStudentBySurnameDescendingCommand}"
+                            TextColor="Black" />
+                </Grid>
+            </Frame>
         </StackLayout>
     </Grid>
 </views:ContentPageBase>
