@@ -31,13 +31,6 @@ public partial class EnrolledListViewModel(
 
     public string StudentFullName => $"{Student?.Name} {Student?.Surname}";
 
-    private string _SearchText;
-    public string SearchText
-    {
-        get => _SearchText;
-        set => SetProperty(ref _SearchText, value);
-    }
-
 
     public async void Receive(EnrolledDeleteMessage message)
     {
@@ -98,9 +91,9 @@ public partial class EnrolledListViewModel(
 
 
     [RelayCommand]
-    private async Task SearchAsync()
+    public async Task SearchAsync(string? search = null)
     {
-        EnrolledList = await enrolledFacade.SearchBySubjectNameAsync(StudentId, SearchText);
+        EnrolledList = await enrolledFacade.SearchBySubjectNameAsync(StudentId, search);
         OnPropertyChanged(nameof(EnrolledList));
     }
 

@@ -9,4 +9,10 @@ public partial class EnrolledListView
         InitializeComponent();
         BindingContext = viewModel;
     }
+    private async void searchBar_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        var viewModel = (EnrolledListViewModel)BindingContext; // Get the ViewModel instance
+        await viewModel.SearchAsync(e.NewTextValue); // Call SearchAsync with the new text value
+
+    }
 }

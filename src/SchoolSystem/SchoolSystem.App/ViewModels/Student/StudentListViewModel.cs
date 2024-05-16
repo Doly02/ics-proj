@@ -16,13 +16,6 @@ public partial class StudentListViewModel(
 {
     public IEnumerable<StudentListModel> StudList { get; set; } = null!;
     private IEnumerable<StudentListModel> _OriginStudents { get; set; } = null!;
-
-    private string _SearchText;
-    public string SearchText
-    {
-        get => _SearchText;
-        set => SetProperty(ref _SearchText, value);
-    }
     
     public async void Receive(StudentAddMessage message)
     {
@@ -105,11 +98,11 @@ public partial class StudentListViewModel(
     }
     
     [RelayCommand]
-    private async Task SearchAsync()
+    public async Task SearchAsync(string? search = null)
     {
         try
         {
-            var results = await studentFacade.SearchAsync(SearchText);
+            var results = await studentFacade.SearchAsync(search);
             StudList = results; 
             OnPropertyChanged(nameof(StudList));
         }

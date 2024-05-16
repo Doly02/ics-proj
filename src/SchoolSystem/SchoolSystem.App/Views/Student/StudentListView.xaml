@@ -41,12 +41,12 @@
             <Button Text="Add" 
                     Command="{Binding GoToCreateCommand}"
                     TextColor="Black"/>
-            <SearchBar Placeholder="Enter search text"
-                       PlaceholderColor="Black"
-                       Text="{Binding SearchText, Mode=TwoWay}"
+            <SearchBar Placeholder="enter search text"
+                       x:Name="searchBar"
+                       TextChanged="searchBar_TextChanged"
                        BackgroundColor="#CCCCCC"
                        SearchCommand="{Binding SearchCommand}"
-                       TextColor="Black"/>
+                       SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
             <Frame Padding="5"  CornerRadius="10" BorderColor="#CCCCCC">
                 <Grid ColumnDefinitions="Auto, Auto, Auto">
                     <Label Grid.Column="0"

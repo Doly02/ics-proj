@@ -9,4 +9,10 @@ public partial class StudentListView
         InitializeComponent();
         BindingContext = viewModel;
     }
+    private async void searchBar_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        var viewModel = (StudentListViewModel)BindingContext; // Get the ViewModel instance
+        await viewModel.SearchAsync(e.NewTextValue); // Call SearchAsync with the new text value
+
+    }
 }
